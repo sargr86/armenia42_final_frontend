@@ -114,7 +114,7 @@ export class SaveCountryComponent implements OnInit {
         // Adding or updating a country info
         this._countries[this.saveAction](formData).subscribe(() => {
             this._auth.formProcessing = false;
-            this.router.navigate(['countries'])
+            this.router.navigate(['world/countries'])
         })
     }
 
@@ -154,7 +154,7 @@ export class SaveCountryComponent implements OnInit {
      */
     remove() {
         this._countries.remove({lang: this.lang, id: this.countryForm.value['id']}).subscribe(() => {
-            this.router.navigate(['countries'])
+            this.router.navigate(['world/countries'])
         });
     }
 
