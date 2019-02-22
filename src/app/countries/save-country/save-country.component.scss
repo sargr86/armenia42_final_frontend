@@ -1,0 +1,56 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
+
+
+
+// Country info on the left
+.infoContainer {
+  float: left;
+  width: 30%;
+  .mat-form-field {
+    display: block !important;
+    margin-top: 20px;
+  }
+  .saveCountry {
+    @include namedBtn;
+    background-color: $green;
+    float: right;
+  }
+
+  .removeCountry {
+    @include namedBtn;
+    background-color: $red;
+    float: left;
+  }
+}
+
+.dropzoneContainer {
+  width: 33%;
+  float: right;
+  padding-top: 40px;
+}
+
+// Flag img on the right
+.flagImg {
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 200px;
+  float: right;
+  margin-top: 60px;
+  border: 1px solid #c0c0c042;
+  position: relative;
+  img {
+    width: 400px;
+    height: 200px;
+  }
+  i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 24px;
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+

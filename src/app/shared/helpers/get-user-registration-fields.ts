@@ -23,7 +23,6 @@ export default class RegFields {
         formFields[`first_name_${lang}`] = ['', [Validators.required, Validators.minLength(MIN_FIRST_NAME_LEN), Validators.maxLength(MAX_FIRST_NAME_LEN)]];
         formFields[`last_name_${lang}`] = ['', [Validators.required, Validators.minLength(MIN_LAST_NAME_LEN), Validators.maxLength(MAX_LAST_NAME_LEN)]];
         formFields['lang'] = lang;
-
         return formFields;
     }
     static doSomethingElse(val: string) { return val; }

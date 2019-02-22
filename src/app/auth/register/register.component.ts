@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
 
-        this.registerForm = this._fb.group(RegFields.get(false));
+        this.registerForm = this._fb.group(RegFields.get(this.formAction=='update'));
 
         // Getting info box elements for this page
         this.infoBoxData = this.editProfile ? infoBox.profileEdit : infoBox.userRegistration;

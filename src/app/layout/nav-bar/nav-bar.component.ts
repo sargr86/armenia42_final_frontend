@@ -13,7 +13,7 @@ import {Subscription} from "rxjs/internal/Subscription";
 export class NavBarComponent implements OnInit {
     lang: string = this.getLang.transform();
     routeSubscription: Subscription;
-    pageTitle:string;
+    pageTitle: string;
 
     constructor(
         public router: Router,
@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit {
     ) {
 
         // Getting current title from title/subject service
-        this.subject.getPageTitle().subscribe(title=>{
+        this.subject.getPageTitle().subscribe(title => {
             this.pageTitle = title;
         });
 
@@ -46,7 +46,7 @@ export class NavBarComponent implements OnInit {
      * @returns {string}
      */
     getAddBtnUrl() {
-        return `/admin/${this.router.url}/add`;
+        return `${this.router.url}/save`;
     }
 
     /**
@@ -54,14 +54,14 @@ export class NavBarComponent implements OnInit {
      * @returns {any}
      */
     get addBtnShow() {
-        return !(/profile|users|edit|add/.test(this.router.url) || this.pageTitle == 'admin_dashboard');
+        return !(/profile|users|edit|add|save/.test(this.router.url)) && this.pageTitle != 'admin_dashboard' && this.pageTitle !== undefined;
     }
 
     /**
      *
      * @returns {boolean}
      */
-    get showSettings(){
+    get showSettings() {
         return !(/login|profile|register/.test(this.router.url));
     }
 

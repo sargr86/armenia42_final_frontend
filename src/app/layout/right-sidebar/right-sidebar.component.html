@@ -23,6 +23,14 @@
             </button>
         </li>
 
+        <!-- Show countries link -->
+        <li *ngIf="!router.url.includes('countries')">
+            <button [matTooltip]="'countries'|translate" [matTooltipPosition]="'left'"
+                    (click)="router.navigate(['world/countries'])">
+                <i class="fa fa-flag"></i>
+            </button>
+        </li>
+
         <!-- Languages menu toggler button with its menu -->
         <li *ngIf="!formPage">
             <button [matTooltip]="'settings'|translate" [matTooltipPosition]="'left'">

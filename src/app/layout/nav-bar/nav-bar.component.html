@@ -4,7 +4,7 @@
 
         <div class="leftGroup">
 
-            <!-- Home page button -->
+            <!-- Navigates to home page -->
             <button class="home" (click)="router.navigate(['/'])" *ngIf="router.url!=='/'"
                     [matTooltip]="'home'|translate">
                 <i class="fa fa-home"></i>
@@ -14,13 +14,18 @@
 
         <div class="rightGroup">
 
-            <!-- Go to login page button -->
+            <!-- Navigates to countries page-->
+            <button [matTooltip]="'countries'|translate" *ngIf="!router.url.includes('countries')" (click)="router.navigate(['world/countries'])">
+                <i class="fa fa-flag"></i>
+            </button>
+
+            <!-- Navigates to login page -->
             <button class="login" [matTooltip]="'login'|translate" *ngIf="!router.url.includes('login')"
                     (click)="router.navigate(['login'])">
                 <i class="fa fa-user"></i>
             </button>
 
-            <!-- Languages menu toggler button -->
+            <!-- Toggles languages menu -->
             <button [matTooltip]="'settings'|translate" class="settings" *ngIf="showSettings">
                 <i class="fa fa-cog" [matMenuTriggerFor]="menu"></i>
             </button>

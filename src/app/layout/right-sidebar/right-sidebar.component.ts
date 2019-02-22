@@ -41,8 +41,7 @@ export class RightSidebarComponent implements OnInit {
      * @returns {any}
      */
     get formPage() {
-        let routerUrl = this.router.url;
-        return (routerUrl.includes('edit') || routerUrl.includes('add') || routerUrl.includes('profile'));
+        return (/save|profile|register|add/.test(this.router.url));
     }
 
 }

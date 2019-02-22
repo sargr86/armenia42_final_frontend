@@ -11,34 +11,33 @@ import {RoleGuard} from "./shared/guards/role.guard";
 
 const routes: Routes = [
     {
-        path:'',
-        component:HomeComponent,
-        data:{
-            title:'home'
+        path: '',
+        component: HomeComponent,
+        data: {
+            title: 'home'
         }
     },
     {
         path: 'register',
         component: RegisterComponent,
-        data:{
-            title:'registration_terminal'
+        data: {
+            title: 'registration_terminal'
         },
-        canActivate:[NonAuthGuard]
+        canActivate: [NonAuthGuard]
     },
     {
-        path:'login',
+        path: 'login',
         component: LoginComponent,
-        data:{
-            title:'login'
+        data: {
+            title: 'login'
         },
-        canActivate:[NonAuthGuard]
+        canActivate: [NonAuthGuard]
     },
     {
-        path:'admin',
+        path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
         data: {
             expectedRole: 'admin',
-
         },
         canActivate: [AuthGuard, RoleGuard],
     },
@@ -52,6 +51,11 @@ const routes: Routes = [
             title: 'profile_terminal'
         },
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'world/countries',
+        loadChildren: './countries/countries.module#CountriesModule',
+
     },
     {
         path: '**',

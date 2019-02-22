@@ -1,0 +1,54 @@
+<mat-card>
+  <!-- Register/ profile form title-->
+  <h2 class="terminalTitle">
+    <i class="fa fa-flag"></i>
+    <span translate>{{pageTitle}}</span>
+  </h2>
+
+  <!-- Country details form -->
+  <form [formGroup]="countryForm">
+    <div class="infoContainer">
+
+      <!-- Country name field* -->
+      <mat-form-field>
+        <mat-label>{{'name'|translate}}</mat-label>
+        <input matInput [formControlName]="'name_'+lang">
+      </mat-form-field>
+
+      <!-- Country description field-->
+      <mat-form-field>
+        <mat-label>{{'description'|translate}}</mat-label>
+        <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
+                  [matAutosizeMinRows]="textAreaLimits.min" [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
+      </mat-form-field>
+
+      <!-- Save- and remove-country actions-->
+      <div class="actions">
+        <button (click)="remove()" class="removeCountry" *ngIf="editCase">
+          <mat-spinner *ngIf="loading" [diameter]="15"></mat-spinner>
+          {{'remove'|translate}}
+        </button>
+        <button (click)="save()" class="saveCountry">
+          <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+          <span>{{'save'|translate}}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Info box recommendations -->
+    <info-box [elements]="infoBoxData"></info-box>
+
+    <!-- Image drop zone -->
+    <div class="dropzoneContainer">
+      <dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"
+                (thumbnail)="onAddedFile($event)" class="flagDropzone"></dropzone>
+    </div>
+
+    <!-- Uploaded image zone -->
+    <div class="flagImg" *ngIf="flag && imageExists">
+      <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
+      <i class="fa fa-times-circle" (click)="changeFlag()"></i>
+    </div>
+
+  </form>
+</mat-card>
