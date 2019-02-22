@@ -11,6 +11,7 @@ import {TEXTAREA_AUTOSIZE_MIN_ROWS, TEXTAREA_AUTOSIZE_MAX_ROWS} from "../../shar
 import {TextAreaLimits} from "../../shared/models/TextAreaLimits";
 import * as _ from 'lodash';
 import * as dropzoneConfig from "../../shared/constants/dropzone";
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-save-country',
@@ -67,7 +68,7 @@ export class SaveCountryComponent implements OnInit {
      * @param {Data} data
      */
     getFormFields(lang: string, data: Data) {
-        let fields:any = CountryFormFields.get(this.saveAction == 'update')
+        let fields: any = CountryFormFields.get(this.saveAction == 'update');
         this.countryForm = this._fb.group(fields);
         if (data.hasOwnProperty('country')) {
             this.countryForm.patchValue(data.country)
@@ -103,21 +104,49 @@ export class SaveCountryComponent implements OnInit {
      */
     save() {
 
-        // Getting country flag file & fields data
-        let fileData = this.setFileData();
-        let formValue = this.countryForm.value;
+        // Getting form data object built with the form values and drop zone file
+        let formData: FormData = this.buildFormData();
 
-        // Converting form values to query params
-        let queryParams = this.queryParams.transform(formValue);
         this._auth.formProcessing = true;
 
         // if(this.countryForm.valid){
 
         // Adding or updating a country info
-        this._countries[this.saveAction](fileData, queryParams).subscribe(() => {
+        this._countries[this.saveAction](formData).subscribe(() => {
             this._auth.formProcessing = false;
             this.router.navigate(['countries'])
         })
+    }
+
+    /**
+     * Builds form data to send to the server
+     * @returns {FormData}
+     */
+    buildFormData() {
+        let formData: FormData = new FormData();
+        let dropFileExist = Object.entries(this.dropzoneFile).length > 0;
+
+        for (let field in this.countryForm.value) {
+
+            if (field != 'flag' || !dropFileExist)
+                formData.append(field, this.countryForm.value[field])
+        }
+
+
+
+        // If drop zone file exists saving it to formData object as well
+        if (dropFileExist) {
+
+            let file = this.dropzoneFile[0];
+
+            let t = moment();
+            let nameArr = file['name'].split('.');
+            let fileName = `${nameArr[0]}${t}.${nameArr[1]}`;
+            formData.append('flag', fileName);
+            formData.append('flag_file', file, fileName)
+        }
+
+        return formData;
     }
 
     /**

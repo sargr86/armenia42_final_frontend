@@ -24,7 +24,7 @@
         </li>
 
         <!-- Show countries link -->
-        <li *ngIf="!router.url.includes('countries')">
+        <li *ngIf="!router.url.includes('countries')|| router.url.includes('save')">
             <button [matTooltip]="'countries'|translate" [matTooltipPosition]="'left'"
                     (click)="router.navigate(['world/countries'])">
                 <i class="fa fa-flag"></i>

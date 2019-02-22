@@ -6,7 +6,10 @@ import {SaveCountryComponent} from "./save-country/save-country.component";
 const routes: Routes = [
     {
         path: '',
-        component: ShowCountriesComponent
+        component: ShowCountriesComponent,
+        data:{
+            title:'countries'
+        }
     },
     {
         path: 'save',

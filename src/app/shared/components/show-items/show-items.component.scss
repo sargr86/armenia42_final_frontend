@@ -1,0 +1,10 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+.circles{
+  @include circles;
+}
+
+.squares{
+  @include squares;
+}

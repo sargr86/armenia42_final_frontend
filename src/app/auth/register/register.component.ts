@@ -112,12 +112,12 @@ export class RegisterComponent implements OnInit {
         // Getting form data object built with the form values and drop zone file
         let formData: FormData = this.buildFormData();
 
-        // if (this.registerForm.valid) {
+        if (this.registerForm.valid) {
             this._auth.formProcessing = true;
             this._auth[this.formAction](formData).subscribe(dt => {
                 this._saveInfo.do(dt,this.editProfile);
             });
-        // }
+        }
 
 
     }

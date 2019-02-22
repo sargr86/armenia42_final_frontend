@@ -15,7 +15,7 @@ export default class CountryFormFields {
         formFields[`name_${lang}`] = ['', [Validators.required]];
         formFields[`description_${lang}`] = '';
         formFields['lang'] = lang;
-        formFields['id'] = '';
+        if(edit) formFields['id'] = '';
 
         return formFields;
 

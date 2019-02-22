@@ -15,6 +15,8 @@ import { LanguagesComponent } from './components/languages/languages.component';
 import { ReplaceAllPipe } from './pipes/replace-all.pipe';
 import { MaterialReusableTableComponent } from './components/material-reusable-table/material-reusable-table.component';
 import { GetMatTableDataSourcePipe } from './pipes/get-mat-table-data-source.pipe';
+import { ShowItemsComponent } from './components/show-items/show-items.component';
+import { GenerateChildItemUrlPipe } from './pipes/generate-child-item-url.pipe';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { GetMatTableDataSourcePipe } from './pipes/get-mat-table-data-source.pip
         LanguagesComponent,
         ReplaceAllPipe,
         MaterialReusableTableComponent,
-        GetMatTableDataSourcePipe
+        GetMatTableDataSourcePipe,
+        ShowItemsComponent,
+        GenerateChildItemUrlPipe
     ],
     imports: [
         CommonModule,
@@ -45,7 +49,8 @@ import { GetMatTableDataSourcePipe } from './pipes/get-mat-table-data-source.pip
         GetUserRegistrationFieldsPipe,
         FixMatDatepickerDateFormatPipe,
         SetMatDatepickerAdapterLocalePipe,
-        GetMatTableDataSourcePipe
+        GetMatTableDataSourcePipe,
+        GenerateChildItemUrlPipe
     ],
     exports: [
         FormsModule,
@@ -55,6 +60,7 @@ import { GetMatTableDataSourcePipe } from './pipes/get-mat-table-data-source.pip
         DropzoneModule,
         InfoBoxComponent,
         LanguagesComponent,
+        ShowItemsComponent,
         MaterialReusableTableComponent,
         GetLangPipe,
         GetImageUrlPipe,

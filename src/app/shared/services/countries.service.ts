@@ -34,8 +34,8 @@ export class CountriesService {
         return this.httpClient.get<Country>(`${this.domain}countries/get-by-name`, {params: params});
     }
 
-    add(formData,urlParams){
-        return this.httpClient.post<Country>(`${this.domain}countries/add?${urlParams}`, formData);
+    add(params){
+        return this.httpClient.post<Country>(`${this.domain}countries/add`, params);
     }
 
     update(formData,urlParams){
