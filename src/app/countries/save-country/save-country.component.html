@@ -41,13 +41,13 @@
     <!-- Image drop zone -->
     <div class="dropzoneContainer">
       <dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"
-                (thumbnail)="onAddedFile($event)" class="flagDropzone"></dropzone>
+                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"  class="flagDropzone"></dropzone>
     </div>
 
     <!-- Uploaded image zone -->
     <div class="flagImg" *ngIf="flag && imageExists">
       <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
-      <i class="fa fa-times-circle" (click)="changeFlag()"></i>
+      <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
     </div>
 
   </form>

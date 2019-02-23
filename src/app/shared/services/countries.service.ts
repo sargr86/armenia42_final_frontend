@@ -30,16 +30,16 @@ export class CountriesService {
      * @param params
      * @returns {Observable<Country>}
      */
-    getByName(params){
-        return this.httpClient.get<Country>(`${this.domain}countries/get-by-name`, {params: params});
+    getByName(data){
+        return this.httpClient.get(`${this.domain}countries/get-by-name`, {params: data});
     }
 
     add(params){
         return this.httpClient.post<Country>(`${this.domain}countries/add`, params);
     }
 
-    update(formData,urlParams){
-        return this.httpClient.put<Country>(`${this.domain}countries/update?${urlParams}`, formData);
+    update(params){
+        return this.httpClient.put<Country>(`${this.domain}countries/update`, params);
     }
 
     remove(params){

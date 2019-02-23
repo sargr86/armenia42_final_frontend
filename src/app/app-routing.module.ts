@@ -8,6 +8,8 @@ import {UserResolver} from "./shared/resolvers/user-resolver.service";
 import {NonAuthGuard} from "./shared/guards/non-auth.guard";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {RoleGuard} from "./shared/guards/role.guard";
+import {SaveCountryComponent} from "./countries/save-country/save-country.component";
+import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
 
 const routes: Routes = [
     {
@@ -55,6 +57,19 @@ const routes: Routes = [
     {
         path: 'world/countries',
         loadChildren: './countries/countries.module#CountriesModule',
+
+    },
+    {
+        path: ':country/edit',
+        component: SaveCountryComponent,
+        resolve: {
+            country: CountriesResolver
+        },
+        canActivate: [AuthGuard,RoleGuard],
+        data: {
+            expectedRole: 'admin',
+            title:'country_terminal'
+        },
 
     },
     {

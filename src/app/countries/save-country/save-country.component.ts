@@ -126,6 +126,8 @@ export class SaveCountryComponent implements OnInit {
         let formData: FormData = new FormData();
         let dropFileExist = Object.entries(this.dropzoneFile).length > 0;
 
+        console.log( Object.entries(this.dropzoneFile).length)
+
         for (let field in this.countryForm.value) {
 
             if (field != 'flag' || !dropFileExist)
@@ -149,6 +151,8 @@ export class SaveCountryComponent implements OnInit {
         return formData;
     }
 
+
+
     /**
      * Removes country info
      */
@@ -156,6 +160,15 @@ export class SaveCountryComponent implements OnInit {
         this._countries.remove({lang: this.lang, id: this.countryForm.value['id']}).subscribe(() => {
             this.router.navigate(['world/countries'])
         });
+    }
+
+    /**
+     * Removes current flag image from the drop zone
+     */
+    removeImage() {
+        console.log('here')
+        this.dropzoneFile = {};
+        this.countryForm.controls['flag'].patchValue('')
     }
 
     /**

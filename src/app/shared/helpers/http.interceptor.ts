@@ -66,9 +66,18 @@ export class RequestInterceptor implements HttpInterceptor {
                             }
 
                         }
-                        this.translate.get([msg, name]).subscribe(d => {
-                            this.toastr.error(d[msg], d[name]);
-                        });
+
+                        if(name instanceof ProgressEvent){
+                            this.translate.get(['unknown_error','check_server']).subscribe(d => {
+                                this.toastr.error(d['check_server'], d['unknown_error']);
+                            });
+                        }
+                        else if(name){
+                            this.translate.get([msg, name]).subscribe(d => {
+                                this.toastr.error(d[msg], d[name]);
+                            });
+                        }
+
                         break;
 
 

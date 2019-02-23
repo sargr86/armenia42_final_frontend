@@ -25,6 +25,8 @@ import {UsersService} from "./shared/services/users.service";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {NonAuthGuard} from "./shared/guards/non-auth.guard";
 import {RoleGuard} from "./shared/guards/role.guard";
+import {CountriesModule} from "./countries/countries.module";
+import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
 
 
 // AoT requires an exported function for factories
@@ -64,7 +66,8 @@ export function tokenGetter() {
         }),
         AuthModule,
         LayoutModule,
-        MaterialModule
+        MaterialModule,
+        CountriesModule
     ],
     providers: [
         AuthService,
@@ -77,6 +80,7 @@ export function tokenGetter() {
         SaveUserInfoService,
         UsersService,
         UserResolver,
+        CountriesResolver,
         AuthGuard,
         NonAuthGuard,
         RoleGuard
