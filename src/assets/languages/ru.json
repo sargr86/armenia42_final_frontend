@@ -107,5 +107,9 @@
   "not_found":"Не найдено",
   "country_terminal":"Терминал страны",
   "country_name_required_error":"Название страны обязательно",
-  "country_exists_error":"Эта страна уже добавлена"
+  "country_exists_error":"Эта страна уже добавлена",
+  "confirm": "Подтвердить",
+  "cancel": "Отменить",
+  "please_confirm": "Пожалуйста подтвердите это действие.",
+  "with_folder":"с папкой"
 }

@@ -1,4 +1,4 @@
-import {FormControl, Validators} from "@angular/forms";
+import {Validators} from "@angular/forms";
 
 
 export default class CountryFormFields {
@@ -6,7 +6,9 @@ export default class CountryFormFields {
         let lang = localStorage.getItem('lang')||'en';
         let formFields = {
             lang: lang,
-            flag: ''
+            flag_img: '',
+            folder:'',
+            with_folder:'0'
         };
 
         // Setting additional fields for register-user and edit-profile cases

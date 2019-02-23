@@ -12,6 +12,9 @@ import {TextAreaLimits} from "../../shared/models/TextAreaLimits";
 import * as _ from 'lodash';
 import * as dropzoneConfig from "../../shared/constants/dropzone";
 import * as moment from 'moment';
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import {ConfirmationDialogComponent} from "../../shared/components/confirmation-dialog/confirmation-dialog.component";
+import {BuildFolderUrlPipe} from "../../shared/pipes/build-folder-url.pipe";
 
 @Component({
     selector: 'app-save-country',
@@ -30,10 +33,12 @@ export class SaveCountryComponent implements OnInit {
     pageTitle: string;
     infoBoxData: string[];
     textAreaLimits: TextAreaLimits = {min: TEXTAREA_AUTOSIZE_MIN_ROWS, max: TEXTAREA_AUTOSIZE_MAX_ROWS};
-    imageExists: boolean; // checks to see if defined flag image of current country exist
+    imageExists = true; // checks to see if defined flag image of current country exist
 
     dropzoneFile: object = {};
     dropzoneConfig: DropzoneConfigInterface;
+
+    folderPath: string;
 
     constructor(
         private router: Router,
@@ -42,6 +47,8 @@ export class SaveCountryComponent implements OnInit {
         private _auth: AuthService,
         private getLang: GetLangPipe,
         private _countries: CountriesService,
+        private dialog: MatDialog,
+        private buildFolderUrl: BuildFolderUrlPipe
     ) {
     }
 
@@ -70,8 +77,15 @@ export class SaveCountryComponent implements OnInit {
     getFormFields(lang: string, data: Data) {
         let fields: any = CountryFormFields.get(this.saveAction == 'update');
         this.countryForm = this._fb.group(fields);
+
+
         if (data.hasOwnProperty('country')) {
-            this.countryForm.patchValue(data.country)
+            let countryData = data.country
+            for (let key in countryData) {
+                if (countryData[key] == null) countryData[key] = '';
+                countryData['folder'] = this.buildFolderUrl.transform(this.router.url)
+            }
+            this.countryForm.patchValue(countryData)
         }
     }
 
@@ -81,22 +95,6 @@ export class SaveCountryComponent implements OnInit {
      */
     onAddedFile(e) {
         this.dropzoneFile = e;
-    }
-
-    /**
-     * If flag image is selected, saving its name in the registration field and formData
-     */
-    setFileData() {
-        let formData = new FormData();
-
-        // If drop zone file exists saving it to formData object as well
-        if (Object.entries(this.dropzoneFile).length != 0) {
-            let file = this.dropzoneFile[0];
-            formData.append('file', file);
-            formData.append('flag', file['name']);
-            this.countryForm.controls['flag'].patchValue(file['name'])
-        }
-        return formData;
     }
 
     /**
@@ -120,55 +118,78 @@ export class SaveCountryComponent implements OnInit {
 
     /**
      * Builds form data to send to the server
-     * @returns {FormData}
+     * @returns {FormData} form Data object
      */
     buildFormData() {
-        let formData: FormData = new FormData();
-        let dropFileExist = Object.entries(this.dropzoneFile).length > 0;
+        const formData: FormData = new FormData();
+        const dropFileExist = Object.entries(this.dropzoneFile).length > 0;
+        let formValue;
 
-        console.log( Object.entries(this.dropzoneFile).length)
+        console.log(this.countryForm.value)
 
-        for (let field in this.countryForm.value) {
-
-            if (field != 'flag' || !dropFileExist)
-                formData.append(field, this.countryForm.value[field])
+        for (const field in this.countryForm.value) {
+            formValue = this.countryForm.value[field];
+            if (field !== 'flag_img' || !dropFileExist)
+                formData.append(field, formValue);
         }
-
 
 
         // If drop zone file exists saving it to formData object as well
         if (dropFileExist) {
 
-            let file = this.dropzoneFile[0];
+            const file = this.dropzoneFile[0];
 
-            let t = moment();
-            let nameArr = file['name'].split('.');
-            let fileName = `${nameArr[0]}${t}.${nameArr[1]}`;
-            formData.append('flag', fileName);
-            formData.append('flag_file', file, fileName)
+            const t = moment();
+            const nameArr = file['name'].split('.');
+            const fileName = `${nameArr[0]}${t}.${nameArr[1]}`;
+            formData.append('flag_img', fileName);
+            formData.append('flag_file', file, fileName);
         }
 
         return formData;
     }
 
 
-
     /**
      * Removes country info
      */
     remove() {
-        this._countries.remove({lang: this.lang, id: this.countryForm.value['id']}).subscribe(() => {
-            this.router.navigate(['world/countries'])
-        });
+
+        // Setting dialog properties
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '300px';
+
+        console.log(this.countryForm.value)
+
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+
+        // Post-confirming actions
+        dialogRef.afterClosed().subscribe(
+            result => {
+                if (result) {
+                    this._countries.remove({lang: this.lang, id: this.countryForm.value['id']}).subscribe(() => {
+                        this.router.navigate(['world/countries'])
+                    });
+                }
+            }
+        );
+
+
     }
 
     /**
      * Removes current flag image from the drop zone
      */
     removeImage() {
-        console.log('here')
+        this.routeCountry.flag_img = '';
         this.dropzoneFile = {};
-        this.countryForm.controls['flag'].patchValue('')
+        this.countryForm.controls['flag_img'].patchValue('');
+    }
+
+    changeWithFolderState(e) {
+        this.withFolder.patchValue(e.target.checked ? '1' : '0');
     }
 
     /**
@@ -193,6 +214,14 @@ export class SaveCountryComponent implements OnInit {
      */
     get folderUrl() {
         return `others/${_.get(this.routeCountry, 'name_en')}/`;
+    }
+
+    /**
+     *  Get with folder checkbox control
+     * @returns {AbstractControl | null}
+     */
+    get withFolder() {
+        return this.countryForm.get('with_folder');
     }
 
 }

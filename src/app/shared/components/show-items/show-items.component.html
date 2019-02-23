@@ -1,40 +1,46 @@
-<div class="{{_auth.loggedIn()?'squares':'circles'}}">
-
-  <!-- Selected items list container -->
-  <div class="listContainer">
-
-    <ul>
-      <ng-container *ngFor="let item of items|async;let i = index">
-        <li class="item {{child}}">
-
-          <!-- Author names for stories in authenticated mode -->
-          <div class="userContainer" *ngIf="storiesPage && auth.loggedIn()">
-            <small>{{item.user.full_name}}</small>
-          </div>
-
-          <!-- Badge number for circles view-->
-          <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn()"></span>
-
-          <!-- Title text with its container -->
-          <div class="titleContainer">
-            <mat-card-title class="title" (click)="router.navigate([getUrl(item)])">{{item['name_'+lang]}}</mat-card-title>
-
-            <!-- Author names for stories in non-authenticated mode -->
-            <div class="userContainer" *ngIf="storiesPage && !_auth.loggedIn()" >
-              <small >{{item.user.full_name}}</small>
-            </div>
-          </div>
-
-          <!-- Edit-item button -->
-          <button (click)="router.navigate([getEditUrl(item)])" class="edit"
-                  *ngIf="_auth.loggedIn() && _auth.checkRoles('admin')">
-            <i class="fas fa-edit"></i>
-          </button>
-
-        </li>
-      </ng-container>
-    </ul>
+<mat-card>
 
 
-  </div>
-</div>
+    <div class="{{_auth.loggedIn()?'squares':'circles'}}">
+
+        <!-- Selected items list container -->
+        <div class="listContainer">
+
+            <ul>
+                <ng-container *ngFor="let item of items|async;let i = index">
+                    <li class="item {{child}}">
+
+                        <!-- Author names for stories in authenticated mode -->
+                        <div class="userContainer" *ngIf="storiesPage && auth.loggedIn()">
+                            <small>{{item.user.full_name}}</small>
+                        </div>
+
+                        <!-- Badge number for circles view-->
+                        <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn()"></span>
+
+                        <!-- Title text with its container -->
+                        <div class="titleContainer">
+                            <mat-card-title class="title" (click)="router.navigate([getUrl(item)])">
+                                {{item['name_'+lang]}}
+                            </mat-card-title>
+
+                            <!-- Author names for stories in non-authenticated mode -->
+                            <div class="userContainer" *ngIf="storiesPage && !_auth.loggedIn()">
+                                <small>{{item.user.full_name}}</small>
+                            </div>
+                        </div>
+
+                        <!-- Edit-item button -->
+                        <button (click)="router.navigate([getEditUrl(item)])" class="edit"
+                                *ngIf="_auth.loggedIn() && _auth.checkRoles('admin')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+
+                    </li>
+                </ng-container>
+            </ul>
+
+
+        </div>
+    </div>
+</mat-card>

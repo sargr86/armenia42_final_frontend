@@ -8,7 +8,7 @@
   "permission_denied":"Permission is denied",
   "unknown_error":"Անհայտ սխալ",
   "dir_not_empty":"Այս անունով պանակը դատարկ չէ",
-  "check_server":"Խնդրում ենք ստոիգել կապը սերվերի հետ",
+  "check_server":"Խնդրում ենք ստուգել կապը սերվերի հետ",
   "country_added":"Պետության տվյալները ավելացվեցին հաջողությամբ",
   "country_updated":"Պետության տվյալները փոփոխվեցին հաջողությամբ",
   "country_removed":"Պետության տվյալները հեռացվեցին հաջողությամբ",
@@ -107,5 +107,9 @@
   "not_found":"Չի գտնվել",
   "country_terminal":"Պետության տերմինալ",
   "country_name_required_error":"Պետության անվանումը պարտադիր է",
-  "country_exists_error":"Այս պետությունն արդեն ավելացված է"
+  "country_exists_error":"Այս պետությունն արդեն ավելացված է",
+  "confirm": "Հաստատել",
+  "cancel": "Չեղարկել",
+  "please_confirm": "Խնդրում ենք հաստատել տվյալ գործողությունը",
+  "with_folder":"պանակի հետ"
 }

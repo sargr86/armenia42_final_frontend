@@ -113,7 +113,11 @@
   "not_found":"Not found",
   "country_terminal":"Country terminal",
   "country_name_required_error":"Country name is required",
-  "country_exists_error":"This country already exists"
+  "country_exists_error":"This country already exists",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "please_confirm": "Please confirm this action.",
+  "with_folder":"With folder"
 
 
 }

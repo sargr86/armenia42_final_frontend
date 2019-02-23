@@ -11,17 +11,35 @@
     display: block !important;
     margin-top: 20px;
   }
-  .saveCountry {
-    @include namedBtn;
-    background-color: $green;
-    float: right;
+  .actions{
+    display: flex;
+    justify-content: space-between;
+    .saveCountry {
+      @include namedBtn;
+      background-color: $green;
+      float: right;
+    }
+
+    .removeContainer{
+      display: flex;
+      .removeCountry {
+        @include namedBtn;
+        background-color: $red;
+      }
+      .checkFolder{
+        padding-top: 4px;
+        label{
+          font-size: 12px;
+          display: block;
+          float:right;
+          color:$darker_gray;
+        }
+      }
+
+    }
+
   }
 
-  .removeCountry {
-    @include namedBtn;
-    background-color: $red;
-    float: left;
-  }
 }
 
 .dropzoneContainer {

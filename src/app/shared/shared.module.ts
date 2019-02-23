@@ -17,6 +17,8 @@ import { MaterialReusableTableComponent } from './components/material-reusable-t
 import { GetMatTableDataSourcePipe } from './pipes/get-mat-table-data-source.pipe';
 import { ShowItemsComponent } from './components/show-items/show-items.component';
 import { GenerateChildItemUrlPipe } from './pipes/generate-child-item-url.pipe';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { BuildFolderUrlPipe } from './pipes/build-folder-url.pipe';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { GenerateChildItemUrlPipe } from './pipes/generate-child-item-url.pipe';
         MaterialReusableTableComponent,
         GetMatTableDataSourcePipe,
         ShowItemsComponent,
-        GenerateChildItemUrlPipe
+        GenerateChildItemUrlPipe,
+        ConfirmationDialogComponent,
+        BuildFolderUrlPipe
     ],
     imports: [
         CommonModule,
@@ -50,7 +54,8 @@ import { GenerateChildItemUrlPipe } from './pipes/generate-child-item-url.pipe';
         FixMatDatepickerDateFormatPipe,
         SetMatDatepickerAdapterLocalePipe,
         GetMatTableDataSourcePipe,
-        GenerateChildItemUrlPipe
+        GenerateChildItemUrlPipe,
+        BuildFolderUrlPipe
     ],
     exports: [
         FormsModule,
@@ -64,6 +69,9 @@ import { GenerateChildItemUrlPipe } from './pipes/generate-child-item-url.pipe';
         MaterialReusableTableComponent,
         GetLangPipe,
         GetImageUrlPipe,
+    ],
+    entryComponents:[
+        ConfirmationDialogComponent
     ]
 })
 export class SharedModule {

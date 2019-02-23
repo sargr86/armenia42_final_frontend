@@ -48,7 +48,7 @@ export class RequestInterceptor implements HttpInterceptor {
                         break;
                     //Sequelize & other errors
                     default:
-                        let name = '';
+                        let name:any;
                         let msg = '';
                         let original = err.error.original;
                         if (!err.error.hasOwnProperty('name')) {
