@@ -19,6 +19,9 @@
       background-color: $green;
       float: right;
     }
+    .saveCountry:disabled{
+      background-color: $dark_gray;
+    }
 
     .removeContainer{
       display: flex;

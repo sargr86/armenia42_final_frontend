@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import CountryFormFields from '../../shared/helpers/get-country-form-fields';
 import {ActivatedRoute, Data, Router} from '@angular/router';
@@ -55,9 +55,10 @@ export class SaveCountryComponent implements OnInit {
   ngOnInit() {
 
     this.dropzoneConfig = dropzoneConfig.USER_PROFILE_IMG_DROPZONE_CONFIG;
+    this._auth.formProcessing = false;
 
     // Getting info box data
-    this.infoBoxData = infoBox.countryAdding;
+    this.infoBoxData = infoBox[this.editCase ? 'countryEditing' : 'countryAdding'];
 
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
@@ -78,9 +79,9 @@ export class SaveCountryComponent implements OnInit {
     const fields: any = CountryFormFields.get(this.saveAction === 'update');
     this.countryForm = this._fb.group(fields);
 
-
+    // Getting folder path from route data
     if (data.hasOwnProperty('country')) {
-      const countryData = data.country
+      const countryData = data.country;
       for (const key in countryData) {
         if (countryData[key] == null) {
           countryData[key] = '';
@@ -108,27 +109,28 @@ export class SaveCountryComponent implements OnInit {
     // Getting form data object built with the form values and drop zone file
     const formData: FormData = this.buildFormData();
 
+    // Showing the button spinner
     this._auth.formProcessing = true;
 
-    // if(this.countryForm.valid){
+    if (this.countryForm.valid) {
 
-    // Adding or updating a country info
-    this._countries[this.saveAction](formData).subscribe(() => {
-      this._auth.formProcessing = false;
-      this.router.navigate(['world/countries']);
-    });
+      // Adding or updating a country info
+      this._countries[this.saveAction](formData).subscribe(() => {
+        this.redirectToList();
+      });
+    }
   }
 
   /**
    * Builds form data to send to the server
-   * @returns {FormData} form Data object
+   * @returns form Data object
    */
-  buildFormData() {
+  buildFormData(): FormData {
     const formData: FormData = new FormData();
     const dropFileExist = Object.entries(this.dropzoneFile).length > 0;
     let formValue;
 
-    for (const field in this.countryForm.value) {
+    for (const field of Object.keys(this.countryForm.value)) {
       formValue = this.countryForm.value[field];
       if (field !== 'flag_img' || !dropFileExist) {
         formData.append(field, formValue);
@@ -157,35 +159,38 @@ export class SaveCountryComponent implements OnInit {
   remove() {
 
     // Setting dialog properties
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '300px';
-
-    // Showing spinner
-    this._auth.removeLoading = true;
-
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      autoFocus: true,
+      width: '300px'
+    });
 
     // Post-confirming actions
     dialogRef.afterClosed().subscribe(
       result => {
-
-        // Stopping spinner on both dialog buttons click
-        this._auth.removeLoading = false;
-
         if (result) {
+          // Showing spinner
+          this._auth.removeLoading = true;
+
+          // Setting parameters to send
           const params = {with_folder: this.withFolder.value, lang: this.lang, id: this.countryForm.value['id']};
-          console.log(params)
+
           this._countries.remove(params).subscribe(() => {
-            this._auth.removeLoading = false;
-            this.router.navigate(['world/countries']);
+            this.redirectToList();
           });
         }
       }
     );
 
 
+  }
+
+  /**
+   * Redirects to countries list page
+   */
+  redirectToList() {
+    this._auth.removeLoading = false;
+    this._auth.formProcessing = false;
+    this.router.navigate(['world/countries']);
   }
 
   /**
@@ -203,47 +208,47 @@ export class SaveCountryComponent implements OnInit {
    * Changing remove-with-folder  checkbox state
    * @param e checkbox change event
    */
-  changeWithFolderState(e) {
+  changeWithFolderState(e: any) {
     this.withFolder.patchValue(e.target.checked ? '1' : '0');
   }
 
   /**
    * Gets country data passed by route url
-   * @returns {any}
+   * @returns route data country
    */
-  get routeCountry() {
+  get routeCountry(): any {
     return _.get(this.routeData, 'country');
   }
 
   /**
    * Gets flag name
-   * @returns {string|undefined}
+   * @returns flag image file name
    */
-  get flag() {
+  get flag(): string | undefined {
     return _.get(this.routeCountry, 'flag_img');
   }
 
   /**
    * Gets folder url for flag
-   * @returns {string}
+   * @returns folder url of the country
    */
-  get folderUrl() {
+  get folderUrl(): string {
     return `others/${_.get(this.routeCountry, 'name_en')}/`;
   }
 
   /**
    * Get with folder checkbox control
-   * @returns {AbstractControl | null}
+   * @returns with folder checkbox control
    */
-  get withFolder() {
+  get withFolder(): AbstractControl | null {
     return this.countryForm.get('with_folder');
   }
 
   /**
    * Gets country name control for checking the field errors
-   * @returns {AbstractControl | null}
+   * @returns country name control
    */
-  get countryName() {
+  get countryName(): AbstractControl | null {
     return this.countryForm.get(`name_${this.lang}`);
   }
 

@@ -9,10 +9,10 @@
   <form [formGroup]="countryForm">
     <div class="infoContainer">
 
-      <!-- Country name field* -->
+      <!-- Country name field* with its error handling -->
       <mat-form-field>
-        <mat-label>{{'name'|translate}}</mat-label>
-        <input matInput [formControlName]="'name_'+lang">
+        <input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">
+        <mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i> </mat-hint>
       </mat-form-field>
       <div *ngIf="countryName.errors && (!countryName.pristine || countryName.touched)" class="error">
         <div *ngIf="countryName.hasError('required')">{{'country_name_required_error'|translate}}</div>
@@ -46,7 +46,7 @@
 
         </div>
 
-        <button (click)="save()" class="saveCountry">
+        <button (click)="save()" class="saveCountry" [disabled]="countryForm.invalid">
           <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
           <span>{{(editCase?'save':'add')|translate}}</span>
         </button>

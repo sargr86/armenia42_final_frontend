@@ -117,7 +117,8 @@
   "confirm": "Confirm",
   "cancel": "Cancel",
   "please_confirm": "Please confirm this action.",
-  "with_folder":"With folder"
+  "with_folder":"With folder",
+  "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system."
 
 
 }
