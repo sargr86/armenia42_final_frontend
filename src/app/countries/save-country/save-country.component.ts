@@ -175,7 +175,9 @@ export class SaveCountryComponent implements OnInit {
         this._auth.removeLoading = false;
 
         if (result) {
-          this._countries.remove({lang: this.lang, id: this.countryForm.value['id']}).subscribe(() => {
+          const params = {with_folder: this.withFolder.value, lang: this.lang, id: this.countryForm.value['id']};
+          console.log(params)
+          this._countries.remove(params).subscribe(() => {
             this._auth.removeLoading = false;
             this.router.navigate(['world/countries']);
           });
