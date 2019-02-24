@@ -12,7 +12,7 @@ import {TextAreaLimits} from '../../shared/models/TextAreaLimits';
 import * as _ from 'lodash';
 import * as dropzoneConfig from '../../shared/constants/dropzone';
 import * as moment from 'moment';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {BuildFolderUrlPipe} from '../../shared/pipes/build-folder-url.pipe';
 
@@ -86,7 +86,7 @@ export class SaveCountryComponent implements OnInit {
     // Getting folder path from route data
     if (data.hasOwnProperty('country')) {
       const countryData = data.country;
-      for (const key in countryData) {
+      for (const key of Object.keys(countryData)) {
         if (countryData[key] == null) {
           countryData[key] = '';
         }
