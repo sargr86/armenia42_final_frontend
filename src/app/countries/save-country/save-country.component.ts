@@ -57,8 +57,12 @@ export class SaveCountryComponent implements OnInit {
     this.dropzoneConfig = dropzoneConfig.USER_PROFILE_IMG_DROPZONE_CONFIG;
     this._auth.formProcessing = false;
 
-    // Getting info box data
+    // Getting info box data, removing first item, because it relates to only English version of the system
     this.infoBoxData = infoBox[this.editCase ? 'countryEditing' : 'countryAdding'];
+    if (this.lang !== 'en' && this.editCase) {
+      this.infoBoxData.shift();
+
+    }
 
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
