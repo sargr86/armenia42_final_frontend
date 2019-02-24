@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
 
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {AuthService} from "../services/auth.service";
+import {AuthService} from '../services/auth.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {

@@ -1,29 +1,29 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ShowCountriesComponent} from "./show-countries/show-countries.component";
-import {SaveCountryComponent} from "./save-country/save-country.component";
+import {ShowCountriesComponent} from './show-countries/show-countries.component';
+import {SaveCountryComponent} from './save-country/save-country.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: ShowCountriesComponent,
-        data:{
-            title:'countries'
-        }
-    },
-    {
-        path: 'save',
-        component: SaveCountryComponent,
-        data: {
-            expectedRole: 'admin',
-            title:'country_terminal'
-        }
+  {
+    path: '',
+    component: ShowCountriesComponent,
+    data: {
+      title: 'countries'
     }
+  },
+  {
+    path: 'add',
+    component: SaveCountryComponent,
+    data: {
+      expectedRole: 'admin',
+      title: 'country_terminal'
+    }
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class CountriesRoutingModule {
 }

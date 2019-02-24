@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 
 // JWT helper
-import {JwtHelperService} from "@auth0/angular-jwt";
+import {JwtHelperService} from '@auth0/angular-jwt';
 import * as jwtDecode from 'jwt-decode';
 
 
@@ -16,7 +16,8 @@ export class AuthService {
     // Gets environment-sensitive api host url
     domain: string = environment.apiHost;
     userData: User;
-    formProcessing: boolean = false;
+    formProcessing = false; // regular button spinner state
+    removeLoading = false; // remove button spinner state
 
     constructor(
         private httpClient: HttpClient,
