@@ -15,6 +15,8 @@ import * as moment from 'moment';
 import {MatDialog} from '@angular/material';
 import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {BuildFolderUrlPipe} from '../../shared/pipes/build-folder-url.pipe';
+import {TranslateService} from "@ngx-translate/core";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-save-country',
@@ -48,7 +50,9 @@ export class SaveCountryComponent implements OnInit {
     private getLang: GetLangPipe,
     private _countries: CountriesService,
     private dialog: MatDialog,
-    private buildFolderUrl: BuildFolderUrlPipe
+    private buildFolderUrl: BuildFolderUrlPipe,
+    private translate: TranslateService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -59,9 +63,9 @@ export class SaveCountryComponent implements OnInit {
 
     // Getting info box data, removing first item, because it relates to only English version of the system
     this.infoBoxData = infoBox[this.editCase ? 'countryEditing' : 'countryAdding'];
-    if (this.lang !== 'en' && this.editCase) {
-      this.infoBoxData.shift();
 
+    if (this.lang !== 'en' && this.editCase) {
+      this.infoBoxData = this.infoBoxData.filter(n => n !== 'item_name_affects_folder_name');
     }
 
     this.route.data.subscribe((dt: Data) => {
@@ -113,14 +117,14 @@ export class SaveCountryComponent implements OnInit {
     // Getting form data object built with the form values and drop zone file
     const formData: FormData = this.buildFormData();
 
-    // Showing the button spinner
-    this._auth.formProcessing = true;
-
     if (this.countryForm.valid) {
+
+      // Showing the button spinner
+      this._auth.formProcessing = true;
 
       // Adding or updating a country info
       this._countries[this.saveAction](formData).subscribe(() => {
-        this.redirectToList();
+        this.redirectToList(this.saveAction);
       });
     }
   }
@@ -179,7 +183,7 @@ export class SaveCountryComponent implements OnInit {
           const params = {with_folder: this.withFolder.value, lang: this.lang, id: this.countryForm.value['id']};
 
           this._countries.remove(params).subscribe(() => {
-            this.redirectToList();
+            this.redirectToList('remove');
           });
         }
       }
@@ -191,10 +195,14 @@ export class SaveCountryComponent implements OnInit {
   /**
    * Redirects to countries list page
    */
-  redirectToList() {
+  redirectToList(action) {
     this._auth.removeLoading = false;
     this._auth.formProcessing = false;
     this.router.navigate(['world/countries']);
+    const msg = [`country_${action}_success`];
+    this.translate.get(msg).subscribe(dt => {
+      this.toastr.success('', dt[msg]);
+    });
   }
 
   /**
