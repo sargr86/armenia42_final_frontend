@@ -1,49 +1,54 @@
 <mat-card [class.grayBg]="!_auth.loggedIn()">
 
 
-    <div class="{{_auth.loggedIn()?'squares':'circles'}}">
+  <div class="{{_auth.loggedIn()?'squares':'circles'}}">
 
-        <!-- Selected items list container -->
-        <div class="listContainer">
+    <!-- Selected items list container -->
+    <div class="listContainer">
+      <ng-container *ngIf="items.length===0;else itemsList">
+        <small class="no_items_found">{{('no_items_'+parent)|translate}}</small>
+      </ng-container>
+      <ng-template #itemsList>
+        <ul>
+          <ng-container *ngFor="let item of items;let i = index">
+            <li class="item {{child}}">
 
-            <ul>
-                <ng-container *ngFor="let item of items|async;let i = index">
-                    <li class="item {{child}}">
+              <!-- Author names for stories in authenticated mode -->
+              <div class="userContainer" *ngIf="storiesPage && auth.loggedIn()">
+                <small>{{item.user.full_name}}</small>
+              </div>
 
-                        <!-- Author names for stories in authenticated mode -->
-                        <div class="userContainer" *ngIf="storiesPage && auth.loggedIn()">
-                            <small>{{item.user.full_name}}</small>
-                        </div>
-
-                        <!-- Badge number & flag for circles view-->
-                        <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn() && child!='countries'"></span>
-                        <div class="flag" *ngIf="!_auth.loggedIn() && child=='countries'" [style.background-image]="item['flag_img']|getImgUrl:('others/'+item['name_en']):true">
-                        </div>
-
-
-                        <!-- Title text with its container -->
-                        <div class="titleContainer">
-                            <mat-card-title class="title" (click)="router.navigate([getUrl(item)])">
-                                {{item['name_'+lang]}}
-                            </mat-card-title>
-
-                            <!-- Author names for stories in non-authenticated mode -->
-                            <div class="userContainer" *ngIf="storiesPage && !_auth.loggedIn()">
-                                <small>{{item.user.full_name}}</small>
-                            </div>
-                        </div>
-
-                        <!-- Edit-item button -->
-                        <button (click)="router.navigate([getEditUrl(item)])" class="edit"
-                                *ngIf="_auth.loggedIn() && _auth.checkRoles('admin')">
-                            <i class="fas fa-edit"></i>
-                        </button>
-
-                    </li>
-                </ng-container>
-            </ul>
+              <!-- Badge number & flag for circles view-->
+              <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn() && child!='countries'"></span>
+              <div class="flag" *ngIf="!_auth.loggedIn() && child=='countries'"
+                   [style.background-image]="item['flag_img']|getImgUrl:('others/'+item['name_en']):true">
+              </div>
 
 
-        </div>
+              <!-- Title text with its container -->
+              <div class="titleContainer">
+                <mat-card-title class="title" (click)="router.navigate([getUrl(item)])">
+                  {{item['name_'+lang]}}
+                </mat-card-title>
+
+                <!-- Author names for stories in non-authenticated mode -->
+                <div class="userContainer" *ngIf="storiesPage && !_auth.loggedIn()">
+                  <small>{{item.user.full_name}}</small>
+                </div>
+              </div>
+
+              <!-- Edit-item button -->
+              <button (click)="router.navigate([getEditUrl(item)])" class="edit"
+                      *ngIf="_auth.loggedIn() && _auth.checkRoles('admin')">
+                <i class="fas fa-edit"></i>
+              </button>
+
+            </li>
+          </ng-container>
+        </ul>
+      </ng-template>
+
+
     </div>
+  </div>
 </mat-card>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
-import CountryFormFields from '../../shared/helpers/get-country-form-fields';
+import ItemFormFields from '../../shared/helpers/get-item-form-fields';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
 import {infoBox} from '../../shared/constants/info_box_data';
@@ -62,7 +62,7 @@ export class SaveCountryComponent implements OnInit {
     this._auth.formProcessing = false;
 
     // Getting info box data, removing first item, because it relates to only English version of the system
-    this.infoBoxData = infoBox[this.editCase ? 'countryEditing' : 'countryAdding'];
+    this.infoBoxData = infoBox[this.editCase ? 'itemEditing' : 'itemAdding'];
 
     if (this.lang !== 'en' && this.editCase) {
       this.infoBoxData = this.infoBoxData.filter(n => n !== 'item_name_affects_folder_name');
@@ -84,7 +84,7 @@ export class SaveCountryComponent implements OnInit {
    * @param  data router data
    */
   getFormFields(lang: string, data: Data) {
-    const fields: any = CountryFormFields.get(this.saveAction === 'update');
+    const fields: any = ItemFormFields.get(this.saveAction === 'update');
     this.countryForm = this._fb.group(fields);
 
     // Getting folder path from route data

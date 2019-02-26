@@ -63,6 +63,19 @@ const routes: Routes = [
 
   },
   {
+    path: ':country/add',
+    component: SaveProvinceComponent,
+    resolve: {
+      country: CountriesResolver
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'province_terminal'
+    },
+
+  },
+  {
     path: ':country/edit',
     component: SaveCountryComponent,
     resolve: {
@@ -85,7 +98,7 @@ const routes: Routes = [
     path: ':country/:province/edit',
     component: SaveProvinceComponent,
     resolve: {
-      country: ProvinceResolverService
+      province: ProvinceResolverService
     },
     canActivate: [AuthGuard, RoleGuard],
     data: {

@@ -1,7 +1,7 @@
 import {Validators} from '@angular/forms';
 
 
-export default class CountryFormFields {
+export default class ItemFormFields {
   static get(edit: boolean) {
     const lang = localStorage.getItem('lang') || 'en';
     const formFields = {

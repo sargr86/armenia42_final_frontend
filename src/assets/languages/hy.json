@@ -106,6 +106,7 @@
   "page_not_found":"Էջը չի գտնվել",
   "not_found":"Չի գտնվել",
   "country_terminal":"Պետության տերմինալ",
+  "province_terminal":"Մարզի տերմինալ",
   "country_name_required_error":"Պետության անվանումը պարտադիր է",
   "country_exists_error":"Այս պետությունն արդեն ավելացված է",
   "confirm": "Հաստատել",
@@ -114,5 +115,7 @@
   "with_folder":"պանակի հետ",
   "country_add_success":"Պետության տվյալները հաջողությամբ ավելացվեցին:",
   "country_update_success":"Պետության տվյալները հաջողությամբ փոփոխվեցին:",
-  "country_remove_success":"Պետության տվյալները հաջողությամբ հեռացվեցին:"
+  "country_remove_success":"Պետության տվյալները հաջողությամբ հեռացվեցին:",
+  "no_items_countries": "Տվյալ պետության համար մարզ/ նահանգ չի գտնվել",
+  "country_not_found": "Տվյալ պետությունը չի գտնվել"
 }

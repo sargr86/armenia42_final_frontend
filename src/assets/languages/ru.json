@@ -106,6 +106,7 @@
   "page_not_found":"Страница не найдена",
   "not_found":"Не найдено",
   "country_terminal":"Терминал страны",
+  "province_terminal":"Терминал провинции",
   "country_name_required_error":"Название страны обязательно",
   "country_exists_error":"Эта страна уже добавлена",
   "confirm": "Подтвердить",
@@ -114,5 +115,7 @@
   "with_folder":"с папкой",
   "country_add_success":"Детали страны успешно добавлены.",
   "country_update_success":"Детали страны успешно изменены.",
-  "country_remove_success":"Детали страны успешно удалены."
+  "country_remove_success":"Детали страны успешно удалены.",
+  "no_items_countries": "Не найдено провинций/ штатов для данного государства",
+  "country_not_found": "Это государство не найдено"
 }
