@@ -1,4 +1,4 @@
-export class Country {
+export class Province {
   id: number;
   cover_id?: number;
   name_en?: string;
@@ -7,5 +7,4 @@ export class Country {
   description_en?: string;
   description_ru?: string;
   description_hy?: string;
-  flag_img?: string;
 }

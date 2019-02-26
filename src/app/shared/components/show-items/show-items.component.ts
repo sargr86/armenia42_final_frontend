@@ -7,6 +7,7 @@ import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {ReplaceAllPipe} from "../../pipes/replace-all.pipe";
 import {GenerateChildItemUrlPipe} from "../../pipes/generate-child-item-url.pipe";
+import {ProvincesService} from '../../services/provinces.service';
 
 @Component({
     selector: 'show-items',
@@ -25,6 +26,7 @@ export class ShowItemsComponent implements OnInit {
     constructor(
         public router: Router,
         private _countries: CountriesService,
+        private _provinces: ProvincesService,
         private _subject: SubjectService,
         private getLang: GetLangPipe,
         public _auth: AuthService,
@@ -34,7 +36,7 @@ export class ShowItemsComponent implements OnInit {
         this._subject.getLanguage().subscribe(lang => {
             this.lang = lang;
             this.getItems();
-        })
+        });
 
 
     }
@@ -51,7 +53,7 @@ export class ShowItemsComponent implements OnInit {
     getItems(){
         if(this.child){
             let params = {lang: this.lang};
-            this.items = this[`_${this.child}`].get(params)
+            this.items = this[`_${this.child}`].get(params);
         }
 
     }

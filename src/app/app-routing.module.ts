@@ -10,81 +10,103 @@ import {AuthGuard} from "./shared/guards/auth.guard";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {SaveCountryComponent} from "./countries/save-country/save-country.component";
 import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
+import {ShowProvincesComponent} from "./provinces/show-provinces/show-provinces.component";
+import {SaveProvinceComponent} from './provinces/save-province/save-province.component';
+import {ProvinceResolverService} from './shared/resolvers/province-resolver.service';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-        data: {
-            title: 'home'
-        }
+  {
+    path: '',
+    component: HomeComponent,
+    data: {
+      title: 'home'
+    }
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {
+      title: 'registration_terminal'
     },
-    {
-        path: 'register',
-        component: RegisterComponent,
-        data: {
-            title: 'registration_terminal'
-        },
-        canActivate: [NonAuthGuard]
+    canActivate: [NonAuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'login'
     },
-    {
-        path: 'login',
-        component: LoginComponent,
-        data: {
-            title: 'login'
-        },
-        canActivate: [NonAuthGuard]
+    canActivate: [NonAuthGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule',
+    data: {
+      expectedRole: 'admin',
     },
-    {
-        path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule',
-        data: {
-            expectedRole: 'admin',
-        },
-        canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'profile/:id',
+    component: RegisterComponent,
+    resolve: {
+      user: UserResolver
     },
-    {
-        path: 'profile/:id',
-        component: RegisterComponent,
-        resolve: {
-            user: UserResolver
-        },
-        data: {
-            title: 'profile_terminal'
-        },
-        canActivate: [AuthGuard]
+    data: {
+      title: 'profile_terminal'
     },
-    {
-        path: 'world/countries',
-        loadChildren: './countries/countries.module#CountriesModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'world/countries',
+    loadChildren: './countries/countries.module#CountriesModule',
 
+  },
+  {
+    path: ':country/edit',
+    component: SaveCountryComponent,
+    resolve: {
+      country: CountriesResolver
     },
-    {
-        path: ':country/edit',
-        component: SaveCountryComponent,
-        resolve: {
-            country: CountriesResolver
-        },
-        canActivate: [AuthGuard,RoleGuard],
-        data: {
-            expectedRole: 'admin',
-            title:'country_terminal'
-        },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'country_terminal'
+    },
 
+  },
+  {
+    path: ':country',
+    component: ShowProvincesComponent,
+    data: {
     },
-    {
-        path: '**',
-        component: NotFoundComponent,
-        data: {
-            title: 'not_found'
-        }
+  },
+  {
+    path: ':country/:province/edit',
+    component: SaveProvinceComponent,
+    resolve: {
+      country: ProvinceResolverService
     },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'province_terminal'
+    },
+
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    data: {
+      title: 'not_found'
+    }
+  },
 
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

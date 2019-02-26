@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Country} from '../models/Country';
+import {Province} from '../models/Province';
 import {Observable} from 'rxjs/internal/Observable';
 import {API_HOST} from '../constants/settings';
 
 @Injectable()
-export class CountriesService {
+export class ProvincesService {
   constructor(
     private httpClient: HttpClient
   ) {
   }
 
   /**
-   * Gets countries list
-   * @param params language to retrieve countries list in that language
-   * @returns countries observable
+   * Gets provinces list
+   * @param params language to retrieve provinces list in that language
+   * @returns provinces observable
    */
-  get(params): Observable<Country[]> {
-    return this.httpClient.get<Country[]>(`${API_HOST}countries/get`, {params: params});
+  get(params): Observable<Province[]> {
+    return this.httpClient.get<Province[]>(`${API_HOST}provinces/get`, {params: params});
   }
 
   /**
@@ -25,8 +25,8 @@ export class CountriesService {
    * @param params a country name to retrieve the country data
    * @returns country observable
    */
-  getByName(params): Observable<Country> {
-    return this.httpClient.get(`${API_HOST}countries/get-by-name`, {params: params});
+  getByName(params): Observable<Province> {
+    return this.httpClient.get(`${API_HOST}provinces/get-by-name`, {params: params});
   }
 
   /**
@@ -34,8 +34,8 @@ export class CountriesService {
    * @param params new country parameters
    * @returns country observable
    */
-  add(params): Observable<Country> {
-    return this.httpClient.post<Country>(`${API_HOST}countries/add`, params);
+  add(params): Observable<Province> {
+    return this.httpClient.post<Province>(`${API_HOST}provinces/add`, params);
   }
 
   /**
@@ -43,8 +43,8 @@ export class CountriesService {
    * @param params selected country parameters
    * @returns country observable
    */
-  update(params): Observable<Country> {
-    return this.httpClient.put<Country>(`${API_HOST}countries/update`, params);
+  update(params): Observable<Province> {
+    return this.httpClient.put<Province>(`${API_HOST}provinces/update`, params);
   }
 
   /**
@@ -53,7 +53,7 @@ export class CountriesService {
    * @returns country observable
    */
   remove(params) {
-    return this.httpClient.delete<Country>(`${API_HOST}countries/remove`, {params: params});
+    return this.httpClient.delete<Province>(`${API_HOST}province/remove`, {params: params});
   }
 
 
