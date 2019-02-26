@@ -20,7 +20,7 @@ export class ShowItemsComponent implements OnInit {
 
     lang: string = this.getLang.transform();
     items: Observable<any>;
-    storiesPage = this.child == 'story';
+    storiesPage = this.child === 'story';
 
     constructor(
         public router: Router,

@@ -8,3 +8,12 @@
 .squares{
   @include squares;
 }
+
+.flag{
+  width: 18px;
+  height:18px;
+  background-size:cover;
+  background-color:$gray;
+  border-radius:18px;
+  margin-top: -8px;
+}

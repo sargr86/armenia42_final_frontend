@@ -112,7 +112,7 @@
   "cancel": "Отменить",
   "please_confirm": "Пожалуйста подтвердите это действие.",
   "with_folder":"с папкой",
-  "country_add_success":"Детали страны успешно добавлены",
-  "country_update_success":"Детали страны успешно изменены",
-  "country_remove_success":"Детали страны успешно удалены"
+  "country_add_success":"Детали страны успешно добавлены.",
+  "country_update_success":"Детали страны успешно изменены.",
+  "country_remove_success":"Детали страны успешно удалены."
 }

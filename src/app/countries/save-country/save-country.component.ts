@@ -152,7 +152,7 @@ export class SaveCountryComponent implements OnInit {
       const file = this.dropzoneFile[0];
       const t = moment();
       const nameArr = file['name'].split('.');
-      const fileName = `${nameArr[0]}${t}.${nameArr[1]}`;
+      const fileName = `${nameArr[0]}.${nameArr[1]}`;
       formData.append('flag_img', fileName);
       formData.append('flag_file', file, fileName);
     }
@@ -199,8 +199,8 @@ export class SaveCountryComponent implements OnInit {
     this._auth.removeLoading = false;
     this._auth.formProcessing = false;
     this.router.navigate(['world/countries']);
-    const msg = [`country_${action}_success`];
-    this.translate.get(msg).subscribe(dt => {
+    const msg = `country_${action}_success`;
+    this.translate.get([msg]).subscribe(dt => {
       this.toastr.success('', dt[msg]);
     });
   }

@@ -15,8 +15,11 @@
                             <small>{{item.user.full_name}}</small>
                         </div>
 
-                        <!-- Badge number for circles view-->
-                        <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn()"></span>
+                        <!-- Badge number & flag for circles view-->
+                        <span class="number" [matBadge]="i+1" *ngIf="!_auth.loggedIn() && child!='countries'"></span>
+                        <div class="flag" *ngIf="!_auth.loggedIn() && child=='countries'" [style.background-image]="item['flag_img']|getImgUrl:('others/'+item['name_en']):true">
+                        </div>
+
 
                         <!-- Title text with its container -->
                         <div class="titleContainer">
