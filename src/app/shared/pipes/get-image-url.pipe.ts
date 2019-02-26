@@ -1,13 +1,12 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer} from "@angular/platform-browser";
-import {ReplaceAllPipe} from "./replace-all.pipe";
-import {environment} from "../../../environments/environment";
+import {DomSanitizer} from '@angular/platform-browser';
+import {ReplaceAllPipe} from './replace-all.pipe';
+import {UPLOADS_FOLDER} from '../constants/settings';
 
 @Pipe({
   name: 'getImgUrl'
 })
 export class GetImageUrlPipe implements PipeTransform {
-  domain: string = environment.apiHost;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -18,22 +17,25 @@ export class GetImageUrlPipe implements PipeTransform {
 
   /**
    * Returns sanitized image url
-   * @param name
-   * @param {string} path
-   * @param {boolean} background
+   * @param name file name
+   * @param path folder path
+   * @param  background is background or an image
    * @returns {any}
    */
   transform(name, path = '', background = false): any {
     let folder = '';
-    if (path) folder = path;
-    if (!name || !path) return;
+    if (path) {
+      folder = path;
+    }
+    if (!name || !path) {
+      return;
+    }
     if (background) {
-      let url = 'url("' + this.domain + 'uploads/' + folder + '/' + name + '")';
+      let url = 'url("' + UPLOADS_FOLDER + folder + '/' + name + '")';
       url = this.replace.transform(url, false);
       return this.sanitizer.bypassSecurityTrustStyle(url);
-    }
-    else {
-      let url = this.domain + 'uploads/' + folder + name;
+    } else {
+      const url = UPLOADS_FOLDER + folder + '/' + name;
       return this.sanitizer.bypassSecurityTrustUrl(url);
     }
 

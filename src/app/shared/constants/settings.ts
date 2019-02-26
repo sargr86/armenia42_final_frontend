@@ -5,4 +5,4 @@ export const DEFAULT_ITEMS = ['world', 'countries', 'provinces', 'directions', '
 export const DEFAULT_ACTIONS = ['edit', 'update', 'add'];
 export const TEXTAREA_AUTOSIZE_MIN_ROWS = 5;
 export const TEXTAREA_AUTOSIZE_MAX_ROWS = 10;
-export const UPLOADS_FOLDER = environment.apiHost + 'public/uploads';
+export const UPLOADS_FOLDER = environment.apiHost + 'uploads/';
