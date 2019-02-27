@@ -126,5 +126,6 @@
   "province_name_required_error":"Province name is required",
   "province_add_success":"Province has been added successfully",
   "province_update_success":"Province has been updated successfully",
-  "province_remove_success":"Province has been removed successfully"
+  "province_remove_success":"Province has been removed successfully",
+  "no_countries_found":"No countries found on this request"
 }

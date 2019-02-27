@@ -6,7 +6,7 @@
     <!-- Selected items list container -->
     <div class="listContainer">
       <ng-container *ngIf="items.length===0;else itemsList">
-        <small class="no_items_found">{{('no_items_'+parent)|translate}}</small>
+        <small class="no_items_found">{{((parent?'no_items_'+parent:'no_countries_found'))|translate}}</small>
       </ng-container>
       <ng-template #itemsList>
         <ul>

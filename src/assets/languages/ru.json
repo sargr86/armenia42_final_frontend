@@ -122,5 +122,6 @@
   "province_name_required_error":"Название провинции обязательно",
   "province_add_success":"Провинция была успешно добавлена",
   "province_update_success":"Детали провинции были успешно изменены",
-  "province_remove_success":"Детали провинции были успешно удалены"
+  "province_remove_success":"Детали провинции были успешно удалены",
+  "no_countries_found":"Не найдено государств по данному запросу"
 }

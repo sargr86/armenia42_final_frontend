@@ -120,7 +120,8 @@
   "country_not_found": "Տվյալ պետությունը չի գտնվել",
   "province_exists_error":"Այս անունով մարզ արդեն գոյություն ունի",
   "province_name_required_error":"Մարզի անունը պարտադիր է",
-  "province_add_success":"Province has been added successfully",
-  "province_update_success":"Province has been updated successfully",
-  "province_remove_success":"Province has been removed successfully"
+  "province_add_success":"Մարզն ավելացվեց հաջողությամբ",
+  "province_update_success":"Մարզի տվյալները հաջողությամբ փոփոխվեցին",
+  "province_remove_success":"Մարզի տվյալները հաջողությամբ հեռացվեցին",
+  "no_countries_found":"Տվյալ հարցմամբ պետություն չի գտնվել"
 }
