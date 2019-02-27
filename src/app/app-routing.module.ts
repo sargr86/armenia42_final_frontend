@@ -13,6 +13,9 @@ import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
 import {ShowProvincesComponent} from "./provinces/show-provinces/show-provinces.component";
 import {SaveProvinceComponent} from './provinces/save-province/save-province.component';
 import {ProvinceResolverService} from './shared/resolvers/province-resolver.service';
+import {ShowDirectionsComponent} from './directions/show-directions/show-directions.component';
+import {DirectionResolverService} from './shared/resolvers/direction-resolver.service';
+import {SaveDirectionComponent} from './directions/save-direction/save-direction.component';
 
 const routes: Routes = [
   {
@@ -104,6 +107,25 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'province_terminal'
+    },
+
+  },
+  {
+    path: ':country/:province',
+    component: ShowDirectionsComponent,
+    data: {
+    },
+  },
+  {
+    path: ':country/:province/:direction/edit',
+    component: SaveDirectionComponent,
+    resolve: {
+      province: DirectionResolverService
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'direction_terminal'
     },
 
   },

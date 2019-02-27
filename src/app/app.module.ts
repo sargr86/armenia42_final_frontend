@@ -20,18 +20,20 @@ import {SaveUserInfoService} from './shared/services/save-user-info.service';
 import {LayoutModule} from './layout/layout.module';
 import {MaterialModule} from './shared/modules/material.module';
 import {SubjectService} from './shared/services/subject.service';
-import {UserResolver} from './shared/resolvers/user-resolver.service';
 import {UsersService} from './shared/services/users.service';
 import {AuthGuard} from './shared/guards/auth.guard';
 import {NonAuthGuard} from './shared/guards/non-auth.guard';
 import {RoleGuard} from './shared/guards/role.guard';
 import {CountriesModule} from './countries/countries.module';
-import {CountriesResolver} from './shared/resolvers/countries-resolver.service';
 import {ProvincesModule} from './provinces/provinces.module';
+import {DirectionsModule} from './directions/directions.module';
 
+import {UserResolver} from './shared/resolvers/user-resolver.service';
+import {CountriesResolver} from './shared/resolvers/countries-resolver.service';
 // Services
 import {ProvincesService} from './shared/services/provinces.service';
 import {CountriesService} from './shared/services/countries.service';
+import {DirectionsService} from './shared/services/directions.service';
 
 
 // AoT requires an exported function for factories
@@ -73,7 +75,8 @@ export function tokenGetter() {
     LayoutModule,
     MaterialModule,
     CountriesModule,
-    ProvincesModule
+    ProvincesModule,
+    DirectionsModule
   ],
   providers: [
     AuthService,
@@ -87,6 +90,7 @@ export function tokenGetter() {
     UsersService,
     CountriesService,
     ProvincesService,
+    DirectionsService,
     UserResolver,
     CountriesResolver,
     AuthGuard,

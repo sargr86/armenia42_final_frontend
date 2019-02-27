@@ -121,6 +121,7 @@
   "with_folder": "With folder",
   "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system.",
   "no_items_countries": "No provinces/ states found for this country",
+  "no_items_provinces": "No directions found for this province",
   "country_not_found": "That country is not found",
   "province_exists_error":"The province with such name is already exists",
   "province_name_required_error":"Province name is required",

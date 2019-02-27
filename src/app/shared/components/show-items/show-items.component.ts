@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
 import {GenerateChildItemUrlPipe} from '../../pipes/generate-child-item-url.pipe';
 import {ProvincesService} from '../../services/provinces.service';
+import {DirectionsService} from '../../services/directions.service';
 
 @Component({
   selector: 'show-items',
@@ -26,6 +27,7 @@ export class ShowItemsComponent implements OnInit {
     public router: Router,
     private _countries: CountriesService,
     private _provinces: ProvincesService,
+    private _directions: DirectionsService,
     private _subject: SubjectService,
     private getLang: GetLangPipe,
     public _auth: AuthService,
