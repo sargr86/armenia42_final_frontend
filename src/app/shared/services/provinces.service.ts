@@ -26,7 +26,7 @@ export class ProvincesService {
    * @returns country observable
    */
   getByName(params): Observable<Province> {
-    return this.httpClient.get(`${API_HOST}provinces/get-by-name`, {params: params});
+    return this.httpClient.get<Province>(`${API_HOST}provinces/get-by-name`, {params: params});
   }
 
   /**
@@ -53,7 +53,7 @@ export class ProvincesService {
    * @returns country observable
    */
   remove(params) {
-    return this.httpClient.delete<Province>(`${API_HOST}province/remove`, {params: params});
+    return this.httpClient.delete<Province>(`${API_HOST}provinces/remove`, {params: params});
   }
 
 

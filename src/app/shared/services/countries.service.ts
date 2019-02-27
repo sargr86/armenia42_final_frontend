@@ -26,7 +26,7 @@ export class CountriesService {
    * @returns country observable
    */
   getByName(params): Observable<Country> {
-    return this.httpClient.get(`${API_HOST}countries/get-by-name`, {params: params});
+    return this.httpClient.get<Country>(`${API_HOST}countries/get-by-name`, {params: params});
   }
 
   /**

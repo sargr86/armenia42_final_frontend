@@ -1,27 +1,27 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-    name: 'replaceAll'
+  name: 'replaceAll'
 })
 export class ReplaceAllPipe implements PipeTransform {
 
-    /**
-     * Coverts name to underscored folders name or opposite
-     * @param value
-     * @param {boolean} folder2Name
-     * @param {boolean} lowercase
-     * @returns {any}
-     */
-    transform(value: any, folder2Name = true,lowercase = false): any {
-        if (value) {
+  /**
+   * Coverts name to underscored folders name or opposite
+   * @param value
+   * @param {boolean} folder2Name
+   * @param {boolean} lowercase
+   * @returns {any}
+   */
+  transform(value: any, folder2Name = true, lowercase = false): any {
+    if (value) {
 
-            if (folder2Name) return value.replace(/_/g, ' ');
-            else {
-                if(lowercase) value = value.toLowerCase();
-                return value.replace(/ /g, '_');
-            }
-        }
-        else return '';
+      if (folder2Name) return value.replace(/_/g, ' ');
+      else {
+        if (lowercase) value = value.toLowerCase();
+        return value.replace(/ /g, '_');
+      }
     }
+    else return '';
+  }
 
 }

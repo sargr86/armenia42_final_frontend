@@ -17,6 +17,7 @@ import {BuildFolderUrlPipe} from '../../shared/pipes/build-folder-url.pipe';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from 'ngx-toastr';
 import {ProvincesService} from '../../shared/services/provinces.service';
+import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
 
 @Component({
   selector: 'app-save-province',
@@ -52,29 +53,44 @@ export class SaveProvinceComponent implements OnInit {
     private dialog: MatDialog,
     private buildFolderUrl: BuildFolderUrlPipe,
     private translate: TranslateService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private replace: ReplaceAllPipe
   ) {
   }
 
   ngOnInit() {
 
+    // Getting drop zone configuration and stopping spinner
     this.dropzoneConfig = dropzoneConfig.USER_PROFILE_IMG_DROPZONE_CONFIG;
     this._auth.formProcessing = false;
 
-    // Getting info box data, removing first item, because it relates to only English version of the system
-    this.infoBoxData = infoBox[this.editCase ? 'itemEditing' : 'itemAdding'];
+    // Getting data for info box
+    this.getInfoBoxData();
 
+    // Getting data passed by route
+    this.getRouteData();
+  }
+
+  /**
+   * Gets info box data for different languages
+   */
+  getInfoBoxData() {
+    // Getting info box data, removing first item, because it relates only to English version of the system
+    this.infoBoxData = infoBox[this.editCase ? 'itemEditing' : 'itemAdding'];
     if (this.lang !== 'en' && this.editCase) {
       this.infoBoxData = this.infoBoxData.filter(n => n !== 'item_name_affects_folder_name');
     }
+  }
 
+  /**
+   * Gets data passed by route
+   */
+  getRouteData() {
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
       this.routeData = dt;
       this.getFormFields(this.lang, dt);
     });
-
-
   }
 
 
@@ -84,11 +100,15 @@ export class SaveProvinceComponent implements OnInit {
    * @param  data router data
    */
   getFormFields(lang: string, data: Data) {
+
+    // Setting the form fields
     const fields: any = ItemFormFields.get(this.saveAction === 'update');
     this.provinceForm = this._fb.group(fields);
+
+    // Getting parent folder path in add case and parent+province path in edit case
     this.folderPath = this.buildFolderUrl.transform(this.router.url);
 
-    // Getting folder path from route data
+    // Setting province data values for edit case
     if (data.hasOwnProperty('province')) {
       const provinceData = data.province;
       for (const key of Object.keys(provinceData)) {
@@ -97,11 +117,10 @@ export class SaveProvinceComponent implements OnInit {
         }
 
         provinceData['folder'] = this.folderPath;
+        provinceData['parent_name'] = provinceData['country']['name_en'];
       }
-      console.log(provinceData)
       this.provinceForm.patchValue(provinceData);
     } else {
-      console.log(this.buildFolderUrl.transform(this.router.url))
       this.provinceForm.patchValue({folder: this.folderPath});
     }
   }
@@ -112,6 +131,42 @@ export class SaveProvinceComponent implements OnInit {
    */
   onAddedFile(e) {
     this.dropzoneFile = e;
+  }
+
+  /**
+   * Builds form data to send to the server
+   * @returns form Data object
+   */
+  buildFormData(): FormData {
+    const formData: FormData = new FormData();
+    const dropFileExist = Object.entries(this.dropzoneFile).length > 0;
+    let formValue;
+
+    for (const field of Object.keys(this.provinceForm.value)) {
+      const val = this.provinceForm.value;
+      if (field === 'new_folder' && this.lang === 'en') {
+        formValue = this.replace.transform(`/${val['parent_name']}/${val['name_en']}`, false, true);
+      } else {
+        formValue = val[field];
+      }
+      if (field !== 'flag_img' || !dropFileExist) {
+        formData.append(field, formValue);
+      }
+    }
+
+
+    // If drop zone file exists saving it to formData object as well
+    if (dropFileExist) {
+
+      const file = this.dropzoneFile[0];
+      const t = moment();
+      const nameArr = file['name'].split('.');
+      const fileName = `${nameArr[0]}.${nameArr[1]}`;
+      formData.append('flag_img', fileName);
+      formData.append('flag_file', file, fileName);
+    }
+
+    return formData;
   }
 
   /**
@@ -134,37 +189,6 @@ export class SaveProvinceComponent implements OnInit {
     }
   }
 
-  /**
-   * Builds form data to send to the server
-   * @returns form Data object
-   */
-  buildFormData(): FormData {
-    const formData: FormData = new FormData();
-    const dropFileExist = Object.entries(this.dropzoneFile).length > 0;
-    let formValue;
-
-    for (const field of Object.keys(this.provinceForm.value)) {
-      formValue = this.provinceForm.value[field];
-      if (field !== 'flag_img' || !dropFileExist) {
-        formData.append(field, formValue);
-      }
-    }
-
-
-    // If drop zone file exists saving it to formData object as well
-    if (dropFileExist) {
-
-      const file = this.dropzoneFile[0];
-      const t = moment();
-      const nameArr = file['name'].split('.');
-      const fileName = `${nameArr[0]}.${nameArr[1]}`;
-      formData.append('flag_img', fileName);
-      formData.append('flag_file', file, fileName);
-    }
-
-    return formData;
-  }
-
 
   /**
    * Removes a province info
@@ -185,7 +209,12 @@ export class SaveProvinceComponent implements OnInit {
           this._auth.removeLoading = true;
 
           // Setting parameters to send
-          const params = {with_folder: this.withFolder.value, lang: this.lang, id: this.provinceForm.value['id']};
+          const params = {
+            with_folder: this.withFolder.value,
+            folder: this.folderPath,
+            lang: this.lang,
+            id: this.provinceForm.value['id']
+          };
 
           this._provinces.remove(params).subscribe(() => {
             this.redirectToList('remove');
@@ -203,7 +232,8 @@ export class SaveProvinceComponent implements OnInit {
   redirectToList(action) {
     this._auth.removeLoading = false;
     this._auth.formProcessing = false;
-    this.router.navigate([this.folderPath]);
+    const url = this.router.url.split('/').filter(n => n)[0];
+    this.router.navigate([url]);
     const msg = `province_${action}_success`;
     this.translate.get([msg]).subscribe(dt => {
       this.toastr.success('', dt[msg]);
@@ -250,7 +280,7 @@ export class SaveProvinceComponent implements OnInit {
    * @returns folder url of the province
    */
   get folderUrl(): string {
-    return `others/${_.get(this.routeProvince, 'name_en')}/`;
+    return `others/${this.folderPath}`;
   }
 
   /**

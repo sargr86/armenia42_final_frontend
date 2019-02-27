@@ -13,6 +13,8 @@ export default class ItemFormFields {
     // Setting additional fields for register-user and edit-profile cases
     if (edit) {
       formFields['id'] = [''];
+      formFields['parent_name'] = [''];
+      formFields['new_folder'] = [''];
     }
 
     formFields[`name_${lang}`] = ['', [Validators.required]];

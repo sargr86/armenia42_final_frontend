@@ -117,5 +117,10 @@
   "country_update_success":"Детали страны успешно изменены.",
   "country_remove_success":"Детали страны успешно удалены.",
   "no_items_countries": "Не найдено провинций/ штатов для данного государства",
-  "country_not_found": "Это государство не найдено"
+  "country_not_found": "Это государство не найдено",
+  "province_exists_error":"Провинция с таким названием уже существует",
+  "province_name_required_error":"Название провинции обязательно",
+  "province_add_success":"Провинция была успешно добавлена",
+  "province_update_success":"Детали провинции были успешно изменены",
+  "province_remove_success":"Детали провинции были успешно удалены"
 }

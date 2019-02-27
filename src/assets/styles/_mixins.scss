@@ -1,5 +1,6 @@
 @import './variables';
 
+/* Terminal title that appears on every form page */
 @mixin terminalTitle {
   color: $dark_gray;
   text-align: center;
@@ -15,6 +16,7 @@
   }
 }
 
+/* Drop zone base settings */
 @mixin dropZone {
   background-color: $dark_gray;
   .dz-message {
@@ -122,6 +124,7 @@
   }
 }
 
+/* Circle numbers for non-authenticated mode */
 @mixin circles {
   position: relative;
   height: 100vh;
@@ -169,7 +172,7 @@
     }
     .titleContainer {
       margin-top: -9px;
-      margin-left: 10px;
+      margin-left: 14px;
 
     }
 
@@ -184,6 +187,7 @@
   }
 }
 
+/* Square boxes for authenticated mode*/
 @mixin squares {
   .mainTitle {
     color: $darker_gray;

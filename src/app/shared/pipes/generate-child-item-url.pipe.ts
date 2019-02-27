@@ -24,10 +24,6 @@ export class GenerateChildItemUrlPipe implements PipeTransform {
     // Getting name or id of child element
     item = this.replace.transform(storiesPage ? item['id'] : item['name_en'], false, !storiesPage);
 
-    console.log(cleaned)
-    console.log(
-      item)
-
     // Generating and returning final url
     return `${cleaned}/${item}`;
   }
