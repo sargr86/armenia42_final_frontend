@@ -107,6 +107,7 @@
   "not_found":"Չի գտնվել",
   "country_terminal":"Պետության տերմինալ",
   "province_terminal":"Մարզի տերմինալ",
+  "direction_terminal": "Ուղղության տերմինալ",
   "country_name_required_error":"Պետության անվանումը պարտադիր է",
   "country_exists_error":"Այս պետությունն արդեն ավելացված է",
   "confirm": "Հաստատել",

@@ -111,6 +111,19 @@ const routes: Routes = [
 
   },
   {
+    path: ':country/:province/add',
+    component: SaveDirectionComponent,
+    resolve: {
+      province: ProvinceResolverService
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'direction_terminal'
+    },
+
+  },
+  {
     path: ':country/:province',
     component: ShowDirectionsComponent,
     data: {
@@ -120,7 +133,7 @@ const routes: Routes = [
     path: ':country/:province/:direction/edit',
     component: SaveDirectionComponent,
     resolve: {
-      province: DirectionResolverService
+      direction: DirectionResolverService
     },
     canActivate: [AuthGuard, RoleGuard],
     data: {

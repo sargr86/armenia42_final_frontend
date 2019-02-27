@@ -113,6 +113,7 @@
   "not_found": "Not found",
   "country_terminal": "Country terminal",
   "province_terminal": "Province terminal",
+  "direction_terminal": "Direction terminal",
   "country_name_required_error": "Country name is required",
   "country_exists_error": "This country already exists",
   "confirm": "Confirm",

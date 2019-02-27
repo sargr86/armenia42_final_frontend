@@ -107,6 +107,7 @@
   "not_found":"Не найдено",
   "country_terminal":"Терминал страны",
   "province_terminal":"Терминал провинции",
+  "direction_terminal": "Терминал направления",
   "country_name_required_error":"Название страны обязательно",
   "country_exists_error":"Эта страна уже добавлена",
   "confirm": "Подтвердить",
