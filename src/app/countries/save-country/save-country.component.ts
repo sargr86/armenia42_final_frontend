@@ -4,7 +4,6 @@ import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import ItemFormFields from '../../shared/helpers/get-item-form-fields';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
-import {infoBox} from '../../shared/constants/info_box_data';
 import {CountriesService} from '../../shared/services/countries.service';
 import {AuthService} from '../../shared/services/auth.service';
 import {TEXTAREA_AUTOSIZE_MIN_ROWS, TEXTAREA_AUTOSIZE_MAX_ROWS} from '../../shared/constants/settings';
@@ -15,8 +14,9 @@ import * as moment from 'moment';
 import {MatDialog} from '@angular/material';
 import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {BuildFolderUrlPipe} from '../../shared/pipes/build-folder-url.pipe';
-import {TranslateService} from "@ngx-translate/core";
-import {ToastrService} from "ngx-toastr";
+import {TranslateService} from '@ngx-translate/core';
+import {ToastrService} from 'ngx-toastr';
+import FormInfoBoxData from '../../shared/helpers/get-info-box-data-for-forms';
 
 @Component({
   selector: 'app-save-country',
@@ -61,17 +61,13 @@ export class SaveCountryComponent implements OnInit {
     this.dropzoneConfig = dropzoneConfig.USER_PROFILE_IMG_DROPZONE_CONFIG;
     this._auth.formProcessing = false;
 
-    // Getting info box data, removing first item, because it relates to only English version of the system
-    this.infoBoxData = infoBox[this.editCase ? 'itemEditing' : 'itemAdding'];
-
-    if (this.lang !== 'en' && this.editCase) {
-      this.infoBoxData = this.infoBoxData.filter(n => n !== 'item_name_affects_folder_name');
-    }
+    // Getting data for info box for different language cases
+    this.infoBoxData = FormInfoBoxData.get(this.editCase, this.lang);
 
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
       this.routeData = dt;
-      this.getFormFields(this.lang, dt);
+      this.buildFormFields(this.lang, dt);
     });
 
 
@@ -83,9 +79,10 @@ export class SaveCountryComponent implements OnInit {
    * @param  lang system current language
    * @param  data router data
    */
-  getFormFields(lang: string, data: Data) {
-    const fields: any = ItemFormFields.get(this.saveAction === 'update');
-    this.countryForm = this._fb.group(fields);
+  buildFormFields(lang: string, data: Data) {
+
+    // Sets the fields of country form
+    this.countryForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
 
     // Getting folder path from route data
     if (data.hasOwnProperty('country')) {

@@ -4,7 +4,6 @@ import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import ItemFormFields from '../../shared/helpers/get-item-form-fields';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
-import {infoBox} from '../../shared/constants/info_box_data';
 import {AuthService} from '../../shared/services/auth.service';
 import {TEXTAREA_AUTOSIZE_MIN_ROWS, TEXTAREA_AUTOSIZE_MAX_ROWS} from '../../shared/constants/settings';
 import {TextAreaLimits} from '../../shared/models/TextAreaLimits';
@@ -79,7 +78,7 @@ export class SaveProvinceComponent implements OnInit {
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
       this.routeData = dt;
-      this.getFormFields(this.lang, dt);
+      this.buildFormFields(this.lang, dt);
     });
   }
 
@@ -89,17 +88,18 @@ export class SaveProvinceComponent implements OnInit {
    * @param  lang system current language
    * @param  data router data
    */
-  getFormFields(lang: string, data: Data) {
+  buildFormFields(lang: string, data: Data) {
 
     // Setting the form fields both for edit and add cases
-    const fields: any = ItemFormFields.get(this.saveAction === 'update');
-    this.provinceForm = this._fb.group(fields);
+    this.provinceForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
 
     // Getting parent folder path in add case and parent+province path in edit case
     this.folderPath = this.buildFolderUrl.transform(this.router.url);
 
     // Setting province data values for edit case
     if (data.hasOwnProperty('province')) {
+
+      // Handling null values patching here
       const provinceData = data.province;
       for (const key of Object.keys(provinceData)) {
         if (provinceData[key] == null) {
@@ -110,6 +110,7 @@ export class SaveProvinceComponent implements OnInit {
         provinceData['parent_name'] = provinceData['country']['name_en'];
       }
       this.provinceForm.patchValue(provinceData);
+
       // Setting folder path value for add-province case
     } else {
       this.provinceForm.patchValue({folder: this.folderPath});
@@ -123,8 +124,8 @@ export class SaveProvinceComponent implements OnInit {
    */
   buildFormData(): FormData {
     const formData: FormData = new FormData();
-    const dropFileExist = Object.entries(this.dropzoneFile).length > 0;
-    let formValue;
+    const dropFileExist: boolean = Object.entries(this.dropzoneFile).length > 0;
+    let formValue: string;
 
     for (const field of Object.keys(this.provinceForm.value)) {
       const val = this.provinceForm.value;

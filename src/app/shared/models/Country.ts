@@ -1,5 +1,5 @@
 export class Country {
-  id: number;
+  id?: number;
   cover_id?: number;
   name_en?: string;
   name_ru?: string;
