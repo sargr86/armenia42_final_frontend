@@ -18,6 +18,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ToastrService} from 'ngx-toastr';
 import {ProvincesService} from '../../shared/services/provinces.service';
 import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
+import FormInfoBoxData from '../../shared/helpers/get-info-box-data-for-forms';
 
 @Component({
   selector: 'app-save-province',
@@ -64,22 +65,11 @@ export class SaveProvinceComponent implements OnInit {
     this.dropzoneConfig = dropzoneConfig.USER_PROFILE_IMG_DROPZONE_CONFIG;
     this._auth.formProcessing = false;
 
-    // Getting data for info box
-    this.getInfoBoxData();
+    // Getting data for info box for different language cases
+    this.infoBoxData = FormInfoBoxData.get(this.editCase, this.lang);
 
     // Getting data passed by route
     this.getRouteData();
-  }
-
-  /**
-   * Gets info box data for different languages
-   */
-  getInfoBoxData() {
-    // Getting info box data, removing first item, because it relates only to English version of the system
-    this.infoBoxData = infoBox[this.editCase ? 'itemEditing' : 'itemAdding'];
-    if (this.lang !== 'en' && this.editCase) {
-      this.infoBoxData = this.infoBoxData.filter(n => n !== 'item_name_affects_folder_name');
-    }
   }
 
   /**
@@ -101,7 +91,7 @@ export class SaveProvinceComponent implements OnInit {
    */
   getFormFields(lang: string, data: Data) {
 
-    // Setting the form fields
+    // Setting the form fields both for edit and add cases
     const fields: any = ItemFormFields.get(this.saveAction === 'update');
     this.provinceForm = this._fb.group(fields);
 
@@ -120,18 +110,12 @@ export class SaveProvinceComponent implements OnInit {
         provinceData['parent_name'] = provinceData['country']['name_en'];
       }
       this.provinceForm.patchValue(provinceData);
+      // Setting folder path value for add-province case
     } else {
       this.provinceForm.patchValue({folder: this.folderPath});
     }
   }
 
-  /**
-   * Gets selected image file
-   * @param e drop zone-added-file event
-   */
-  onAddedFile(e) {
-    this.dropzoneFile = e;
-  }
 
   /**
    * Builds form data to send to the server
@@ -249,6 +233,15 @@ export class SaveProvinceComponent implements OnInit {
     }
     this.dropzoneFile = {};
     this.provinceForm.controls['flag_img'].patchValue('');
+  }
+
+
+  /**
+   * Gets selected image file
+   * @param e drop zone-added-file event
+   */
+  onAddedFile(e) {
+    this.dropzoneFile = e;
   }
 
   /**
