@@ -125,5 +125,8 @@
   "province_add_success":"Մարզն ավելացվեց հաջողությամբ",
   "province_update_success":"Մարզի տվյալները հաջողությամբ փոփոխվեցին",
   "province_remove_success":"Մարզի տվյալները հաջողությամբ հեռացվեցին",
+  "direction_add_success":"Ուղղությունն ավելացվեց հաջողությամբ",
+  "direction_update_success":"Մարզի տվյալները հաջողությամբ փոփոխվեցին",
+  "direction_remove_success":"Մարզի տվյալները հաջողությամբ հեռացվեցին",
   "no_countries_found":"Տվյալ հարցմամբ պետություն չի գտնվել"
 }

@@ -129,5 +129,8 @@
   "province_add_success":"Province has been added successfully",
   "province_update_success":"Province has been updated successfully",
   "province_remove_success":"Province has been removed successfully",
+  "direction_add_success":"Direction has been added successfully",
+  "direction_update_success":"Direction has been updated successfully",
+  "direction_remove_success":"Direction has been removed successfully",
   "no_countries_found":"No countries found on this request"
 }
