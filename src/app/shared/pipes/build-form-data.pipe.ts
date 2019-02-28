@@ -16,7 +16,6 @@ export class BuildFormDataPipe implements PipeTransform {
     const formData: FormData = new FormData();
     const dropFileExist: boolean = Object.entries(dropzoneFile).length > 0;
 
-
     for (const field of Object.keys(formValue)) {
       if (field === 'new_folder' && lang === 'en') {
         const newFolder = formValue['folder'].substring(0, formValue['folder'].lastIndexOf('/')) + '/' + formValue['name_en'];

@@ -19,6 +19,7 @@ import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
 import FormInfoBoxData from '../../shared/helpers/get-info-box-data-for-forms';
 import {DirectionsService} from '../../shared/services/directions.service';
 import {BuildFormDataPipe} from '../../shared/pipes/build-form-data.pipe';
+import {RedirectToListService} from '../../shared/services/redirect-to-list.service';
 
 @Component({
   selector: 'app-save-direction',
@@ -42,8 +43,6 @@ export class SaveDirectionComponent implements OnInit {
   dropzoneFile: object = {};
   dropzoneConfig: DropzoneConfigInterface;
 
-  folderPath: string;
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -56,7 +55,8 @@ export class SaveDirectionComponent implements OnInit {
     private translate: TranslateService,
     private toastr: ToastrService,
     private replace: ReplaceAllPipe,
-    private buildFormData: BuildFormDataPipe
+    private buildFormData: BuildFormDataPipe,
+    private redirect: RedirectToListService
   ) {
   }
 
@@ -94,7 +94,10 @@ export class SaveDirectionComponent implements OnInit {
     this.directionForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
 
     // Applying province or direction folder for add* or edit-direction cases
-    this.directionForm.patchValue(this.editCase ? data.direction : {folder: data['province']['folder']});
+    this.directionForm.patchValue(this.editCase ? data.direction : {
+      folder: data['province']['folder'],
+      parent_name: data['province']['name_en']
+    });
 
   }
 
@@ -113,9 +116,56 @@ export class SaveDirectionComponent implements OnInit {
 
       // Adding or updating a direction info
       this._directions[this.saveAction](formData).subscribe(() => {
-        // this.redirectToList(this.saveAction);
+        this.redirect.do(this.saveAction, 'direction');
       });
     }
+  }
+
+  /**
+   * Removes a direction info
+   */
+  remove() {
+
+    // Setting dialog properties
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      autoFocus: true,
+      width: '300px'
+    });
+
+    // Post-confirming actions
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result) {
+          // Showing spinner
+          this._auth.removeLoading = true;
+
+          // Setting parameters to send
+          const params = {
+            with_folder: this.withFolder.value,
+            folder: this.routeDirection['folder'],
+            lang: this.lang,
+            id: this.directionForm.value['id']
+          };
+
+          this._directions.remove(params).subscribe(() => {
+            this.redirect.do('remove', 'direction');
+          });
+        }
+      }
+    );
+
+
+  }
+
+  /**
+   * Removes current flag image from the drop zone
+   */
+  removeImage() {
+    if (this.editCase) {
+      this.routeDirection.flag_img = '';
+    }
+    this.dropzoneFile = {};
+    this.directionForm.controls['flag_img'].patchValue('');
   }
 
   /**
@@ -124,6 +174,14 @@ export class SaveDirectionComponent implements OnInit {
    */
   onAddedFile(e) {
     this.dropzoneFile = e;
+  }
+
+  /**
+   * Changing remove-with-folder  checkbox state
+   * @param e checkbox change event
+   */
+  changeWithFolderState(e: any) {
+    this.withFolder.patchValue(e.target.checked ? '1' : '0');
   }
 
 

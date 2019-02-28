@@ -7,13 +7,13 @@ export default class ItemFormFields {
     const formFields = {
       lang: lang,
       flag_img: '',
-      folder: ''
+      folder: '',
+      parent_name: ''
     };
 
     // Setting additional fields for register-user and edit-profile cases
     if (edit) {
       formFields['id'] = [''];
-      formFields['parent_name'] = [''];
       formFields['new_folder'] = [''];
     }
 
