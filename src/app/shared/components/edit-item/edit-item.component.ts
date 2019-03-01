@@ -29,13 +29,15 @@ import {RedirectToListService} from '../../services/redirect-to-list.service';
 import * as _ from 'lodash';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 import {MatDialog} from '@angular/material';
+import {ProvincesService} from '../../services/provinces.service';
+import {DirectionsService} from '../../services/directions.service';
 
 @Component({
-  selector: 'app-save-items',
-  templateUrl: './save-items.component.html',
-  styleUrls: ['./save-items.component.scss']
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.scss']
 })
-export class SaveItemsComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
 
   @Input() parent: string;
@@ -65,6 +67,8 @@ export class SaveItemsComponent implements OnInit {
     private _fb: FormBuilder,
     private buildFormData: BuildFormDataPipe,
     private _countries: CountriesService,
+    private _provinces: ProvincesService,
+    private _directions: DirectionsService,
     private redirect: RedirectToListService,
     private dialog: MatDialog,
   ) {
@@ -103,12 +107,26 @@ export class SaveItemsComponent implements OnInit {
     // Setting the form fields both for edit and add cases
     this.itemForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
 
-    const parentData = data[this.parent];
+    let childData;
+    let parentData;
+
+
+
+    if (this.parent) {
+
+      if (this.editCase) {
+        childData = data[this.item];
+        parentData = childData[this.parent];
+        childData['parent_name'] = parentData['name_en'];
+      } else {
+        parentData = data[this.parent];
+      }
+    }
 
     // Applying province or direction folder for add* or edit-direction cases
-    this.itemForm.patchValue(this.editCase ? data[this.item] : {
-      folder: parentData ? parentData['folder'] : '',
-      parent_name: parentData ? parentData['name_en'] : ''
+    this.itemForm.patchValue(this.editCase ? childData : {
+      folder: this.parent ? parentData['folder'] : '',
+      parent_name: this.parent ? parentData['name_en'] : ''
     });
 
   }
@@ -125,6 +143,8 @@ export class SaveItemsComponent implements OnInit {
 
       // Showing the button spinner
       this._auth.formProcessing = true;
+
+      console.log(this.routeItem)
 
       // Adding or updating a direction info
       this[`_${this.routeItem}`][this.saveAction](formData).subscribe(() => {
@@ -171,6 +191,14 @@ export class SaveItemsComponent implements OnInit {
   }
 
   /**
+   * Changing remove-with-folder  checkbox state
+   * @param e checkbox change event
+   */
+  changeWithFolderState(e: any) {
+    this.withFolder.patchValue(e.target.checked ? '1' : '0');
+  }
+
+  /**
    * Gets selected image file
    * @param e drop zone-added-file event
    */
@@ -198,15 +226,6 @@ export class SaveItemsComponent implements OnInit {
   }
 
   /**
-   * Changing remove-with-folder  checkbox state
-   * @param e checkbox change event
-   */
-  changeWithFolderState(e: any) {
-    this.withFolder.patchValue(e.target.checked ? '1' : '0');
-  }
-
-
-  /**
    * Gets country name control for checking the field errors
    * @returns country name control
    */
@@ -221,5 +240,21 @@ export class SaveItemsComponent implements OnInit {
    */
   get withFolder(): AbstractControl | null {
     return this.itemForm.get('with_folder');
+  }
+
+  /**
+   * Gets flag name
+   * @returns flag image file name
+   */
+  get flag(): string | undefined {
+    return _.get(this.routeItemSingular, 'flag_img');
+  }
+
+  /**
+   * Gets folder url for flag
+   * @returns folder url of the direction
+   */
+  get folderUrl(): string {
+    return `others/${this.routeData[this.item].folder}`;
   }
 }

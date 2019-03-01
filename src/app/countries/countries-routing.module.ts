@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ShowCountriesComponent} from './show-countries/show-countries.component';
-import {SaveCountryComponent} from './save-country/save-country.component';
+import {EditCountryComponent} from './edit-country/edit-country.component';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: SaveCountryComponent,
+    component: EditCountryComponent,
     data: {
       expectedRole: 'admin',
       title: 'country_terminal',

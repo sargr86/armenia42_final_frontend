@@ -8,8 +8,14 @@ import {UserResolver} from './shared/resolvers/user-resolver.service';
 import {NonAuthGuard} from './shared/guards/non-auth.guard';
 import {AuthGuard} from './shared/guards/auth.guard';
 import {RoleGuard} from './shared/guards/role.guard';
-import {SaveCountryComponent} from './countries/save-country/save-country.component';
 import {CountriesResolver} from './shared/resolvers/countries-resolver.service';
+import {ShowProvincesComponent} from './provinces/show-provinces/show-provinces.component';
+import {DirectionResolverService} from './shared/resolvers/direction-resolver.service';
+import {ProvinceResolverService} from './shared/resolvers/province-resolver.service';
+import {EditDirectionComponent} from './directions/edit-direction/edit-direction.component';
+import {EditProvinceComponent} from './provinces/edit-province/edit-province.component';
+import {ShowDirectionsComponent} from './directions/show-directions/show-directions.component';
+import {EditCountryComponent} from './countries/edit-country/edit-country.component';
 
 const routes: Routes = [
   {
@@ -60,8 +66,22 @@ const routes: Routes = [
 
   },
   {
+    path: ':country/add',
+    component: EditProvinceComponent,
+    resolve: {
+      country: CountriesResolver
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'province_terminal',
+      item: 'provinces'
+    },
+
+  },
+  {
     path: ':country/edit',
-    component: SaveCountryComponent,
+    component: EditCountryComponent,
     resolve: {
       country: CountriesResolver
     },
@@ -70,6 +90,58 @@ const routes: Routes = [
       expectedRole: 'admin',
       title: 'country_terminal',
       item: 'countries'
+    },
+
+  },
+  {
+    path: ':country',
+    component: ShowProvincesComponent,
+    data: {},
+  },
+  {
+    path: ':country/:province/edit',
+    component: EditProvinceComponent,
+    resolve: {
+      province: ProvinceResolverService
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'province_terminal',
+      item: 'provinces'
+    },
+
+  },
+  {
+    path: ':country/:province/add',
+    component: EditDirectionComponent,
+    resolve: {
+      province: ProvinceResolverService
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'direction_terminal',
+      item: 'directions'
+    },
+
+  },
+  {
+    path: ':country/:province',
+    component: ShowDirectionsComponent,
+    data: {},
+  },
+  {
+    path: ':country/:province/:direction/edit',
+    component: EditDirectionComponent,
+    resolve: {
+      direction: DirectionResolverService
+    },
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      expectedRole: 'admin',
+      title: 'direction_terminal',
+      item: 'directions'
     },
 
   },

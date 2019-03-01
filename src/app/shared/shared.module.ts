@@ -19,7 +19,7 @@ import {ShowItemsComponent} from './components/show-items/show-items.component';
 import {GenerateChildItemUrlPipe} from './pipes/generate-child-item-url.pipe';
 import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
 import {BuildFolderUrlPipe} from './pipes/build-folder-url.pipe';
-import {SaveItemsComponent} from './components/save-items/save-items.component';
+import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {BuildFormDataPipe} from './pipes/build-form-data.pipe';
 
 @NgModule({
@@ -39,7 +39,7 @@ import {BuildFormDataPipe} from './pipes/build-form-data.pipe';
     GenerateChildItemUrlPipe,
     ConfirmationDialogComponent,
     BuildFolderUrlPipe,
-    SaveItemsComponent,
+    EditItemComponent,
     BuildFormDataPipe
   ],
   imports: [
@@ -71,7 +71,7 @@ import {BuildFormDataPipe} from './pipes/build-form-data.pipe';
     InfoBoxComponent,
     LanguagesComponent,
     ShowItemsComponent,
-    SaveItemsComponent,
+    EditItemComponent,
     MaterialReusableTableComponent,
     GetLangPipe,
     GetImageUrlPipe,

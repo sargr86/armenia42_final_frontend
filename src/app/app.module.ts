@@ -27,65 +27,69 @@ import {NonAuthGuard} from "./shared/guards/non-auth.guard";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {CountriesModule} from "./countries/countries.module";
 import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
+import {ProvincesModule} from './provinces/provinces.module';
+import {DirectionsModule} from './directions/directions.module';
 
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/languages/', '.json');
+  return new TranslateHttpLoader(http, './assets/languages/', '.json');
 }
 
 // Token getter for JWT module
 export function tokenGetter() {
-    return localStorage.getItem('token');
+  return localStorage.getItem('token');
 }
 
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({disableTimeOut: false}),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: ['localhost:3000'],
-                blacklistedRoutes: ['localhost:3000/auth/']
-            }
-        }),
-        AuthModule,
-        LayoutModule,
-        MaterialModule,
-        CountriesModule
-    ],
-    providers: [
-        AuthService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: RequestInterceptor,
-            multi: true
-        },
-        SubjectService,
-        SaveUserInfoService,
-        UsersService,
-        UserResolver,
-        CountriesResolver,
-        AuthGuard,
-        NonAuthGuard,
-        RoleGuard
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({disableTimeOut: false}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['localhost:3000/auth/']
+      }
+    }),
+    AuthModule,
+    LayoutModule,
+    MaterialModule,
+    CountriesModule,
+    ProvincesModule,
+    DirectionsModule
+  ],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+    SubjectService,
+    SaveUserInfoService,
+    UsersService,
+    UserResolver,
+    CountriesResolver,
+    AuthGuard,
+    NonAuthGuard,
+    RoleGuard
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

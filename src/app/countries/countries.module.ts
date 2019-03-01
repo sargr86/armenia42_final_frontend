@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common';
 
 import {CountriesRoutingModule} from './countries-routing.module';
 import {ShowCountriesComponent} from './show-countries/show-countries.component';
-import {SharedModule} from "../shared/shared.module";
-import { SaveCountryComponent } from './save-country/save-country.component';
+import {SharedModule} from '../shared/shared.module';
+import { EditCountryComponent } from './edit-country/edit-country.component';
 
 @NgModule({
-    declarations: [ShowCountriesComponent, SaveCountryComponent],
+    declarations: [ShowCountriesComponent, EditCountryComponent],
     imports: [
         CommonModule,
         CountriesRoutingModule,
