@@ -16,7 +16,8 @@ const routes: Routes = [
     component: SaveCountryComponent,
     data: {
       expectedRole: 'admin',
-      title: 'country_terminal'
+      title: 'country_terminal',
+      item: 'countries'
     }
   }
 ];

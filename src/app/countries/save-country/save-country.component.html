@@ -1,72 +1,73 @@
-<mat-card>
-  <!-- Register/ profile form title-->
-  <h2 class="terminalTitle">
-    <i class="fa fa-flag"></i>
-    <span translate>{{pageTitle}}</span>
-  </h2>
+<app-save-items [parent]="" [item]="'country'"></app-save-items>
+<!--<mat-card>-->
+  <!--&lt;!&ndash; Register/ profile form title&ndash;&gt;-->
+  <!--<h2 class="terminalTitle">-->
+    <!--<i class="fa fa-flag"></i>-->
+    <!--<span translate>{{pageTitle}}</span>-->
+  <!--</h2>-->
 
-  <!-- Country details form -->
-  <form [formGroup]="countryForm">
-    <div class="infoContainer">
+  <!--&lt;!&ndash; Country details form &ndash;&gt;-->
+  <!--<form [formGroup]="countryForm">-->
+    <!--<div class="infoContainer">-->
 
-      <!-- Country name field* with its error handling -->
-      <mat-form-field>
-        <input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">
-        <mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i> </mat-hint>
-      </mat-form-field>
-      <div *ngIf="countryName.errors && (!countryName.pristine || countryName.touched)" class="error">
-        <div *ngIf="countryName.hasError('required')">{{'country_name_required_error'|translate}}</div>
-        <div *ngIf="countryName.hasError('minlength')||countryName.hasError('maxlength')">
-          {{'country_name_length_error'|translate}}
-        </div>
-      </div>
+      <!--&lt;!&ndash; Country name field* with its error handling &ndash;&gt;-->
+      <!--<mat-form-field>-->
+        <!--<input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">-->
+        <!--<mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i> </mat-hint>-->
+      <!--</mat-form-field>-->
+      <!--<div *ngIf="countryName.errors && (!countryName.pristine || countryName.touched)" class="error">-->
+        <!--<div *ngIf="countryName.hasError('required')">{{'country_name_required_error'|translate}}</div>-->
+        <!--<div *ngIf="countryName.hasError('minlength')||countryName.hasError('maxlength')">-->
+          <!--{{'country_name_length_error'|translate}}-->
+        <!--</div>-->
+      <!--</div>-->
 
-      <!-- Country description field-->
-      <mat-form-field>
-        <mat-label>{{'description'|translate}}</mat-label>
-        <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
-                  [matAutosizeMinRows]="textAreaLimits.min"
-                  [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
-      </mat-form-field>
+      <!--&lt;!&ndash; Country description field&ndash;&gt;-->
+      <!--<mat-form-field>-->
+        <!--<mat-label>{{'description'|translate}}</mat-label>-->
+        <!--<textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize-->
+                  <!--[matAutosizeMinRows]="textAreaLimits.min"-->
+                  <!--[matAutosizeMaxRows]="textAreaLimits.max"></textarea>-->
+      <!--</mat-form-field>-->
 
-      <!-- Save- and remove-country actions-->
-      <div class="actions">
-        <div class="removeContainer" *ngIf="editCase">
-          <button (click)="remove()" class="removeCountry">
-            <mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>
-            {{'remove'|translate}}
-          </button>
+      <!--&lt;!&ndash; Save- and remove-country actions&ndash;&gt;-->
+      <!--<div class="actions">-->
+        <!--<div class="removeContainer" *ngIf="editCase">-->
+          <!--<button (click)="remove()" class="removeCountry">-->
+            <!--<mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>-->
+            <!--{{'remove'|translate}}-->
+          <!--</button>-->
 
-          <!-- Remove-with-folder checkbox-->
-          <div class="checkFolder">
-            <input type="checkbox" id="folderCheck" formControlName="with_folder"
-                   [checked]="withFolder.value=='1'" (change)="changeWithFolderState($event)">
-            <label for="folderCheck">{{'with_folder'|translate}}</label>
-          </div>
+          <!--&lt;!&ndash; Remove-with-folder checkbox&ndash;&gt;-->
+          <!--<div class="checkFolder">-->
+            <!--<input type="checkbox" id="folderCheck" formControlName="with_folder"-->
+                   <!--[checked]="withFolder.value=='1'" (change)="changeWithFolderState($event)">-->
+            <!--<label for="folderCheck">{{'with_folder'|translate}}</label>-->
+          <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
-        <button (click)="save()" class="saveCountry" [disabled]="countryForm.invalid">
-          <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
-          <span>{{(editCase?'save':'add')|translate}}</span>
-        </button>
-      </div>
-    </div>
+        <!--<button (click)="save()" class="saveCountry" [disabled]="countryForm.invalid">-->
+          <!--<mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>-->
+          <!--<span>{{(editCase?'save':'add')|translate}}</span>-->
+        <!--</button>-->
+      <!--</div>-->
+    <!--</div>-->
 
-    <!-- Info box recommendations -->
-    <info-box [elements]="infoBoxData"></info-box>
+    <!--&lt;!&ndash; Info box recommendations &ndash;&gt;-->
+    <!--<info-box [elements]="infoBoxData"></info-box>-->
 
-    <!-- Image drop zone -->
-    <div class="dropzoneContainer" *ngIf="!flag">
-      <dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"
-                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()" class="flagDropzone"></dropzone>
-    </div>
+    <!--&lt;!&ndash; Image drop zone &ndash;&gt;-->
+    <!--<div class="dropzoneContainer" *ngIf="!flag">-->
+      <!--<dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"-->
+                <!--(thumbnail)="onAddedFile($event)" (removedFile)="removeImage()" class="flagDropzone"></dropzone>-->
+    <!--</div>-->
 
-    <!-- Uploaded image zone -->
-    <div class="flagImg" *ngIf="flag && imageExists">
-      <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
-      <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
-    </div>
+    <!--&lt;!&ndash; Uploaded image zone &ndash;&gt;-->
+    <!--<div class="flagImg" *ngIf="flag && imageExists">-->
+      <!--<img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">-->
+      <!--<i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>-->
+    <!--</div>-->
 
-  </form>
-</mat-card>
+  <!--</form>-->
+<!--</mat-card>-->
