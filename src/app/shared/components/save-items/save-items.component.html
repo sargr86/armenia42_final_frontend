@@ -1,0 +1,72 @@
+<mat-card>
+  <!-- Register/ profile form title-->
+  <h2 class="terminalTitle">
+    <i class="fa fa-flag"></i>
+    <span translate>{{pageTitle}}</span>
+  </h2>
+
+
+  <form [formGroup]="itemForm">
+    <div class="infoContainer">
+
+      <!-- Item name field* with its error handling -->
+      <mat-form-field>
+        <input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">
+        <mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i></mat-hint>
+      </mat-form-field>
+      <div *ngIf="itemName.errors && (!itemName.pristine || itemName.touched)" class="error">
+        <div *ngIf="itemName.hasError('required')">{{item+'_name_required_error'|translate}}</div>
+        <div *ngIf="itemName.hasError('minlength')||itemName.hasError('maxlength')">
+          {{item+'_name_length_error'|translate}}
+        </div>
+      </div>
+
+      <!-- direction description field-->
+      <mat-form-field>
+        <mat-label>{{'description'|translate}}</mat-label>
+        <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
+                  [matAutosizeMinRows]="textAreaLimits.min"
+                  [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
+      </mat-form-field>
+
+      <!-- Save- and remove-direction actions-->
+      <div class="actions">
+        <div class="removeContainer" *ngIf="editCase">
+          <button (click)="remove()" class="removeItem">
+            <mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>
+            {{'remove'|translate}}
+          </button>
+
+          <!-- Remove-with-folder checkbox-->
+          <div class="checkFolder">
+            <input type="checkbox" id="folderCheck" formControlName="with_folder"
+                   [checked]="withFolder.value=='1'" (change)="changeWithFolderState($event)">
+            <label for="folderCheck">{{'with_folder'|translate}}</label>
+          </div>
+
+        </div>
+
+        <button (click)="save()" class="saveItem" [disabled]="itemForm.invalid">
+          <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+          <span>{{(editCase?'save':'add')|translate}}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Info box recommendations -->
+    <info-box [elements]="infoBoxData"></info-box>
+
+    <!-- Image drop zone -->
+    <div class="dropzoneContainer" *ngIf="!flag">
+      <dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"
+                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()" class="flagDropzone"></dropzone>
+    </div>
+
+    <!-- Uploaded image zone -->
+    <div class="flagImg" *ngIf="flag && imageExists">
+      <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
+      <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
+    </div>
+
+  </form>
+</mat-card>
