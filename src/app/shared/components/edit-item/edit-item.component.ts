@@ -31,6 +31,7 @@ import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-d
 import {MatDialog} from '@angular/material';
 import {ProvincesService} from '../../services/provinces.service';
 import {DirectionsService} from '../../services/directions.service';
+import {LocationsService} from '../../services/locations.service';
 
 @Component({
   selector: 'app-edit-item',
@@ -69,6 +70,7 @@ export class EditItemComponent implements OnInit {
     private _countries: CountriesService,
     private _provinces: ProvincesService,
     private _directions: DirectionsService,
+    private _locations: LocationsService,
     private redirect: RedirectToListService,
     private dialog: MatDialog,
   ) {
@@ -143,8 +145,6 @@ export class EditItemComponent implements OnInit {
 
       // Showing the button spinner
       this._auth.formProcessing = true;
-
-      console.log(this.routeItem)
 
       // Adding or updating a direction info
       this[`_${this.routeItem}`][this.saveAction](formData).subscribe(() => {

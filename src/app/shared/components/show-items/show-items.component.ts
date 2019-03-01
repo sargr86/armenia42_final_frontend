@@ -1,14 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CountriesService} from "../../services/countries.service";
-import {SubjectService} from "../../services/subject.service";
-import {GetLangPipe} from "../../pipes/get-lang.pipe";
-import {Observable} from "rxjs/internal/Observable";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {ReplaceAllPipe} from "../../pipes/replace-all.pipe";
-import {GenerateChildItemUrlPipe} from "../../pipes/generate-child-item-url.pipe";
+import {Observable} from 'rxjs/internal/Observable';
+import {Router} from '@angular/router';
+
+import {GetLangPipe} from '../../pipes/get-lang.pipe';
+import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
+import {GenerateChildItemUrlPipe} from '../../pipes/generate-child-item-url.pipe';
+
+import {AuthService} from '../../services/auth.service';
+import {SubjectService} from '../../services/subject.service';
+import {CountriesService} from '../../services/countries.service';
 import {ProvincesService} from '../../services/provinces.service';
 import {DirectionsService} from '../../services/directions.service';
+import {LocationsService} from '../../services/locations.service';
 
 @Component({
   selector: 'show-items',
@@ -29,6 +32,7 @@ export class ShowItemsComponent implements OnInit {
     private _countries: CountriesService,
     private _provinces: ProvincesService,
     private _directions: DirectionsService,
+    private _locations: LocationsService,
     private _subject: SubjectService,
     private getLang: GetLangPipe,
     public _auth: AuthService,
@@ -73,7 +77,7 @@ export class ShowItemsComponent implements OnInit {
   }
 
   getEditUrl(item) {
-    return `${this.getUrl(item)}/edit`
+    return `${this.getUrl(item)}/edit`;
   }
 
 }

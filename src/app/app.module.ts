@@ -29,6 +29,7 @@ import {CountriesModule} from "./countries/countries.module";
 import {CountriesResolver} from "./shared/resolvers/countries-resolver.service";
 import {ProvincesModule} from './provinces/provinces.module';
 import {DirectionsModule} from './directions/directions.module';
+import {LocationsModule} from './locations/locations.module';
 
 
 // AoT requires an exported function for factories
@@ -71,7 +72,8 @@ export function tokenGetter() {
     MaterialModule,
     CountriesModule,
     ProvincesModule,
-    DirectionsModule
+    DirectionsModule,
+    LocationsModule
   ],
   providers: [
     AuthService,

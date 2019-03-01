@@ -16,6 +16,8 @@ import {EditDirectionComponent} from './directions/edit-direction/edit-direction
 import {EditProvinceComponent} from './provinces/edit-province/edit-province.component';
 import {ShowDirectionsComponent} from './directions/show-directions/show-directions.component';
 import {EditCountryComponent} from './countries/edit-country/edit-country.component';
+import {EditLocationComponent} from './locations/edit-location/edit-location.component';
+import {LocationResolverService} from './shared/resolvers/location-resolver.service';
 
 const routes: Routes = [
   {
@@ -145,6 +147,27 @@ const routes: Routes = [
     },
 
   },
+
+  {
+    path: ':country/:province/:direction',
+    loadChildren: './locations/locations.module#LocationsModule',
+    data: {
+      item: "location",
+      page: "direction"
+    }
+  },
+  {
+    path: ':country/:province/:direction/:location/edit',
+    component: EditLocationComponent,
+    resolve: {
+      location: LocationResolverService
+    },
+    data: {
+      item: 'locations',
+      title: 'location_terminal'
+    }
+  },
+
   {
     path: '**',
     component: NotFoundComponent,

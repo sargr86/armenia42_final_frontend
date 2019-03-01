@@ -22,7 +22,6 @@ export class RedirectToListService {
     this._auth.formProcessing = false;
     let url: string = this.router.url.substring(0, this.router.url.lastIndexOf('/'));
     if (action !== 'add') url = url.substring(0, url.lastIndexOf('/'));
-    console.log(action,url)
 
     this.router.navigate([url]);
     const msg = `${item}_${action}_success`;
