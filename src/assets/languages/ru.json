@@ -109,7 +109,7 @@
   "province_terminal": "Терминал провинции",
   "direction_terminal": "Терминал направления",
   "location_terminal": "Терминал местоположения",
-  "story_terminal":"Story terminal",
+  "story_terminal":"Терминал истории",
   "country_name_required_error":"Название страны обязательно",
   "country_exists_error":"Эта страна уже добавлена",
   "confirm": "Подтвердить",
@@ -118,5 +118,9 @@
   "with_folder":"с папкой",
   "country_add_success":"Детали страны успешно добавлены.",
   "country_update_success":"Детали страны успешно изменены.",
-  "country_remove_success":"Детали страны успешно удалены."
+  "country_remove_success":"Детали страны успешно удалены.",
+  "location_category_required_error":"Пожалуйста выберите хотя бы одну категорию для выбранного местоположения",
+  "location_exists_error": "Местоположение с таким названием уже существует",
+  "location_name_required_error": "Название местоположения обязательно",
+  "direction_not_found_error":"The direction is not found"
 }

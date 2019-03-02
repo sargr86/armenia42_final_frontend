@@ -116,12 +116,16 @@
   "province_terminal": "Province terminal",
   "direction_terminal": "Direction terminal",
   "location_terminal": "Location terminal",
-  "story_terminal":"Story terminal",
+  "story_terminal": "Story terminal",
   "country_name_required_error": "Country name is required",
   "country_exists_error": "This country already exists",
   "confirm": "Confirm",
   "cancel": "Cancel",
   "please_confirm": "Please confirm this action.",
   "with_folder": "With folder",
-  "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system."
+  "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system.",
+  "location_category_required_error": "Please select at least one category of the location",
+  "location_exists_error": "A location with such name already exists",
+  "location_name_required_error": "A location name is required",
+  "direction_not_found_error":"The direction is not found"
 }

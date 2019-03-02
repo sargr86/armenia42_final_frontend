@@ -118,5 +118,9 @@
   "with_folder": "պանակի հետ",
   "country_add_success": "Պետության տվյալները հաջողությամբ ավելացվեցին:",
   "country_update_success": "Պետության տվյալները հաջողությամբ փոփոխվեցին:",
-  "country_remove_success": "Պետության տվյալները հաջողությամբ հեռացվեցին:"
+  "country_remove_success": "Պետության տվյալները հաջողությամբ հեռացվեցին:",
+  "location_category_required_error":"Խնդրում ենք ընտրել տեղանքի գոնե մեկ կատեգորիա",
+  "location_exists_error": "Տվյալ անունով տեղամաս գոյություն ունի",
+  "location_name_required_error": "Տեղանքի անունը պարտադիր է",
+  "direction_not_found_error":"Տվյալ անունով ուղղություն չի գտնվել"
 }
