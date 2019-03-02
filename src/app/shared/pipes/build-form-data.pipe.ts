@@ -30,8 +30,15 @@ export class BuildFormDataPipe implements PipeTransform {
         formValue[field] = this.replace.transform(newFolder, false, true);
       }
 
-      // Appending flag image field to form data if drop zone file is not exist
-      if (field !== 'flag_img' || !dropFileExist) {
+      // Implemented categories field logic here
+      if (field === 'category_ids' && formValue['category_ids']) {
+        const ids = [];
+        formValue['category_ids'].map(cat => {
+          ids.push(cat['value']);
+        });
+        formData.append(field, ids.join(','));
+        // Appending flag image field to form data if drop zone file is not exist
+      } else if (field !== 'flag_img' || !dropFileExist) {
         formData.append(field, formValue[field]);
       }
     }

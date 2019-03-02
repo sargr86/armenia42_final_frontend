@@ -33,6 +33,7 @@ import {RedirectToListService} from '../../services/redirect-to-list.service';
 import * as _ from 'lodash';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 import {MatDialog} from '@angular/material';
+import {CategoriesService} from '../../services/categories.service';
 
 
 @Component({
@@ -62,6 +63,8 @@ export class EditItemComponent implements OnInit {
   dropzoneFile: object = {};
   dropzoneConfig: DropzoneConfigInterface = dropZoneConfig.ITEM_IMG_DROPZONE_CONFIG;
 
+  categoriesList: any;
+
   constructor(
     private getLang: GetLangPipe,
     public router: Router,
@@ -74,6 +77,7 @@ export class EditItemComponent implements OnInit {
     private _directions: DirectionsService,
     private _locations: LocationsService,
     private _stories: StoriesService,
+    private _categories: CategoriesService,
     private redirect: RedirectToListService,
     private dialog: MatDialog,
   ) {
@@ -90,8 +94,15 @@ export class EditItemComponent implements OnInit {
     // Getting data passed by route
     this.getRouteData();
 
+    if (this.item === 'location') {
+      // Setting parameters to send
+      const params = {
+        lang: this.lang,
+      };
 
-    // this.redirect.do(this.saveAction, this.item, this.parent, this.routeData);
+      this.categoriesList = this._categories.getCategories(params, false);
+    }
+
   }
 
   /**
@@ -114,7 +125,7 @@ export class EditItemComponent implements OnInit {
   buildFormFields(lang: string, data: Data) {
 
     // Setting the form fields both for edit and add cases
-    this.itemForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
+    this.itemForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update', this.item) as any);
 
     let childData;
     let parentData;
@@ -127,7 +138,7 @@ export class EditItemComponent implements OnInit {
         childData = data[this.item];
         parentData = childData[this.parent];
         childData['parent_name'] = parentData['name_en'];
-
+        childData['category_ids'] = childData['loc_categories'];
         // Add-item case
       } else {
         parentData = data[this.parent];

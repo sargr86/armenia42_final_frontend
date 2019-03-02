@@ -2,7 +2,7 @@ import {Validators} from '@angular/forms';
 
 
 export default class ItemFormFields {
-  static get(edit: boolean) {
+  static get(edit: boolean, item: string) {
     const lang = localStorage.getItem('lang') || 'en';
     const formFields = {
       lang: lang,
@@ -15,6 +15,10 @@ export default class ItemFormFields {
     if (edit) {
       formFields['id'] = [''];
       formFields['new_folder'] = [''];
+    }
+
+    if (item === 'location') {
+      formFields['category_ids'] = '';
     }
 
     formFields[`name_${lang}`] = ['', [Validators.required]];
