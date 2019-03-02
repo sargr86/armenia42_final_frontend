@@ -21,13 +21,22 @@
         </div>
       </div>
 
-      <!-- direction description field-->
+      <!-- An item description field-->
       <mat-form-field>
         <mat-label>{{'description'|translate}}</mat-label>
         <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
                   [matAutosizeMinRows]="textAreaLimits.min"
                   [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
       </mat-form-field>
+
+      <!-- Location categories list -->
+      <ng-select [items]="categories|async" [multiple]="true" *ngIf="item==='location'"
+                 dropdownPosition="bottom" formControlName="category_ids">
+        <ng-template ng-option-tmp let-item="item">
+          <i class="fa fa-{{item.icon}}"></i>
+          {{item.label}}
+        </ng-template>
+      </ng-select>
 
       <!-- Save- and remove-direction actions-->
       <div class="actions">
