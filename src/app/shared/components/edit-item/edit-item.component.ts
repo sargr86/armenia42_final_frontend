@@ -86,6 +86,9 @@ export class EditItemComponent implements OnInit {
 
     // Getting data passed by route
     this.getRouteData();
+
+
+    // this.redirect.do(this.saveAction, this.item, this.parent, this.routeData);
   }
 
   /**
@@ -132,7 +135,6 @@ export class EditItemComponent implements OnInit {
       childData = data[this.item];
     }
 
-
     // Applying province or direction folder for add* or edit-direction cases
     this.itemForm.patchValue(this.editCase ? childData : {
       folder: this.parent ? parentData['folder'] : '',
@@ -156,7 +158,7 @@ export class EditItemComponent implements OnInit {
 
       // Adding or updating a direction info
       this[`_${this.routeItem}`][this.saveAction](formData).subscribe(() => {
-        this.redirect.do(this.saveAction, this.item);
+        this.redirect.do(this.saveAction, this.item, this.parent, this.routeData);
       });
     }
   }
@@ -189,7 +191,7 @@ export class EditItemComponent implements OnInit {
           };
 
           this[`_${this.routeItem}`].remove(params).subscribe(() => {
-            this.redirect.do('remove', 'direction');
+            this.redirect.do('remove', this.item, this.parent, this.routeData);
           });
         }
       }

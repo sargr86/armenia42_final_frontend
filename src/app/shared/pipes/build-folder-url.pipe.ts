@@ -2,13 +2,18 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {DEFAULT_ACTIONS} from '../constants/settings';
 
 @Pipe({
-    name: 'buildFolderUrl'
+  name: 'buildFolderUrl'
 })
 export class BuildFolderUrlPipe implements PipeTransform {
 
-    transform(routerUrl: any, args?: any): any {
-        const splittedUrl = routerUrl.split('/');
-        return splittedUrl.filter(r => !DEFAULT_ACTIONS.includes(r)).join('/');
+  transform(routerUrl: any, pop = false): any {
+    const splittedUrl = routerUrl.split('/');
+    const urlArr = splittedUrl.filter(r => !DEFAULT_ACTIONS.includes(r));
+    if (pop) {
+      urlArr.pop();
     }
+    const url = urlArr.join('/');
+    return url;
+  }
 
 }
