@@ -12,6 +12,7 @@ import {CountriesService} from '../../services/countries.service';
 import {ProvincesService} from '../../services/provinces.service';
 import {DirectionsService} from '../../services/directions.service';
 import {LocationsService} from '../../services/locations.service';
+import {StoriesService} from '../../services/stories.service';
 
 @Component({
   selector: 'show-items',
@@ -33,6 +34,7 @@ export class ShowItemsComponent implements OnInit {
     private _provinces: ProvincesService,
     private _directions: DirectionsService,
     private _locations: LocationsService,
+    private _stories: StoriesService,
     private _subject: SubjectService,
     private getLang: GetLangPipe,
     public _auth: AuthService,

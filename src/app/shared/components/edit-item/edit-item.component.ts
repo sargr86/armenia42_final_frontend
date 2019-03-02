@@ -8,6 +8,10 @@ import {GetLangPipe} from '../../pipes/get-lang.pipe';
 // Services
 import {AuthService} from '../../services/auth.service';
 import {CountriesService} from '../../services/countries.service';
+import {ProvincesService} from '../../services/provinces.service';
+import {DirectionsService} from '../../services/directions.service';
+import {LocationsService} from '../../services/locations.service';
+import {StoriesService} from '../../services/stories.service';
 
 // The form fields
 import ItemFormFields from '../../helpers/get-item-form-fields';
@@ -29,9 +33,7 @@ import {RedirectToListService} from '../../services/redirect-to-list.service';
 import * as _ from 'lodash';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 import {MatDialog} from '@angular/material';
-import {ProvincesService} from '../../services/provinces.service';
-import {DirectionsService} from '../../services/directions.service';
-import {LocationsService} from '../../services/locations.service';
+
 
 @Component({
   selector: 'app-edit-item',
@@ -71,6 +73,7 @@ export class EditItemComponent implements OnInit {
     private _provinces: ProvincesService,
     private _directions: DirectionsService,
     private _locations: LocationsService,
+    private _stories: StoriesService,
     private redirect: RedirectToListService,
     private dialog: MatDialog,
   ) {

@@ -92,9 +92,12 @@ const routes: Routes = [
   {
     path: ':country/:province/:direction',
     loadChildren: './locations/locations.module#LocationsModule',
-    data: {
-      item: 'location',
-    }
+
+  },
+  {
+    path: ':country/:province/:direction/:location',
+    loadChildren: './stories/stories.module#StoriesModule',
+
   },
   {
     path: '**',
