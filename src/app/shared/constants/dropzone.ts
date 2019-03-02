@@ -22,3 +22,15 @@ export const ITEM_IMG_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFiles: 1,
   addRemoveLinks: true
 };
+
+
+export const STORY_IMG_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+  url: '{not_provided}',
+  maxFilesize: 1,
+  acceptedFiles: 'image/*',
+  autoProcessQueue: false,
+  uploadMultiple: true,
+  maxFiles: 5,
+  addRemoveLinks: true
+};

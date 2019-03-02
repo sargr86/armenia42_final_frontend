@@ -23,7 +23,7 @@
 
       <!-- Location categories list -->
       <ng-select [items]="categoriesList|async" [multiple]="true" *ngIf="item==='location'"
-                [placeholder]="'categories'|translate" dropdownPosition="bottom" formControlName="category_ids">
+                 [placeholder]="'categories'|translate" dropdownPosition="bottom" formControlName="category_ids">
         <ng-template ng-option-tmp let-item="item">
           <i class="fa fa-{{item.icon}}"></i>
           {{item.label}}
@@ -37,7 +37,6 @@
                   [matAutosizeMinRows]="textAreaLimits.min"
                   [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
       </mat-form-field>
-
 
 
       <!-- Save- and remove-direction actions-->
@@ -69,8 +68,11 @@
 
     <!-- Image drop zone -->
     <div class="dropzoneContainer" *ngIf="!flag">
-      <dropzone [config]="dropzoneConfig" [message]="'img_dropzone_msg'|translate" id="dropzone"
-                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()" class="flagDropzone"></dropzone>
+      <dropzone [config]="dropzoneConfig"
+                [message]="dropzoneMsg|translate"
+                id="dropzone"
+                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
+                class="{{item==='story'?'storyDropzone':'flagDropzone'}}"></dropzone>
     </div>
 
     <!-- Uploaded image zone -->

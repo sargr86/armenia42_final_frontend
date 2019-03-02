@@ -23,7 +23,7 @@
   "langs": "Languages",
   "translate": "Translate",
   "img_dropzone_msg": "Click or drop here the flag image to add",
-  "img_dropzone_story_msg": "Click or drop here the story images to add",
+  "story_dropzone_msg": "Click or drop here the story images to add",
   "make_cover_for": "Make cover for ...",
   "name": "Name",
   "description": "Description",
@@ -99,6 +99,8 @@
   "use_corresponding_lang": "Since the system uses Google Translate for translating some (marked as <i class='fa fa-globe'></i>) details to other supported languages, please use the interface language when filling in the fields. Otherwise the translation may not correspond your input details.",
   "go_back_to_change_lang": "If you want to change the current language, please do so on the previous page.",
   "dropzone_image_max_size": "Please upload an image with size not more than 1Mb.",
+  "dropzone_images_max_size":"Please upload images with size not more than 1Mb.",
+  "max_story_files":"You can upload 5 images of the story at once. The rest images can be uploaded ",
   "will_auth_after_reg": "After registration completed, you'll be authorized and redirected to the home page.",
   "profile_info_updated": "Profile information has been updated successfully",
   "profile_img": "Profile image",
@@ -127,5 +129,6 @@
   "location_category_required_error": "Please select at least one category of the location",
   "location_exists_error": "A location with such name already exists",
   "location_name_required_error": "A location name is required",
-  "direction_not_found_error":"The direction is not found"
+  "direction_not_found_error":"The direction is not found",
+  "location_dropzone_msg": "Click or drop here the logo image to add"
 }

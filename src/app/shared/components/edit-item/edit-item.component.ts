@@ -61,7 +61,7 @@ export class EditItemComponent implements OnInit {
   imageExists = true; // checks to see if defined flag image of current direction exist
 
   dropzoneFile: object = {};
-  dropzoneConfig: DropzoneConfigInterface = dropZoneConfig.ITEM_IMG_DROPZONE_CONFIG;
+  dropzoneConfig: DropzoneConfigInterface;
 
   categoriesList: any;
 
@@ -86,10 +86,12 @@ export class EditItemComponent implements OnInit {
 
   ngOnInit() {
 
+    // Setting drop zone configuration and stopping 'save-action' loader
+    this.dropzoneConfig = dropZoneConfig[(this.item !== 'story' ? 'ITEM_IMG_DROPZONE_CONFIG' : 'STORY_IMG_DROPZONE_CONFIG')];
     this._auth.formProcessing = false;
 
     // Getting data for info box for different language cases
-    this.infoBoxData = FormInfoBoxData.get(this.editCase, this.lang);
+    this.infoBoxData = FormInfoBoxData.get(this.editCase, this.lang, this.item);
 
     // Getting data passed by route
     this.getRouteData();
@@ -280,5 +282,9 @@ export class EditItemComponent implements OnInit {
    */
   get folderUrl(): string {
     return `others/${this.routeData[this.item].folder}`;
+  }
+
+  get dropzoneMsg() {
+    return this.item === 'story' ? 'story_dropzone_msg' : (this.item === 'location' ? 'location_dropzone_msg' : 'img_dropzone_msg');
   }
 }
