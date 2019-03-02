@@ -106,24 +106,32 @@ export class EditItemComponent implements OnInit {
    * @param  data router data
    */
   buildFormFields(lang: string, data: Data) {
+
     // Setting the form fields both for edit and add cases
     this.itemForm = this._fb.group(ItemFormFields.get(this.saveAction === 'update') as any);
 
     let childData;
     let parentData;
 
-
-
+    // Non-country case
     if (this.parent) {
 
+      // Edit-item case
       if (this.editCase) {
         childData = data[this.item];
         parentData = childData[this.parent];
         childData['parent_name'] = parentData['name_en'];
+
+        // Add-item case
       } else {
         parentData = data[this.parent];
       }
+
+      // Country case
+    } else {
+      childData = data[this.item];
     }
+
 
     // Applying province or direction folder for add* or edit-direction cases
     this.itemForm.patchValue(this.editCase ? childData : {

@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ShowLocationsComponent} from './show-locations/show-locations.component';
 import {EditLocationComponent} from './edit-location/edit-location.component';
 import {DirectionResolverService} from '../shared/resolvers/direction-resolver.service';
+import {LocationResolverService} from '../shared/resolvers/location-resolver.service';
 
 const routes: Routes = [
   {
@@ -18,6 +19,17 @@ const routes: Routes = [
     component: EditLocationComponent,
     resolve: {
       direction: DirectionResolverService
+    },
+    data: {
+      item: 'locations',
+      title: 'location_terminal'
+    }
+  },
+  {
+    path: ':location/edit',
+    component: EditLocationComponent,
+    resolve: {
+      location: LocationResolverService
     },
     data: {
       item: 'locations',

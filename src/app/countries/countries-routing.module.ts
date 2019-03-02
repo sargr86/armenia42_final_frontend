@@ -19,7 +19,7 @@ const routes: Routes = [
       title: 'country_terminal',
       item: 'countries'
     }
-  }
+  },
 ];
 
 @NgModule({

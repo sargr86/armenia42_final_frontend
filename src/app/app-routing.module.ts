@@ -68,20 +68,6 @@ const routes: Routes = [
 
   },
   {
-    path: ':country/add',
-    component: EditProvinceComponent,
-    resolve: {
-      country: CountriesResolver
-    },
-    canActivate: [AuthGuard, RoleGuard],
-    data: {
-      expectedRole: 'admin',
-      title: 'province_terminal',
-      item: 'provinces'
-    },
-
-  },
-  {
     path: ':country/edit',
     component: EditCountryComponent,
     resolve: {
@@ -97,77 +83,19 @@ const routes: Routes = [
   },
   {
     path: ':country',
-    component: ShowProvincesComponent,
-    data: {},
-  },
-  {
-    path: ':country/:province/edit',
-    component: EditProvinceComponent,
-    resolve: {
-      province: ProvinceResolverService
-    },
-    canActivate: [AuthGuard, RoleGuard],
-    data: {
-      expectedRole: 'admin',
-      title: 'province_terminal',
-      item: 'provinces'
-    },
-
-  },
-  {
-    path: ':country/:province/add',
-    component: EditDirectionComponent,
-    resolve: {
-      province: ProvinceResolverService
-    },
-    canActivate: [AuthGuard, RoleGuard],
-    data: {
-      expectedRole: 'admin',
-      title: 'direction_terminal',
-      item: 'directions'
-    },
-
+    loadChildren: './provinces/provinces.module#ProvincesModule',
   },
   {
     path: ':country/:province',
-    component: ShowDirectionsComponent,
-    data: {},
+    loadChildren: './directions/directions.module#DirectionsModule',
   },
-  {
-    path: ':country/:province/:direction/edit',
-    component: EditDirectionComponent,
-    resolve: {
-      direction: DirectionResolverService
-    },
-    canActivate: [AuthGuard, RoleGuard],
-    data: {
-      expectedRole: 'admin',
-      title: 'direction_terminal',
-      item: 'directions'
-    },
-
-  },
-
   {
     path: ':country/:province/:direction',
     loadChildren: './locations/locations.module#LocationsModule',
     data: {
-      item: "location",
-      page: "direction"
+      item: 'location',
     }
   },
-  {
-    path: ':country/:province/:direction/:location/edit',
-    component: EditLocationComponent,
-    resolve: {
-      location: LocationResolverService
-    },
-    data: {
-      item: 'locations',
-      title: 'location_terminal'
-    }
-  },
-
   {
     path: '**',
     component: NotFoundComponent,
