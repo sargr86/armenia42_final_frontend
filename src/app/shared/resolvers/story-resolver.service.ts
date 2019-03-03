@@ -19,8 +19,8 @@ export class StoryResolverService {
   resolve(route: ActivatedRouteSnapshot) {
     const params = route.params;
     const story = params.story ? this.replace.transform(params.story) : '';
-    return this.stories.getByName({
-      name_en: story,
+    return this.stories.getById({
+      id: story,
       parent_name: params.location,
       lang: this.getLang.transform()
     });

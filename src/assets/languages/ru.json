@@ -125,7 +125,10 @@
   "location_exists_error": "Местоположение с таким названием уже существует",
   "location_name_required_error": "Название местоположения обязательно",
   "story_name_required_error": "Название истории обязательно",
+  "country_not_found_error":"Страна не найдена",
+  "province_not_found_error":"Провинция не найдена",
   "direction_not_found_error":"Направление не найдено",
+  "location_not_found_error":"Местоположение не найдено",
   "location_dropzone_msg": "Нажать или перенести сюда файл логотипа",
   "story_imgs_further_uploads":"Остальные фотоматериалы можно загрузить на странице изображений"
 }

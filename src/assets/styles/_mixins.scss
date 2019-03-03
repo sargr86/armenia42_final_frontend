@@ -177,10 +177,17 @@
   .item:hover {
     color: $yellow;
   }
-  .item.story {
+  .item.stories {
     .number {
       margin-top: 9px !important;
     }
+    .titleContainer{
+      margin-left:17px;
+      .title{
+        margin:0;
+      }
+    }
+
   }
 }
 

@@ -1,13 +1,17 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import * as moment from 'moment';
 import {ReplaceAllPipe} from './replace-all.pipe';
+import {AuthService} from '../services/auth.service';
 
 @Pipe({
   name: 'buildFormData'
 })
 export class BuildFormDataPipe implements PipeTransform {
 
-  constructor(private replace: ReplaceAllPipe) {
+  constructor(
+    private replace: ReplaceAllPipe,
+    private _auth: AuthService
+  ) {
 
   }
 
@@ -38,6 +42,7 @@ export class BuildFormDataPipe implements PipeTransform {
           ids.push(cat['value']);
         });
         formData.append(field, ids.join(','));
+
         // Appending flag image field to form data if drop zone file is not exist
       } else if (field !== 'flag_img' || !dropFileExist) {
         formData.append(field, formValue[field]);
@@ -49,12 +54,14 @@ export class BuildFormDataPipe implements PipeTransform {
 
 
       if (item === 'story') {
+        formData.append('user_id', this._auth.userData.id.toString());
 
         dropzoneFiles.map(f => {
           const file = f[0];
           const t = moment();
           const nameArr = file['name'].split('.');
           const fileName = `${nameArr[0]}.${nameArr[1]}`;
+
           formData.append('story_imgs', fileName);
           formData.append('story_img_files', file, fileName);
         });

@@ -100,6 +100,10 @@ const routes: Routes = [
     loadChildren: './stories/stories.module#StoriesModule',
   },
   {
+    path: ':country/:province/:direction/:location/:story',
+    loadChildren: './images/images.module#ImagesModule',
+  },
+  {
     path: '**',
     component: NotFoundComponent,
     data: {

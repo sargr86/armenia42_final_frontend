@@ -100,7 +100,7 @@
   "go_back_to_change_lang": "If you want to change the current language, please do so on the previous page.",
   "dropzone_image_max_size": "Please upload an image with size not more than 1Mb.",
   "dropzone_images_max_size":"Please upload images with size not more than 1Mb.",
-  "max_story_files":"You can upload 5 images of the story at once. The rest images can be uploaded ",
+  "max_story_files":"You can upload 5 images of the story at once. The rest images can be uploaded in the images page",
   "will_auth_after_reg": "After registration completed, you'll be authorized and redirected to the home page.",
   "profile_info_updated": "Profile information has been updated successfully",
   "profile_img": "Profile image",
@@ -130,7 +130,10 @@
   "location_exists_error": "A location with such name already exists",
   "location_name_required_error": "Location name is required",
   "story_name_required_error": "Story name is required",
+  "country_not_found_error":"The country is not found",
+  "province_not_found_error":"The province is not found",
   "direction_not_found_error":"The direction is not found",
+  "location_not_found_error":"The location is not found",
   "location_dropzone_msg": "Click or drop here the logo image to add",
   "story_imgs_further_uploads":"Further uploads are possible on the images page"
 }

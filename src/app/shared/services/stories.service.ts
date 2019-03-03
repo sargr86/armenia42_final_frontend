@@ -27,8 +27,8 @@ export class StoriesService {
    * @param params a story name to retrieve the story data
    * @returns story observable
    */
-  getByName(params): Observable<Story> {
-    return this.httpClient.get<Story>(`${API_HOST}stories/get-by-name`, {params: params});
+  getById(params): Observable<Story> {
+    return this.httpClient.get<Story>(`${API_HOST}stories/get-by-id`, {params: params});
   }
 
   /**

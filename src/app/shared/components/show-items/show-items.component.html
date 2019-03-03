@@ -11,7 +11,7 @@
                     <li class="item {{child}}">
 
                         <!-- Author names for stories in authenticated mode -->
-                        <div class="userContainer" *ngIf="storiesPage && auth.loggedIn()">
+                        <div class="userContainer" *ngIf="storiesPage && _auth.loggedIn()">
                             <small>{{item.user.full_name}}</small>
                         </div>
 
