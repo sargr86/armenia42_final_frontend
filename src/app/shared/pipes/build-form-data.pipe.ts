@@ -11,10 +11,11 @@ export class BuildFormDataPipe implements PipeTransform {
 
   }
 
-  transform(formValue: any, dropzoneFile: any, lang: string): any {
+  transform(formValue: any, dropzoneFiles: any, item: string, lang: string): any {
 
     const formData: FormData = new FormData();
-    const dropFileExist: boolean = Object.entries(dropzoneFile).length > 0;
+    const dropFileExist: boolean = dropzoneFiles.length > 0;
+
 
     for (const field of Object.keys(formValue)) {
 
@@ -46,12 +47,29 @@ export class BuildFormDataPipe implements PipeTransform {
     // If drop zone file exists saving it to formData object as well
     if (dropFileExist) {
 
-      const file = dropzoneFile[0];
-      const t = moment();
-      const nameArr = file['name'].split('.');
-      const fileName = `${nameArr[0]}.${nameArr[1]}`;
-      formData.append('flag_img', fileName);
-      formData.append('flag_file', file, fileName);
+
+      if (item === 'story') {
+
+        dropzoneFiles.map(f => {
+          const file = f[0];
+          const t = moment();
+          const nameArr = file['name'].split('.');
+          const fileName = `${nameArr[0]}.${nameArr[1]}`;
+          formData.append('story_imgs', fileName);
+          formData.append('story_img_files', file, fileName);
+        });
+
+
+      } else {
+        const file = dropzoneFiles[0];
+        const t = moment();
+        const nameArr = file[0]['name'].split('.');
+        const fileName = `${nameArr[0]}.${nameArr[1]}`;
+
+        formData.append('flag_img', fileName);
+        formData.append('flag_file', file[0], fileName);
+      }
+
     }
 
 

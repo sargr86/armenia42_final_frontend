@@ -60,7 +60,7 @@ export class EditItemComponent implements OnInit {
   textAreaLimits: TextAreaLimits = {min: TEXTAREA_AUTOSIZE_MIN_ROWS, max: TEXTAREA_AUTOSIZE_MAX_ROWS};
   imageExists = true; // checks to see if defined flag image of current direction exist
 
-  dropzoneFile: object = {};
+  dropzoneFiles = [];
   dropzoneConfig: DropzoneConfigInterface;
 
   categoriesList: any;
@@ -165,7 +165,7 @@ export class EditItemComponent implements OnInit {
   save() {
 
     // Building form data object and getting it
-    const formData = this.buildFormData.transform(this.itemForm.value, this.dropzoneFile, this.lang);
+    const formData = this.buildFormData.transform(this.itemForm.value, this.dropzoneFiles, this.item, this.lang);
 
     if (this.itemForm.valid) {
 
@@ -229,7 +229,8 @@ export class EditItemComponent implements OnInit {
    * @param e drop zone-added-file event
    */
   onAddedFile(e) {
-    this.dropzoneFile = e;
+
+    this.dropzoneFiles.push(e);
   }
 
   /**
@@ -239,7 +240,7 @@ export class EditItemComponent implements OnInit {
     if (this.editCase) {
       this.routeItemSingular.flag_img = '';
     }
-    this.dropzoneFile = {};
+    this.dropzoneFiles = [];
     this.itemForm.controls['flag_img'].patchValue('');
   }
 
