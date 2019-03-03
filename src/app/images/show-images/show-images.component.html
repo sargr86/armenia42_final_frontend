@@ -1,3 +1,41 @@
-<p>
-  show-images works!
-</p>
+<div class="storyContainer">
+
+
+  <div class="galleryContainer" *ngIf="galleryImages && viewMode=='gallery'">
+    <!--<ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>-->
+  </div>
+
+  <!-- Images list for authenticated users -->
+  <ul class="images" *ngIf="images && viewMode=='list' && _auth.loggedIn()">
+    <ng-container *ngFor="let i of images">
+      <li class="image">
+        <div class="imageContainer" [style.background-image]="i['small']|getImgUrl:('others/'+routeData['story']['folder']):true">
+          <ng-container class="buttonsContainer" *ngIf="_auth.loggedIn()">
+            <button (click)="editImageInfo(i.id)" class="editStory">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="removeImage" (click)="removeImage(i.id)">
+              <i class="fas fa-times-circle"></i>
+            </button>
+            <button class="makeCover" (click)="makeCover(i.id)" [class.selectedBg]="i.cover">
+              <p>1</p>
+            </button>
+            <button class="makeFavorite" (click)="makeFav(i.id)" [class.selected]="i.fav">
+              <i class="fas fa-star"></i>
+            </button>
+          </ng-container>
+
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+
+
+  <div *ngIf="!_auth.loggedIn() && story">
+    <h3 class="storyTitle">{{story['name_'+auth.lang]}}</h3>
+
+    <!--<preview-gallery [galleryImages]="galleryImages"></preview-gallery>-->
+
+    <p class="storyDesc">{{story['description_'+auth.lang]}}</p>
+  </div>
+</div>

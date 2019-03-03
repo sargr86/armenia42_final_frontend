@@ -24,6 +24,7 @@ export class GetImageUrlPipe implements PipeTransform {
    */
   transform(name, path = '', background = false): any {
     let folder = '';
+    let url;
     if (path) {
       folder = path;
     }
@@ -31,11 +32,11 @@ export class GetImageUrlPipe implements PipeTransform {
       return;
     }
     if (background) {
-      let url = 'url("' + UPLOADS_FOLDER + folder + '/' + name + '")';
+      url = 'url("' + UPLOADS_FOLDER + folder + '/' + name + '")';
       url = this.replace.transform(url, false);
       return this.sanitizer.bypassSecurityTrustStyle(url);
     } else {
-      const url = UPLOADS_FOLDER + folder + '/' + name;
+      url = UPLOADS_FOLDER + folder + '/' + name;
       return this.sanitizer.bypassSecurityTrustUrl(url);
     }
 

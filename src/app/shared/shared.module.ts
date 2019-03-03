@@ -30,6 +30,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InfoBoxComponent} from './components/info-box/info-box.component';
 import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {LanguagesComponent} from './components/languages/languages.component';
+import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {LanguagesComponent} from './components/languages/languages.component';
     ConfirmationDialogComponent,
     BuildFolderUrlPipe,
     EditItemComponent,
-    BuildFormDataPipe
+    BuildFormDataPipe,
+    GetStoryImageUrlPipe
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import {LanguagesComponent} from './components/languages/languages.component';
     GetMatTableDataSourcePipe,
     GenerateChildItemUrlPipe,
     BuildFolderUrlPipe,
-    BuildFormDataPipe
+    BuildFormDataPipe,
+    GetStoryImageUrlPipe
   ],
   exports: [
     FormsModule,

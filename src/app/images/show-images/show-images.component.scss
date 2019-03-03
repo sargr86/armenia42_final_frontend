@@ -1,0 +1,85 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
+
+.storyContainer {
+  //background-color: $dark_gray;
+}
+
+.galleryContainer {
+  text-align: center;
+}
+
+.imageContainer {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.image {
+  display: inline-block;
+  margin-left: 20px;
+  position: relative;
+  .makeFavorite {
+    position: absolute;
+    bottom: 5px;
+    right: 1px
+  }
+  .makeCover {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    .mat-badge-content {
+      color: $darker_gray !important;
+      background-color: $white !important;
+      font-size: 14px !important;
+    }
+  }
+}
+
+button {
+  @include noBgButton;
+  i {
+
+    font-size: 20px;
+  }
+}
+
+.removeImage {
+  float: right;
+}
+
+.galleryControls {
+  text-align: center;
+  .launchSlideshow {
+    @include noBgButton;
+    color: $white;
+    margin: 10px 0;
+    i {
+      font-size: 25px;
+    }
+  }
+}
+
+.storyTitle, .storyDesc {
+  text-align: center;
+  color: $white;
+}
+
+.makeCover {
+  background-color: $white;
+  color: $dark_gray;
+  width: 20px !important;
+  height: 20px !important;
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.makeFavorite {
+  i {
+    font-size: 18px;
+  }
+}

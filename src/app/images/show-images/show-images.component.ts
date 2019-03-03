@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ImagesService} from '../../shared/services/images.service';
-import {ActivatedRoute, Data} from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {SubjectService} from '../../shared/services/subject.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {Image} from '../../shared/models/Image';
+import {AuthService} from '../../shared/services/auth.service';
+import {GetStoryImageUrlPipe} from '../../shared/pipes/get-story-image-url.pipe';
 
 @Component({
   selector: 'app-show-images',
@@ -13,19 +15,28 @@ import {Image} from '../../shared/models/Image';
 })
 export class ShowImagesComponent implements OnInit {
   lang = this.getLang.transform();
-  images: Observable<Image[]>;
+  images: Image[];
+  viewMode = 'list';
+  routeData: Data;
+
+  galleryOptions;
+  galleryImages;
 
   constructor(
     private _images: ImagesService,
     private route: ActivatedRoute,
+    private router: Router,
     private getLang: GetLangPipe,
-    private _subject: SubjectService
+    private _subject: SubjectService,
+    public _auth: AuthService,
+    private getStoryImgUrl: GetStoryImageUrlPipe
   ) {
 
   }
 
   ngOnInit() {
     this.route.data.subscribe((dt: Data) => {
+      this.routeData = dt;
       this._subject.getLanguage().subscribe(lang => {
         this.lang = lang;
         this.getImages(dt, lang);
@@ -42,7 +53,57 @@ export class ShowImagesComponent implements OnInit {
    */
   getImages(dt, lang) {
     const params = {story_id: dt.story.id, lang: lang};
-    this.images = this._images.get(params);
+    this._images.get(params).subscribe(d => {
+      this.images = d;
+      if (this.viewMode === 'gallery') {
+        this.prepareGalery(d);
+      }
+
+    });
+  }
+
+  /**
+   * Prepares the gallery options and images
+   * @param dt
+   */
+  prepareGalery(dt) {
+    let self = this;
+
+
+    // Setting ngx-gallery options
+    this.galleryOptions = [
+      {
+        'previewFullscreen': true,
+        'width': '50%',
+        'previewKeyboardNavigation': true,
+        'imageDescription': true,
+        'previewCloseOnEsc': true,
+        'imageActions': [{
+          icon: 'fa fa-times-circle', onClick: () => {
+            // self.subject.setSlideshow(true);
+          }, titleText: 'delete'
+        }]
+      },
+      {'breakpoint': 500, 'width': '300px', 'height': '300px', 'thumbnailsColumns': 3},
+      {'breakpoint': 300, 'width': '100%', 'height': '200px', 'thumbnailsColumns': 2},
+
+    ];
+    console.log(this.routeData)
+
+
+    // Preparing gallery images data
+    if (dt) {
+      dt.map(img => {
+        img.big = this.routeData['story']['folder'] + img['big'];
+        img.medium = this.routeData['story']['folder'] + img['medium'];
+        img.small = this.routeData['story']['folder'] + img['small'];
+        // img.medium = this.getStoryImgUrl.transform(this.router.url, img['name'], this.routeData);
+        // img.small = this.getStoryImgUrl.transform(this.router.url, img['name'], this.routeData);
+        // img.description = img['description_' + this.auth.lang];
+
+      });
+      this.galleryImages = dt.images;
+    }
   }
 
 }
