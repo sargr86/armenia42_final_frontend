@@ -128,7 +128,9 @@
   "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system.",
   "location_category_required_error": "Please select at least one category of the location",
   "location_exists_error": "A location with such name already exists",
-  "location_name_required_error": "A location name is required",
+  "location_name_required_error": "Location name is required",
+  "story_name_required_error": "Story name is required",
   "direction_not_found_error":"The direction is not found",
-  "location_dropzone_msg": "Click or drop here the logo image to add"
+  "location_dropzone_msg": "Click or drop here the logo image to add",
+  "story_imgs_further_uploads":"Further uploads are possible on the images page"
 }

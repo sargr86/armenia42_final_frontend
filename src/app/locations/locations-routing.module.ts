@@ -22,7 +22,8 @@ const routes: Routes = [
     },
     data: {
       item: 'locations',
-      title: 'location_terminal'
+      title: 'location_terminal',
+      icon: 'map-marker'
     }
   },
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     },
     data: {
       item: 'locations',
-      title: 'location_terminal'
+      title: 'location_terminal',
+      icon: 'map-marker'
     }
   },
 ];

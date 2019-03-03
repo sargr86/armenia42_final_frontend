@@ -1,7 +1,7 @@
 <mat-card>
   <!-- Register/ profile form title-->
   <h2 class="terminalTitle">
-    <i class="fa fa-flag"></i>
+    <i class="fa fa-{{titleIcon}}"></i>
     <span translate>{{pageTitle}}</span>
   </h2>
 
@@ -67,7 +67,7 @@
     <info-box [elements]="infoBoxData"></info-box>
 
     <!-- Image drop zone -->
-    <div class="dropzoneContainer" *ngIf="!flag">
+    <div class="dropzoneContainer" *ngIf="!flag && !notShownOnStoryEdit">
       <dropzone [config]="dropzoneConfig"
                 [message]="dropzoneMsg|translate"
                 id="dropzone"
@@ -79,6 +79,10 @@
     <div class="flagImg" *ngIf="flag && imageExists">
       <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
       <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
+    </div>
+
+    <div class="storyImgsUploadInfo" *ngIf="notShownOnStoryEdit">
+      <h4>{{'story_imgs_further_uploads'|translate}}</h4>
     </div>
 
   </form>

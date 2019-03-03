@@ -23,7 +23,8 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'direction_terminal',
-      item: 'directions'
+      item: 'directions',
+      icon: 'directions'
     },
 
   },
@@ -37,7 +38,8 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'direction_terminal',
-      item: 'directions'
+      item: 'directions',
+      icon: 'directions'
     },
 
   },

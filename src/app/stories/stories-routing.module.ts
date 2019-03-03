@@ -19,7 +19,8 @@ const routes: Routes = [
     },
     data: {
       title: 'story_terminal',
-      item: 'stories'
+      item: 'stories',
+      icon: 'book-open'
     }
   },
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     },
     data: {
       title: 'story_terminal',
-      item: 'stories'
+      item: 'stories',
+      icon: 'book-open'
     }
   }
 ];

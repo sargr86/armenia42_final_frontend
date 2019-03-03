@@ -111,7 +111,7 @@
   "province_terminal": "Նահանգի/ մարզի տերմինալ",
   "direction_terminal": "Ուղղության տերմինալ",
   "location_terminal": "Տեղանքի տերմինալ",
-  "story_terminal": "Story terminal",
+  "story_terminal": "Պատմության տերմինալ",
   "country_name_required_error": "Պետության անվանումը պարտադիր է",
   "country_exists_error": "Այս պետությունն արդեն ավելացված է",
   "confirm": "Հաստատել",
@@ -124,6 +124,9 @@
   "location_category_required_error":"Խնդրում ենք ընտրել տեղանքի գոնե մեկ կատեգորիա",
   "location_exists_error": "Տվյալ անունով տեղամաս գոյություն ունի",
   "location_name_required_error": "Տեղանքի անունը պարտադիր է",
+  "story_name_required_error": "Պատմության անունը պարտադիր է",
   "direction_not_found_error":"Տվյալ անունով ուղղություն չի գտնվել",
-  "location_dropzone_msg": "Սեղմել կամ տեղափոխել այստեղ լոգոյի ֆայլը"
+  "location_dropzone_msg": "Սեղմել կամ տեղափոխել այստեղ լոգոյի ֆայլը",
+  "story_imgs_further_uploads":"Մնացած նկարների բեռնումը հնարավոր է նկարների առանձնացված էջում"
+
 }

@@ -77,7 +77,8 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'country_terminal',
-      item: 'countries'
+      item: 'countries',
+      icon: 'flag'
     },
 
   },
@@ -97,7 +98,6 @@ const routes: Routes = [
   {
     path: ':country/:province/:direction/:location',
     loadChildren: './stories/stories.module#StoriesModule',
-
   },
   {
     path: '**',

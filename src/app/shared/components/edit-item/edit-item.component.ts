@@ -64,6 +64,7 @@ export class EditItemComponent implements OnInit {
   dropzoneConfig: DropzoneConfigInterface;
 
   categoriesList: any;
+  titleIcon: string;
 
   constructor(
     private getLang: GetLangPipe,
@@ -113,6 +114,7 @@ export class EditItemComponent implements OnInit {
   getRouteData() {
     this.route.data.subscribe((dt: Data) => {
       this.pageTitle = dt['title'];
+      this.titleIcon = dt['icon'];
       this.routeData = dt;
       this.routeItem = dt['item'];
       this.buildFormFields(this.lang, dt);
@@ -285,7 +287,15 @@ export class EditItemComponent implements OnInit {
     return `others/${this.routeData[this.item].folder}`;
   }
 
-  get dropzoneMsg() {
+  /**
+   * Gets drop zone message for its diffrent types
+   * @returns drop zone message
+   */
+  get dropzoneMsg(): string {
     return this.item === 'story' ? 'story_dropzone_msg' : (this.item === 'location' ? 'location_dropzone_msg' : 'img_dropzone_msg');
+  }
+
+  get notShownOnStoryEdit(): boolean {
+    return this.item === 'story' && this.editCase;
   }
 }

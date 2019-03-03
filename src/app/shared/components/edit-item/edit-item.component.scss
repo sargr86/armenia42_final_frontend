@@ -74,3 +74,19 @@
     cursor: pointer;
   }
 }
+
+.storyImgsUploadInfo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 200px;
+  padding: 5px;
+  float: right;
+  margin-top: 40px;
+  background-color: $silver;
+  color:$white;
+  h3{
+    text-align: center;
+  }
+}

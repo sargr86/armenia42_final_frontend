@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {ShowProvincesComponent} from './show-provinces/show-provinces.component';
 import {ProvinceResolverService} from '../shared/resolvers/province-resolver.service';
 import {AuthGuard} from '../shared/guards/auth.guard';
@@ -23,7 +23,8 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'province_terminal',
-      item: 'provinces'
+      item: 'provinces',
+      icon: 'umbrella'
     },
 
   },
@@ -37,7 +38,8 @@ const routes: Routes = [
     data: {
       expectedRole: 'admin',
       title: 'province_terminal',
-      item: 'provinces'
+      item: 'provinces',
+      icon: 'umbrella'
     },
 
   },
@@ -47,4 +49,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProvincesRoutingModule { }
+export class ProvincesRoutingModule {
+}
