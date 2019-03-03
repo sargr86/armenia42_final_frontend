@@ -30,7 +30,8 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InfoBoxComponent} from './components/info-box/info-box.component';
 import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {LanguagesComponent} from './components/languages/languages.component';
-import { PreviewGalleryComponent } from './components/preview-gallery/preview-gallery.component';
+import {PreviewGalleryComponent} from './components/preview-gallery/preview-gallery.component';
+import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { PreviewGalleryComponent } from './components/preview-gallery/preview-ga
     EditItemComponent,
     BuildFormDataPipe,
     PreviewGalleryComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     CommonModule,
@@ -91,6 +93,7 @@ import { PreviewGalleryComponent } from './components/preview-gallery/preview-ga
     EditItemComponent,
     PreviewGalleryComponent,
     MaterialReusableTableComponent,
+    BreadcrumbsComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent

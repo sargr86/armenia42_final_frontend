@@ -1,0 +1,50 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+.breadcrumbs {
+  //margin-top: 30px;
+  .breadCrumbContainer:last-of-type {
+    background-color: $green;
+    border-radius:15px;
+    small {
+      color: $white;
+    }
+  }
+  .breadCrumbContainer {
+    display: inline-block;
+    .breadCrumb {
+      cursor: pointer;
+      padding: 0 4px;
+      display: block;
+      text-transform: capitalize;
+      color: $dark_gray;
+      float: left;
+    }
+    .breadCrumb.unavailable{
+      background-color: $red;
+      cursor: default;
+      color:$white;
+      border-radius: 13px;
+    }
+    .breadCrumb:hover{
+      color:$white;
+      border-radius: 13px;
+    }
+    .breadCrumb:hover:not(:last-child):not(.unavailable){
+      background-color: $yellow;
+    }
+
+    .path-arrow {
+      font-size: 12px;
+      color: $dark_gray;
+      margin: 3px 10px 0;
+      display: block;
+      float: right;
+    }
+  }
+}
+.not-auth{
+  small.breadCrumb,.path-arrow{
+    color:$white!important;
+  }
+}

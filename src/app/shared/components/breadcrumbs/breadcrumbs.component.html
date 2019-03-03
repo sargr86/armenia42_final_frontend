@@ -1,0 +1,8 @@
+<ul class="breadcrumbs {{_auth.loggedIn()?'auth':'not-auth'}}" >
+  <li class="breadCrumbContainer" *ngFor="let b of breadCrumbs;let i = index">
+    <small class="breadCrumb" (click)="goToPath(b['link'])"
+           (mouseenter) ="mouseEnter(i) "  (mouseleave) ="mouseLeave(i)"
+           [class.unavailable]="checkAvailability(b['link'])">{{b['name']|replaceAll}}</small>
+    <i class="fas fa-arrow-{{getHoverValue(i)}} path-arrow" [class.backward]="hovered" *ngIf="i!=breadCrumbs.length -1"></i>
+  </li>
+</ul>

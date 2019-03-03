@@ -12,6 +12,12 @@
 
     </div>
 
+    <!--Breadcrumbs or placeholder of them-->
+    <div class="breadcrumbs">
+      <breadcrumbs [breadCrumbs]="breadCrumbs" class="breadCrumbs"></breadcrumbs>
+      <!--<div class="breadcrumbsPlaceholder" *ngIf="router.url.includes('countries')"></div>-->
+    </div>
+
     <div class="rightGroup">
 
       <!-- Navigates to countries page-->
@@ -49,14 +55,22 @@
     </div>
 
 
+    <!--Breadcrumbs or placeholder of them-->
+    <div class="breadcrumbs">
+      <breadcrumbs [breadCrumbs]="breadCrumbs" class="breadCrumbs"></breadcrumbs>
+      <!--<div class="breadcrumbsPlaceholder" *ngIf="router.url.includes('countries')"></div>-->
+    </div>
+
     <div class="rightGroup">
 
       <form [formGroup]="navForm">
 
-        <button (click)="changeImgsViewMode('list')" class="viewMode" [class.selected]="viewMode==='list'" *ngIf="storyPage">
+        <button (click)="changeImgsViewMode('list')" class="viewMode" [class.selected]="viewMode==='list'"
+                *ngIf="storyPage">
           <mat-icon>view_list</mat-icon>
         </button>
-        <button (click)="changeImgsViewMode('gallery')" class="viewMode" [class.selected]="viewMode==='gallery'" *ngIf="storyPage">
+        <button (click)="changeImgsViewMode('gallery')" class="viewMode" [class.selected]="viewMode==='gallery'"
+                *ngIf="storyPage">
           <mat-icon>compare_arrows</mat-icon>
         </button>
 

@@ -6,7 +6,9 @@ nav {
   margin: auto;
   padding: 8px;
   .leftGroup{
-    width: 50%;
+    float: left;
+  }
+  .breadcrumbs{
     float: left;
   }
   .rightGroup{
@@ -24,7 +26,9 @@ nav {
   .logout {
     float: right;
   }
-  .auth {
+  .auth,.not-auth {
+    display: flex;
+    justify-content: space-between;
     overflow: hidden;
   }
   .not-auth{
