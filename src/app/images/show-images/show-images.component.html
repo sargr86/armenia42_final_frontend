@@ -1,15 +1,15 @@
-<mat-card>
+<mat-card [class.auth]="!_auth.loggedIn()">
   <div class="storyContainer">
     <div class="galleryContainer" *ngIf="galleryImages && viewMode=='gallery'">
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
     </div>
 
     <!-- Images list for authenticated users -->
-    <ul class="images" *ngIf="images && viewMode=='list' && _auth.loggedIn()">
-      <ng-container *ngFor="let i of images">
+    <ul class="images" *ngIf="galleryImages && viewMode=='list' && _auth.loggedIn()">
+      <ng-container *ngFor="let i of galleryImages">
         <li class="image">
           <div class="imageContainer"
-               [style.background-image]="i['small']|getImgUrl:('others/'+routeData['story']['folder']):true">
+               [style.background-image]="getImgUrl(i['small'])">
             <ng-container class="buttonsContainer" *ngIf="_auth.loggedIn()">
               <button (click)="editImageInfo(i.id)" class="editStory">
                 <i class="fas fa-edit"></i>
@@ -31,12 +31,12 @@
     </ul>
 
 
-    <div *ngIf="!_auth.loggedIn() && story">
-      <h3 class="storyTitle">{{story['name_'+auth.lang]}}</h3>
+    <div *ngIf="galleryImages">
+      <h3 class="storyTitle">{{routeData['name_'+lang]}}</h3>
 
-      <!--<preview-gallery [galleryImages]="galleryImages"></preview-gallery>-->
+      <preview-gallery [galleryImages]="galleryImages"></preview-gallery>
 
-      <p class="storyDesc">{{story['description_'+auth.lang]}}</p>
+      <p class="storyDesc">{{routeData['description_'+lang]}}</p>
     </div>
   </div>
 </mat-card>

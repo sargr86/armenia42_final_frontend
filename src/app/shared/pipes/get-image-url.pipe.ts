@@ -34,6 +34,7 @@ export class GetImageUrlPipe implements PipeTransform {
     if (background) {
       url = 'url("' + UPLOADS_FOLDER + folder + '/' + name + '")';
       url = this.replace.transform(url, false);
+      console.log(url)
       return this.sanitizer.bypassSecurityTrustStyle(url);
     } else {
       url = UPLOADS_FOLDER + folder + '/' + name;

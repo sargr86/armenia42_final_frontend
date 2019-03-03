@@ -1,0 +1,18 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+#galleries{
+  text-align: center;
+  .launchSlideshow{
+    @include noBgButton;
+    opacity: 0.5;
+    color: $white;
+    border-radius: 40px;
+    i {
+      font-size: 40px;
+    }
+    i:hover {
+      color: $green;
+    }
+  }
+}

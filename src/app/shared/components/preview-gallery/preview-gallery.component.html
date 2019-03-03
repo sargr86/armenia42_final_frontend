@@ -1,0 +1,13 @@
+<div id="galleries">
+
+  <div class="galleryControls">
+    <button class="launchSlideshow" (click)="openPreview(onlyPreviewGallery)"
+            *ngIf="galleryImages && galleryImages.length > 0">
+      <i class="fa fa-chevron-circle-up"></i>
+    </button>
+  </div>
+
+  <div class="galleryContainer" *ngIf="galleryImages">
+    <ngx-gallery [options]="prevGalleryOptions" [images]="galleryImages" #onlyPreviewGallery></ngx-gallery>
+  </div>
+</div>

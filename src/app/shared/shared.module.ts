@@ -30,6 +30,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InfoBoxComponent} from './components/info-box/info-box.component';
 import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {LanguagesComponent} from './components/languages/languages.component';
+import { PreviewGalleryComponent } from './components/preview-gallery/preview-gallery.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {LanguagesComponent} from './components/languages/languages.component';
     BuildFolderUrlPipe,
     EditItemComponent,
     BuildFormDataPipe,
+    PreviewGalleryComponent,
   ],
   imports: [
     CommonModule,
@@ -87,6 +89,7 @@ import {LanguagesComponent} from './components/languages/languages.component';
     LanguagesComponent,
     ShowItemsComponent,
     EditItemComponent,
+    PreviewGalleryComponent,
     MaterialReusableTableComponent,
   ],
   entryComponents: [
