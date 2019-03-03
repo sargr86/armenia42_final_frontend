@@ -5,6 +5,14 @@ nav {
   width: 85vw;
   margin: auto;
   padding: 8px;
+  .leftGroup{
+    width: 50%;
+    float: left;
+  }
+  .rightGroup{
+    float: right;
+    display: flex;
+  }
   button{
     @include iconBtn;
     margin-left:10px;
@@ -25,13 +33,7 @@ nav {
     button{
       color:$white;
     }
-    .leftGroup{
-      width: 50%;
-      float: left;
-    }
-    .rightGroup{
-      float: right;
-    }
+
   }
 }
 

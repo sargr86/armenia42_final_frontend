@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {ActivationEnd, NavigationEnd, Router} from '@angular/router';
 import {SubjectService} from '../../shared/services/subject.service';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {AuthService} from '../../shared/services/auth.service';
 import {Subscription} from 'rxjs/internal/Subscription';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'nav-bar',
@@ -14,12 +15,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   lang: string = this.getLang.transform();
   routeSubscription: Subscription;
   pageTitle: string;
+  navForm: FormGroup;
+  viewMode = 'list';
+  storyPage = false;
 
   constructor(
     public router: Router,
     public  _auth: AuthService,
     private subject: SubjectService,
     private getLang: GetLangPipe,
+    private _fb: FormBuilder
   ) {
 
     // Getting current title from title/subject service
@@ -30,13 +35,18 @@ export class NavBarComponent implements OnInit, OnDestroy {
     // Getting system current language if changed by language component
     this.subject.getLanguage().subscribe(lang => {
       this.lang = lang;
-    })
+    });
+
+    this.navForm = this._fb.group({
+      viewMode: this.viewMode,
+      lang: this.lang
+    });
   }
 
   ngOnInit() {
     this.routeSubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-
+      if (event instanceof ActivationEnd) {
+        this.storyPage = 'story' in event.snapshot.params;
       }
     });
   }
@@ -64,6 +74,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
   get showSettings() {
     return !(/login|profile|register/.test(this.router.url));
   }
+
+  /**
+   * Changes images view mode in the selected story
+   */
+  changeImgsViewMode(mode) {
+    this.viewMode = mode;
+    this.navForm.controls.viewMode.setValue(mode);
+    // this.auth.slideshow = this.viewMode == 'gallery';
+    this.subject.setNavForm(this.navForm.value);
+  }
+
 
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();

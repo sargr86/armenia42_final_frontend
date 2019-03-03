@@ -3,10 +3,10 @@ import {ImagesService} from '../../shared/services/images.service';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {SubjectService} from '../../shared/services/subject.service';
-import {Observable} from 'rxjs/internal/Observable';
 import {Image} from '../../shared/models/Image';
 import {AuthService} from '../../shared/services/auth.service';
 import {GetStoryImageUrlPipe} from '../../shared/pipes/get-story-image-url.pipe';
+import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 
 @Component({
   selector: 'app-show-images',
@@ -41,6 +41,11 @@ export class ShowImagesComponent implements OnInit {
         this.lang = lang;
         this.getImages(dt, lang);
       });
+      this._subject.getNavForm().subscribe(d => {
+        this.viewMode = d.viewMode;
+        this.getImages(dt, this.lang);
+      });
+
       this.getImages(dt, this.lang);
     });
 
@@ -54,9 +59,11 @@ export class ShowImagesComponent implements OnInit {
   getImages(dt, lang) {
     const params = {story_id: dt.story.id, lang: lang};
     this._images.get(params).subscribe(d => {
-      this.images = d;
+
       if (this.viewMode === 'gallery') {
         this.prepareGalery(d);
+      }  else {
+        this.images = d;
       }
 
     });
@@ -88,21 +95,15 @@ export class ShowImagesComponent implements OnInit {
       {'breakpoint': 300, 'width': '100%', 'height': '200px', 'thumbnailsColumns': 2},
 
     ];
-    console.log(this.routeData)
-
 
     // Preparing gallery images data
     if (dt) {
       dt.map(img => {
-        img.big = this.routeData['story']['folder'] + img['big'];
-        img.medium = this.routeData['story']['folder'] + img['medium'];
-        img.small = this.routeData['story']['folder'] + img['small'];
-        // img.medium = this.getStoryImgUrl.transform(this.router.url, img['name'], this.routeData);
-        // img.small = this.getStoryImgUrl.transform(this.router.url, img['name'], this.routeData);
-        // img.description = img['description_' + this.auth.lang];
-
+        img.big = OTHER_UPLOADS_FOLDER + this.routeData['story']['folder'] + '/' + img['big'];
+        img.medium = OTHER_UPLOADS_FOLDER + this.routeData['story']['folder'] + '/' + img['medium'];
+        img.small = OTHER_UPLOADS_FOLDER + this.routeData['story']['folder'] + '/' + img['small'];
       });
-      this.galleryImages = dt.images;
+      this.galleryImages = dt;
     }
   }
 

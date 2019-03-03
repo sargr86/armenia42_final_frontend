@@ -8,7 +8,7 @@ import {MaterialModule} from './modules/material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {DropzoneModule} from 'ngx-dropzone-wrapper';
 import {NgSelectModule} from '@ng-select/ng-select';
-
+import {NgxGalleryModule} from 'ngx-gallery';
 
 // Pipes
 import {GetLangPipe} from './pipes/get-lang.pipe';
@@ -60,7 +60,8 @@ import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
     MaterialModule,
     TranslateModule,
     DropzoneModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxGalleryModule
   ],
   providers: [
     GetLangPipe,
@@ -82,6 +83,7 @@ import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
     TranslateModule,
     DropzoneModule,
     NgSelectModule,
+    NgxGalleryModule,
     GetLangPipe,
     GetImageUrlPipe,
     InfoBoxComponent,
