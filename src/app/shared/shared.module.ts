@@ -30,7 +30,6 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {InfoBoxComponent} from './components/info-box/info-box.component';
 import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {LanguagesComponent} from './components/languages/languages.component';
-import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,6 @@ import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
     BuildFolderUrlPipe,
     EditItemComponent,
     BuildFormDataPipe,
-    GetStoryImageUrlPipe
   ],
   imports: [
     CommonModule,
@@ -74,7 +72,6 @@ import { GetStoryImageUrlPipe } from './pipes/get-story-image-url.pipe';
     GenerateChildItemUrlPipe,
     BuildFolderUrlPipe,
     BuildFormDataPipe,
-    GetStoryImageUrlPipe
   ],
   exports: [
     FormsModule,

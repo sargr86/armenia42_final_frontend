@@ -1,7 +1,9 @@
-<ul class="sidebarLinks">
-    <li>
-        <button>
-            <i class="fa fa-ban"></i>
-        </button>
+<div class="catContainer">
+
+  <ul class="categories">
+    <li *ngFor="let cat of categories|async;let cIndex = index">
+      <i class="fas fa-{{cat['icon']}}" [class.active]="getActiveCategory(cat)"
+         [matTooltip]="cat['label']" (click)="getCategorizedItems(cat)"></i>
     </li>
-</ul>
+  </ul>
+</div>

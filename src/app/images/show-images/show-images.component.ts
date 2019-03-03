@@ -5,7 +5,6 @@ import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {SubjectService} from '../../shared/services/subject.service';
 import {Image} from '../../shared/models/Image';
 import {AuthService} from '../../shared/services/auth.service';
-import {GetStoryImageUrlPipe} from '../../shared/pipes/get-story-image-url.pipe';
 import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 
 @Component({
@@ -29,7 +28,6 @@ export class ShowImagesComponent implements OnInit {
     private getLang: GetLangPipe,
     private _subject: SubjectService,
     public _auth: AuthService,
-    private getStoryImgUrl: GetStoryImageUrlPipe
   ) {
 
   }
