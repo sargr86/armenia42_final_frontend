@@ -5,8 +5,9 @@ import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {SubjectService} from '../../shared/services/subject.service';
 import {Image} from '../../shared/models/Image';
 import {AuthService} from '../../shared/services/auth.service';
-import {OTHER_UPLOADS_FOLDER, UPLOADS_FOLDER} from '../../shared/constants/settings';
+import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 import {DomSanitizer} from '@angular/platform-browser';
+import {NgxGalleryImage, NgxGalleryAction} from 'ngx-gallery';
 
 @Component({
   selector: 'app-show-images',
@@ -20,7 +21,7 @@ export class ShowImagesComponent implements OnInit {
   routeData: Data;
 
   galleryOptions;
-  galleryImages;
+  galleryImages: NgxGalleryImage[];
 
   constructor(
     private _images: ImagesService,
@@ -59,14 +60,7 @@ export class ShowImagesComponent implements OnInit {
   getImages(dt, lang) {
     const params = {story_id: dt.story.id, lang: lang};
     this._images.get(params).subscribe(data => {
-
-      // if (this.viewMode === 'gallery') {
-      //
-      // }  else {
       this.prepareGalery(data);
-
-      // }
-
     });
   }
 

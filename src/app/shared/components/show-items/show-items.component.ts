@@ -71,14 +71,17 @@ export class ShowItemsComponent implements OnInit {
 
   /**
    * Gets child item url
-   * @param item
-   * @returns {any}
+   * @param item current item
    */
   getUrl(item) {
     return this.getChildUrl.transform(item, this.storiesPage, this.router.url);
   }
 
-  getEditUrl(item) {
+  /**
+   * Gets edit item url
+   * @param item current item
+   */
+  getEditUrl(item): string {
     return `${this.getUrl(item)}/edit`;
   }
 
