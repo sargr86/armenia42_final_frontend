@@ -1,3 +1,4 @@
+/* User profile image drop zone */
 .profileImgDropzone {
   width: 350px;
   height: 350px;
@@ -21,6 +22,7 @@
   }
 }
 
+/* Flag/ logo drop zone */
 .flagDropzone {
   width: 350px;
   height: 209px;
@@ -48,13 +50,13 @@
   }
 }
 
+/* Story images drop zone */
 .storyDropzone{
   width: 350px;
   height: 450px;
   overflow: hidden;
   @include dropZone;
-
-  .dz-message{
-    overflow: hidden!important;
+  .dz-wrapper,.dz-message {
+    overflow: hidden !important;
   }
 }

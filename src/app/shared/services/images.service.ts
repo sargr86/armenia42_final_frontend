@@ -21,4 +21,12 @@ export class ImagesService {
   get(params): Observable<Image[]> {
     return this.httpClient.get<Image[]>(`${API_HOST}images/get`, {params: params});
   }
+
+  /**
+   * Adds images to the selected story
+   * @param params images parameters
+   */
+  add(params): Observable<Image[]> {
+    return this.httpClient.post<Image[]>(`${API_HOST}images/add`, params);
+  }
 }

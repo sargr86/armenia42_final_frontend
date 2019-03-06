@@ -1,4 +1,4 @@
-export class Story {
+export interface Story {
   id: number;
   cover_id?: number;
   name_en?: string;
@@ -7,4 +7,5 @@ export class Story {
   description_en?: string;
   description_ru?: string;
   description_hy?: string;
+  folder?:string;
 }

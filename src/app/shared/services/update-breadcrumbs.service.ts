@@ -26,9 +26,7 @@ export class UpdateBreadcrumbsService {
    */
   do(data, lang = 'en'): Breadcrumb[] {
     this.breadCrumbs = [];
-
     this.build(data, '', lang);
-    console.log(this.breadCrumbs)
     return this.breadCrumbs;
   }
 

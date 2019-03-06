@@ -98,6 +98,7 @@ export class EditItemComponent implements OnInit {
     this.getRouteData();
 
     if (this.item === 'location') {
+
       // Setting parameters to send
       const params = {
         lang: this.lang,

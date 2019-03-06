@@ -52,7 +52,7 @@ export class BuildFormDataPipe implements PipeTransform {
     // If drop zone file exists saving it to formData object as well
     if (dropFileExist) {
 
-
+      // On story page adding user as well
       if (item === 'story') {
         formData.append('user_id', this._auth.userData.id.toString());
 

@@ -1,0 +1,16 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
+
+.dropzoneContainer {
+  margin: auto;
+  width: 30%;
+}
+
+.actions {
+  padding: 10px;
+  .addImages {
+    @include namedBtn;
+    background-color: $green;
+    margin:auto;
+  }
+}

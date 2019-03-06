@@ -1,3 +1,25 @@
-<p>
-  add-images works!
-</p>
+<mat-card>
+
+  <!-- Images terminal title -->
+  <h2 class="terminalTitle">
+    <i class="fa fa-{{titleIcon}}"></i>
+    <span translate>{{pageTitle}}</span>
+  </h2>
+
+  <form [formGroup]="imagesForm">
+
+    <!-- Image drop zone -->
+    <div class="dropzoneContainer" *ngIf="!flag">
+      <dropzone [config]="dropzoneConfig"
+                [message]="dropzoneMsg|translate"
+                id="dropzone"
+                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
+                class="storyDropzone"></dropzone>
+    </div>
+
+    <div class="actions">
+      <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+      <button class="addImages" (click)="addImages()">{{'add'|translate}}</button>
+    </div>
+  </form>
+</mat-card>
