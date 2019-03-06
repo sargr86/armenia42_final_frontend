@@ -11,6 +11,9 @@ const routes: Routes = [
   {
     path: '',
     component: ShowDirectionsComponent,
+    resolve: {
+      province: ProvinceResolverService
+    },
     data: {},
   },
   {

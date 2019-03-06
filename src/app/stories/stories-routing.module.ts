@@ -9,7 +9,10 @@ const routes: Routes = [
   {
     path: '',
     component: ShowStoriesComponent,
-    data: {}
+    data: {},
+    resolve:{
+      location:LocationResolverService
+    }
   },
   {
     path: 'add',

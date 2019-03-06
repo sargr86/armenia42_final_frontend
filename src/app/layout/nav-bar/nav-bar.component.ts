@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivationEnd, Data, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, ActivationEnd, Data, NavigationEnd, Router} from '@angular/router';
 import {SubjectService} from '../../shared/services/subject.service';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {AuthService} from '../../shared/services/auth.service';
 import {Subscription} from 'rxjs/internal/Subscription';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {UpdateBreadcrumbsService} from '../../shared/services/update-breadcrumbs.service';
 
 @Component({
   selector: 'nav-bar',
@@ -20,7 +21,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   viewMode = 'list';
   storyPage = false;
 
-  breadCrumbParts = ['country', 'province', 'direction', 'location', 'story'];
+
   breadCrumbs = [];
 
   constructor(
@@ -28,17 +29,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
     public  _auth: AuthService,
     private subject: SubjectService,
     private getLang: GetLangPipe,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private updateBreadCrumbs: UpdateBreadcrumbsService,
+    private route: ActivatedRoute
   ) {
 
     // Getting current title from title/subject service
     this.subject.getPageTitle().subscribe(title => {
       this.pageTitle = title;
-    });
-
-    // Getting system current language if changed by language component
-    this.subject.getLanguage().subscribe(lang => {
-      this.lang = lang;
     });
 
     this.navForm = this._fb.group({
@@ -47,22 +45,32 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnInit() {
-    let counter = 0;
+
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof ActivationEnd) {
-        ++counter;
-        let data = event.snapshot.data;
-        if (counter < 2) this.routeData = data;
-        this.storyPage = 'story' in event.snapshot.params;
-        this.updateBreadCrumbs(data, this.router.url, this.lang);
+        const data = event.snapshot.data;
+        if (Object.entries(data).length !== 0) {
+          // Getting system current language if changed by language component
+          this.subject.getLanguage().subscribe(lang => {
+            this.lang = lang;
+            this.breadCrumbs = this.updateBreadCrumbs.do(data, this.lang);
+          });
+
+
+          this.routeData = data;
+          this.breadCrumbs = this.updateBreadCrumbs.do(data, this.lang);
+          this.storyPage = 'story' in event.snapshot.params;
+        }
       }
+
     });
   }
 
   /**
    * Gets url for add-*item button
-   * @returns {string}
+   * @returns add-*item router url
    */
   getAddBtnUrl() {
     return `${this.router.url}/add`;
@@ -73,14 +81,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
    * @returns {any}
    */
   get addBtnShow() {
-    return !(/profile|users|edit|add|save/.test(this.router.url)) && this.pageTitle != 'admin_dashboard' && this.pageTitle !== undefined;
+    return !(/profile|users|edit|add|save/.test(this.router.url)) && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== undefined;
   }
 
   /**
-   *
-   * @returns {boolean}
+   * Shows settings button
+   * @returns show settings getter
    */
-  get showSettings() {
+  get showSettings(): boolean {
     return !(/login|profile|register/.test(this.router.url));
   }
 
@@ -90,45 +98,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   changeImgsViewMode(mode) {
     this.viewMode = mode;
     this.navForm.controls.viewMode.setValue(mode);
-    // this.auth.slideshow = this.viewMode == 'gallery';
     this.subject.setNavForm(this.navForm.value);
-  }
-
-
-  updateBreadCrumbs(data, url, lang = 'en') {
-    this.breadCrumbs = [];
-    if (this.breadCrumbs.length === 0) {
-      if (lang === 'en') {
-        let splittedUrl = url.split('/');
-        splittedUrl.map(u => {
-          if (!isNaN(parseFloat(u)) && isFinite(u)) {
-            if (this.routeData.story.id == u) {
-              u = this.routeData.story['name_en'];
-            }
-          }
-          // else {
-          u = u.replace('%20', ' ');
-          u = u.replace('_', ' ');
-
-          if (u) {
-            this.breadCrumbs.push({name: u, link: u.toLowerCase()});
-          }
-          // }
-
-        });
-      } else {
-        this.breadCrumbParts.map(p => {
-          if (data.hasOwnProperty(p) && data[p]) {
-            this.breadCrumbs.push({
-              name: data[p]['name_' + lang],
-              link: data[p]['name_en'].toLowerCase()
-            });
-          }
-        });
-      }
-
-    }
-
   }
 
 

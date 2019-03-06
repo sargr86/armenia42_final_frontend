@@ -12,6 +12,9 @@ const routes: Routes = [
     path: '',
     component: ShowProvincesComponent,
     data: {},
+    resolve: {
+      country: CountriesResolver
+    },
   },
   {
     path: 'add',

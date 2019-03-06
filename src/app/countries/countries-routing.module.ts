@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ShowCountriesComponent,
     data: {
       title: 'countries'
-    }
+    },
   },
   {
     path: 'add',

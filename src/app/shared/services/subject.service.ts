@@ -10,6 +10,7 @@ export class SubjectService {
   public navForm = new Subject<any>();
   public tableData = new Subject<any>();
   public pageTitle = new Subject<string>();
+  public rightSidebar = new Subject<any>()
 
   constructor() {
   }
@@ -72,6 +73,14 @@ export class SubjectService {
   // Gets nav calendar form values as observable
   getNavForm(): Observable<any> {
     return this.navForm.asObservable();
+  }
+
+  setRightSidebar(value) {
+    this.rightSidebar.next(value);
+  }
+
+  getRightSidebar(): Observable<any> {
+    return this.rightSidebar.asObservable();
   }
 
 }

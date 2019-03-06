@@ -12,7 +12,10 @@ const routes: Routes = [
     data: {
       item: 'locations',
       title: 'location_terminal'
-    }
+    },
+    resolve: {
+      direction: DirectionResolverService
+    },
   },
   {
     path: 'add',
