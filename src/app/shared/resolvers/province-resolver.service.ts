@@ -19,6 +19,7 @@ export class ProvinceResolverService {
   resolve(route: ActivatedRouteSnapshot) {
     const params = route.params;
     const province = params.province ? this.replace.transform(params.province) : '';
-    return this.provinces.getByName({name_en: province, lang: this.getLang.transform()});
+    const country = params.country ? this.replace.transform(params.country) : '';
+    return this.provinces.getByName({province: province, country: country, lang: this.getLang.transform()});
   }
 }

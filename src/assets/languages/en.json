@@ -35,6 +35,7 @@
   "please_correct_folder_name": "Please write the name carefully as this can not be updated later on",
   "add_province": "Add a new province/ state",
   "edit_province": "Edit the province/ state",
+  "edit":"Edit",
   "province_name_required_error": "Province name is required",
   "province_add_success": "Province info has been added successfully",
   "province_update_success": "Province info has been updated successfully",
@@ -121,6 +122,8 @@
   "story_terminal": "Story terminal",
   "country_name_required_error": "Country name is required",
   "country_exists_error": "This country already exists",
+  "province_exists_error":"The country already has a province with such name",
+  "direction_exists_error":"The province already has a direction with such name",
   "confirm": "Confirm",
   "cancel": "Cancel",
   "please_confirm": "Please confirm this action.",
@@ -135,5 +138,7 @@
   "direction_not_found_error":"The direction is not found",
   "location_not_found_error":"The location is not found",
   "location_dropzone_msg": "Click or drop here the logo image to add",
-  "story_imgs_further_uploads":"Further uploads are possible on the images page"
+  "story_imgs_further_uploads":"Further uploads are possible on the images page",
+  "directory_not_exist_error":"The folder isn't found, please try to remove without the folder",
+  "location_name_unique":"Please write the full name of the location, as it must be unique."
 }

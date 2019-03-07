@@ -5,8 +5,13 @@ export default class FormInfoBoxData {
     let res;
 
     if (item !== 'story') {
+      const action = edit ? 'itemEditing' : 'itemAdding';
+
       // Getting info box data, removing first item, because it relates only to English version of the system
-      res = infoBox[edit ? 'itemEditing' : 'itemAdding'];
+      res = infoBox[action];
+      if (item === 'location') {
+        res.unshift('location_name_unique');
+      }
 
     } else {
       res = infoBox[edit ? 'storyEditing' : 'storyAdding'];

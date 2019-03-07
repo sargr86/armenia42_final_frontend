@@ -20,8 +20,8 @@ export class LocationResolverService {
     const params = route.params;
     const location = params.location ? this.replace.transform(params.location) : '';
     return this.locations.getByName({
-      name_en: location,
-      parent_name: params.direction,
+      location: location,
+      direction: params.direction,
       lang: this.getLang.transform()
     });
   }

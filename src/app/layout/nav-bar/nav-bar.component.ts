@@ -55,12 +55,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
           // Getting system current language if changed by language component
           this.subject.getLanguage().subscribe(lang => {
             this.lang = lang;
-            this.breadCrumbs = this.updateBreadCrumbs.do(data, this.lang);
+            this.breadCrumbs = this.updateBreadCrumbs.do(data,this.router.url, this.lang);
           });
 
 
           this.routeData = data;
-          this.breadCrumbs = this.updateBreadCrumbs.do(data, this.lang);
+          this.breadCrumbs = this.updateBreadCrumbs.do(data,this.router.url, this.lang);
           this.storyPage = 'story' in event.snapshot.params;
         }
       }

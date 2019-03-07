@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BREADCRUMB_PARTS} from '../constants/settings';
+import {BREADCRUMB_PARTS, DEFAULT_ACTIONS} from '../constants/settings';
 import {Breadcrumb} from '../models/Breadcrumb';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
@@ -11,6 +11,7 @@ export class UpdateBreadcrumbsService {
 
   breadCrumbs: Breadcrumb[] = [];
   result = [];
+  url;
 
   constructor(
     private router: Router,
@@ -22,10 +23,12 @@ export class UpdateBreadcrumbsService {
   /**
    * Manages breadcrumbs building
    * @param data route data
+   * @param url router url
    * @param lang current language
    */
-  do(data, lang = 'en'): Breadcrumb[] {
+  do(data, url, lang = 'en'): Breadcrumb[] {
     this.breadCrumbs = [];
+    this.url = url;
     this.build(data, '', lang);
     return this.breadCrumbs;
   }
@@ -62,6 +65,17 @@ export class UpdateBreadcrumbsService {
       this.build(data, keys[0], lang);
     } else {
       this.breadCrumbs = this.breadCrumbs.reverse();
+
+      // Adding one of the default actions to the breadcrumbs, if router url contains it
+      DEFAULT_ACTIONS.map(action => {
+        if (this.url.includes(action)) {
+          this.breadCrumbs.push({
+            name: this.translate.instant(action),
+            link: action
+          });
+        }
+      });
+
     }
   }
 

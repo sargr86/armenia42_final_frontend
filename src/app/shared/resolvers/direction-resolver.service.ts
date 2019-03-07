@@ -19,9 +19,10 @@ export class DirectionResolverService {
   resolve(route: ActivatedRouteSnapshot) {
     const params = route.params;
     const direction = params.direction ? this.replace.transform(params.direction) : '';
+    const province = params.province ? this.replace.transform(params.province) : '';
     return this.directions.getByName({
-      name_en: direction,
-      parent_name: params.province,
+      direction: direction,
+      province: province,
       lang: this.getLang.transform()
     });
   }

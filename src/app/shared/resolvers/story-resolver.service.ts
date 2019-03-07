@@ -20,8 +20,8 @@ export class StoryResolverService {
     const params = route.params;
     const story = params.story ? this.replace.transform(params.story) : '';
     return this.stories.getById({
-      id: story,
-      parent_name: params.location,
+      story: story,
+      location: params.location,
       lang: this.getLang.transform()
     });
   }
