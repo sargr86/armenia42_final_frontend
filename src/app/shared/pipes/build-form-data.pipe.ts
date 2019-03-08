@@ -58,7 +58,6 @@ export class BuildFormDataPipe implements PipeTransform {
 
       // On story page adding user as well
       if (item === 'story') {
-        formData.append('user_id', this._auth.userData.id.toString());
 
         dropzoneFiles.map(f => {
           const file = f[0];

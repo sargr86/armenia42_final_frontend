@@ -51,16 +51,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof ActivationEnd) {
         const data = event.snapshot.data;
+        const url = this.router.url;
         if (Object.entries(data).length !== 0) {
           // Getting system current language if changed by language component
           this.subject.getLanguage().subscribe(lang => {
             this.lang = lang;
-            this.breadCrumbs = this.updateBreadCrumbs.do(data,this.router.url, this.lang);
+            this.breadCrumbs = this.updateBreadCrumbs.do(data, url, lang);
           });
 
 
           this.routeData = data;
-          this.breadCrumbs = this.updateBreadCrumbs.do(data,this.router.url, this.lang);
+          this.breadCrumbs = this.updateBreadCrumbs.do(data, url, this.lang);
           this.storyPage = 'story' in event.snapshot.params;
         }
       }

@@ -3,11 +3,16 @@
 
     <div class="{{_auth.loggedIn()?'squares':'circles'}}">
 
+      <ng-container *ngIf="items.length===0;else itemsList">
+        <small class="no_items_found">{{((parent?'no_'+child+'_found':'no_countries_found'))|translate}}</small>
+      </ng-container>
+      <ng-template #itemsList>
+
         <!-- Selected items list container -->
         <div class="listContainer">
 
             <ul>
-                <ng-container *ngFor="let item of items|async;let i = index">
+                <ng-container *ngFor="let item of items;let i = index">
                     <li class="item {{child}}">
 
                         <!-- Author names for stories in authenticated mode -->
@@ -45,5 +50,6 @@
 
 
         </div>
+      </ng-template>
     </div>
 </mat-card>

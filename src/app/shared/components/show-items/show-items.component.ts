@@ -25,7 +25,7 @@ export class ShowItemsComponent implements OnInit {
   @Input() child: string;
 
   lang: string = this.getLang.transform();
-  items: Observable<any>;
+  items = [];
   storiesPage: boolean;
 
   constructor(
@@ -64,7 +64,9 @@ export class ShowItemsComponent implements OnInit {
       const splitterUrl = this.router.url.split('/');
 
       const params = {lang: this.lang, parent_name: splitterUrl[splitterUrl.length - 1]};
-      this.items = this[`_${this.child}`].get(params);
+      this[`_${this.child}`].get(params).subscribe(dt => {
+        this.items = dt;
+      });
     }
 
   }

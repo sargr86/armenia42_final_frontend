@@ -1,90 +1,98 @@
 <mat-card>
 
-  <!-- Item  form title-->
-  <h2 class="terminalTitle">
-    <i class="fa fa-{{titleIcon}}"></i>
-    <span translate>{{pageTitle}}</span>
-  </h2>
+  <div class="terminalContainer" >
 
 
-  <form [formGroup]="itemForm">
-    <div class="infoContainer">
+    <!-- Item  form title-->
+    <h2 class="terminalTitle">
+      <i class="fa fa-{{titleIcon}}"></i>
+      <span translate>{{pageTitle}}</span>
+    </h2>
 
-      <!-- Item name field* with its error handling -->
-      <mat-form-field>
-        <input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">
-        <mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i></mat-hint>
-      </mat-form-field>
-      <div *ngIf="itemName.errors && (!itemName.pristine || itemName.touched)" class="error">
-        <div *ngIf="itemName.hasError('required')">{{item+'_name_required_error'|translate}}</div>
-        <div *ngIf="itemName.hasError('minlength')||itemName.hasError('maxlength')">
-          {{item+'_name_length_error'|translate}}
+    <form [formGroup]="itemForm" *ngIf="editCase && routeData[item]||!editCase;else itemNotFound">
+      <div class="infoContainer">
+
+        <!-- Item name field* with its error handling -->
+        <mat-form-field>
+          <input matInput [formControlName]="'name_'+lang" placeholder="{{'name'|translate}}">
+          <mat-hint *ngIf="!editCase"><i class="fa fa-globe"></i></mat-hint>
+        </mat-form-field>
+        <div *ngIf="itemName.errors && (!itemName.pristine || itemName.touched)" class="error">
+          <div *ngIf="itemName.hasError('required')">{{item+'_name_required_error'|translate}}</div>
+          <div *ngIf="itemName.hasError('minlength')||itemName.hasError('maxlength')">
+            {{item+'_name_length_error'|translate}}
+          </div>
         </div>
-      </div>
 
-      <!-- Location categories list -->
-      <ng-select [items]="categoriesList|async" [multiple]="true" *ngIf="item==='location'"
-                 [placeholder]="'categories'|translate" dropdownPosition="bottom" formControlName="category_ids">
-        <ng-template ng-option-tmp let-item="item">
-          <i class="fa fa-{{item.icon}}"></i>
-          {{item.label}}
-        </ng-template>
-      </ng-select>
+        <!-- Location categories list -->
+        <ng-select [items]="categoriesList|async" [multiple]="true" *ngIf="item==='location'"
+                   [placeholder]="'categories'|translate" dropdownPosition="bottom" formControlName="category_ids">
+          <ng-template ng-option-tmp let-item="item">
+            <i class="fa fa-{{item.icon}}"></i>
+            {{item.label}}
+          </ng-template>
+        </ng-select>
 
-      <!-- An item description field-->
-      <mat-form-field>
-        <mat-label>{{'description'|translate}}</mat-label>
-        <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
-                  [matAutosizeMinRows]="textAreaLimits.min"
-                  [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
-      </mat-form-field>
+        <!-- An item description field-->
+        <mat-form-field>
+          <mat-label>{{'description'|translate}}</mat-label>
+          <textarea matInput [formControlName]="'description_'+lang" matTextareaAutosize
+                    [matAutosizeMinRows]="textAreaLimits.min"
+                    [matAutosizeMaxRows]="textAreaLimits.max"></textarea>
+        </mat-form-field>
 
 
-      <!-- Save- and remove-direction actions-->
-      <div class="actions">
-        <div class="removeContainer" *ngIf="editCase">
-          <button (click)="remove()" class="removeItem">
-            <mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>
-            {{'remove'|translate}}
-          </button>
+        <!-- Save- and remove-direction actions-->
+        <div class="actions">
+          <div class="removeContainer" *ngIf="editCase">
+            <button (click)="remove()" class="removeItem">
+              <mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>
+              {{'remove'|translate}}
+            </button>
 
-          <!-- Remove-with-folder checkbox-->
-          <div class="checkFolder">
-            <input type="checkbox" id="folderCheck" formControlName="with_folder"
-                   [checked]="withFolder.value=='1'" (change)="changeWithFolderState($event)">
-            <label for="folderCheck">{{'with_folder'|translate}}</label>
+            <!-- Remove-with-folder checkbox-->
+            <div class="checkFolder">
+              <input type="checkbox" id="folderCheck" formControlName="with_folder"
+                     [checked]="withFolder.value=='1'" (change)="changeWithFolderState($event)">
+              <label for="folderCheck">{{'with_folder'|translate}}</label>
+            </div>
+
           </div>
 
+          <button (click)="save()" class="saveItem" [disabled]="itemForm.invalid">
+            <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+            <span>{{(editCase?'save':'add')|translate}}</span>
+          </button>
         </div>
-
-        <button (click)="save()" class="saveItem" [disabled]="itemForm.invalid">
-          <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
-          <span>{{(editCase?'save':'add')|translate}}</span>
-        </button>
       </div>
-    </div>
 
-    <!-- Info box recommendations -->
-    <info-box [elements]="infoBoxData"></info-box>
+      <!-- Info box recommendations -->
+      <info-box [elements]="infoBoxData"></info-box>
 
-    <!-- Image drop zone -->
-    <div class="dropzoneContainer" *ngIf="!flag && !notShownOnStoryEdit">
-      <dropzone [config]="dropzoneConfig"
-                [message]="dropzoneMsg|translate"
-                id="dropzone"
-                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
-                class="{{item==='story'?'storyDropzone':'flagDropzone'}}"></dropzone>
-    </div>
+      <!-- Image drop zone -->
+      <div class="dropzoneContainer" *ngIf="!flag && !notShownOnStoryEdit">
+        <dropzone [config]="dropzoneConfig"
+                  [message]="dropzoneMsg|translate"
+                  id="dropzone"
+                  (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
+                  class="{{item==='story'?'storyDropzone':'flagDropzone'}}"></dropzone>
+      </div>
 
-    <!-- Uploaded image zone -->
-    <div class="flagImg" *ngIf="flag && imageExists">
-      <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
-      <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
-    </div>
+      <!-- Uploaded image zone -->
+      <div class="flagImg" *ngIf="flag && imageExists">
+        <img [src]="flag|getImgUrl:folderUrl:false" (error)="imageExists = false">
+        <i class="fa fa-times-circle remove-flag" (click)="removeImage()"></i>
+      </div>
 
-    <div class="storyImgsUploadInfo" *ngIf="notShownOnStoryEdit">
-      <h4>{{'story_imgs_further_uploads'|translate}}</h4>
-    </div>
+      <div class="storyImgsUploadInfo" *ngIf="notShownOnStoryEdit">
+        <h4>{{'story_imgs_further_uploads'|translate}}</h4>
+      </div>
 
-  </form>
+    </form>
+  </div>
+
+  <ng-template #itemNotFound>
+    <small class="no_items_found">{{item+'_not_found_error'|translate}}</small>
+  </ng-template>
+
 </mat-card>

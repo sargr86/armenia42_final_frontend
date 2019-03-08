@@ -141,9 +141,13 @@ export class EditItemComponent implements OnInit {
       // Edit-item case
       if (this.editCase) {
         childData = data[this.item];
-        parentData = childData[this.parent];
-        childData['parent_name'] = parentData['name_en'];
-        childData['category_ids'] = childData['loc_categories'];
+
+        if (childData) {
+          parentData = childData[this.parent];
+          childData['parent_name'] = parentData['name_en'];
+          childData['category_ids'] = childData['loc_categories'];
+        }
+
         // Add-item case
       } else {
         parentData = data[this.parent];
@@ -154,11 +158,12 @@ export class EditItemComponent implements OnInit {
       childData = data[this.item];
     }
 
-    // Applying province or direction folder for add* or edit-direction cases
-    this.itemForm.patchValue(this.editCase ? childData : {
-      folder: this.parent ? parentData['folder'] : '',
-      parent_name: this.parent ? parentData['name_en'] : ''
-    });
+      // Applying province or direction folder for add* or edit-direction cases
+      this.itemForm.patchValue(this.editCase ? childData : {
+        folder: this.parent ? parentData['folder'] : '',
+        parent_name: this.parent ? parentData['name_en'] : ''
+      });
+
 
   }
 

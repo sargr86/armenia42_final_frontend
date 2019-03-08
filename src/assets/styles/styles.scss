@@ -62,3 +62,10 @@ ul {
   color: $green!important;
 }
 
+.no_items_found{
+  color:$silver;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
