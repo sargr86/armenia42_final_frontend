@@ -1,0 +1,44 @@
+<mat-card>
+
+  <form [formGroup]="editImageInfoForm">
+    <div class="info">
+      <mat-list class="infoList">
+        <mat-list-item>
+          <mat-form-field>
+            <mat-label>{{'description'|translate}}</mat-label>
+            <textarea matInput matTextareaAutosize [matAutosizeMinRows]="2" [matAutosizeMaxRows]="25"
+                      [formControlName]="'description_'+lang"></textarea>
+          </mat-form-field>
+
+        </mat-list-item>
+
+        <mat-list-item *ngIf="makeCover">
+          <ng-select [items]="coverItems" class="coverItems"
+                     dropdownPosition="up" formControlName="coverItem">
+          </ng-select>
+        </mat-list-item>
+        <mat-list-item>
+          <label for="translateDesc" [matTooltip]="'translate'|translate">
+            <i class="fas fa-globe translateSign" [class.green]="translateState"></i>
+          </label>
+          <label for="cover" [matTooltip]="'make_cover'|translate">
+            <button class="coverSign" (click)="coverItemToggle()" [class.yellowBg]="makeCover"
+                    [class.selectedBg]="image.cover">1
+            </button>
+          </label>
+          <label for="favorite" [matTooltip]="'make_fav'|translate">
+            <i class="fas fa-star favSign" [class.green]="favState" [class.selected]="image.fav"></i>
+          </label>
+          <input type="checkbox" formControlName="translate" id="translateDesc" [hidden]="true">
+          <input type="checkbox" formControlName="cover" id="cover" [hidden]="true">
+          <input type="checkbox" formControlName="favorite" id="favorite" [hidden]="true">
+        </mat-list-item>
+      </mat-list>
+
+      <button (click)="saveImageInfo()" class="saveImageInfo">{{'save'|translate}}</button>
+    </div>
+    <div class="image" [style.background-image]="image.folder|getImgUrl:'others':true">
+
+    </div>
+  </form>
+</mat-card>

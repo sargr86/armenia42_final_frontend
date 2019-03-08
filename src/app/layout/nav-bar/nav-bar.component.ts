@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
   pageTitle: string;
   navForm: FormGroup;
   viewMode = 'list';
-  storyPage = false;
 
 
   breadCrumbs = [];
@@ -52,6 +51,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
       if (event instanceof ActivationEnd) {
         const data = event.snapshot.data;
         const url = this.router.url;
+
+        // Resetting story images view mode
+        this.changeImgsViewMode('list');
+
         if (Object.entries(data).length !== 0) {
           // Getting system current language if changed by language component
           this.subject.getLanguage().subscribe(lang => {
@@ -62,7 +65,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
           this.routeData = data;
           this.breadCrumbs = this.updateBreadCrumbs.do(data, url, this.lang);
-          this.storyPage = 'story' in event.snapshot.params;
         }
       }
 

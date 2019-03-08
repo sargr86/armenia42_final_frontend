@@ -28,7 +28,7 @@ export class GetImageUrlPipe implements PipeTransform {
     if (path) {
       folder = path;
     }
-    if (!name || !path) {
+    if (!name) {
       return;
     }
     if (background) {

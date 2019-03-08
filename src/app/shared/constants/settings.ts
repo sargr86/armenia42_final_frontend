@@ -8,4 +8,4 @@ export const TEXTAREA_AUTOSIZE_MAX_ROWS = 10;
 export const API_HOST = environment.apiHost;
 export const UPLOADS_FOLDER = API_HOST + 'uploads/';
 export const OTHER_UPLOADS_FOLDER = UPLOADS_FOLDER + 'others/';
-export const BREADCRUMB_PARTS = ['country', 'province', 'direction', 'location', 'story'];
+export const BREADCRUMB_PARTS = ['country', 'province', 'direction', 'location', 'story','image'];

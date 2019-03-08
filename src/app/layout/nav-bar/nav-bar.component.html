@@ -66,11 +66,11 @@
       <form [formGroup]="navForm">
 
         <button (click)="changeImgsViewMode('list')" class="viewMode" [class.selected]="viewMode==='list'"
-                *ngIf="storyPage">
+                *ngIf="pageTitle=='story_images'">
           <mat-icon>view_list</mat-icon>
         </button>
         <button (click)="changeImgsViewMode('gallery')" class="viewMode" [class.selected]="viewMode==='gallery'"
-                *ngIf="storyPage">
+                *ngIf="pageTitle=='story_images'">
           <mat-icon>compare_arrows</mat-icon>
         </button>
 

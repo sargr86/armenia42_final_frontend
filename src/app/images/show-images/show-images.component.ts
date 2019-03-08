@@ -8,6 +8,7 @@ import {AuthService} from '../../shared/services/auth.service';
 import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NgxGalleryImage, NgxGalleryAction} from 'ngx-gallery';
+import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
 
 @Component({
   selector: 'app-show-images',
@@ -30,7 +31,8 @@ export class ShowImagesComponent implements OnInit {
     private getLang: GetLangPipe,
     private _subject: SubjectService,
     public _auth: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private replace: ReplaceAllPipe
   ) {
 
   }
@@ -106,6 +108,14 @@ export class ShowImagesComponent implements OnInit {
   getImgUrl(url) {
     url = 'url("' + url + '")';
     return this.sanitizer.bypassSecurityTrustStyle(url);
+  }
+
+  /**
+   * Navigates to the selected images info editing page
+   * @param id
+   */
+  editImageInfo(id) {
+    this.router.navigate([this.replace.transform(this.router.url + '/image/' + id, false)]);
   }
 
 }

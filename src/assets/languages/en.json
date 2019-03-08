@@ -146,5 +146,6 @@
   "location_dropzone_msg": "Click or drop here the logo image to add",
   "story_imgs_further_uploads":"Further uploads are possible on the images page",
   "directory_not_exist_error":"The folder isn't found, please try to remove without the folder",
-  "location_name_unique":"Please write the full name of the location, as it must be unique."
+  "location_name_unique":"Please write the full name of the location, as it must be unique.",
+  "story_images": "Story images"
 }
