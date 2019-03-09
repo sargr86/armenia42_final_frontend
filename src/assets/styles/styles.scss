@@ -58,14 +58,44 @@ ul {
   background-color: $dark_gray;
 }
 
-.selected {
-  color: $green!important;
+.selected, .green {
+  color: $green !important;
 }
 
-.no_items_found{
-  color:$silver;
+.yellowBg {
+  background-color: $yellow !important;
+}
+
+.selectedBg {
+  background-color: $green !important;
+}
+
+.no_items_found {
+  color: $silver;
   display: block;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.coverSign {
+  display: block;
+  float: left;
+  @include noBgButton;
+  width: 20px !important;;
+  height: 20px !important;
+  background-color: $dark_gray;
+}
+
+b.coverSign{
+  margin: 3px 4px;
+  padding: 7px 4px 0 4px;
+  width: 5px !important;
+  height: 6px !important;
+  //float: left;
+  font-size: 11px;
+}
+
+.favSign {
+  color: $dark_gray;
 }

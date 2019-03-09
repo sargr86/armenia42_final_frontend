@@ -32,7 +32,7 @@ export class RequestInterceptor implements HttpInterceptor {
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         this._auth.formProcessing = false;
-        this._auth.removeLoading = false;
+        this._auth.removeProcessing = false;
         switch (err.status) {
           // Express Validator errors
           case 422:

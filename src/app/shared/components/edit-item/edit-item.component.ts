@@ -204,7 +204,7 @@ export class EditItemComponent implements OnInit {
       result => {
         if (result) {
           // Showing spinner
-          this._auth.removeLoading = true;
+          this._auth.removeProcessing = true;
 
           // Setting parameters to send
           const params = {

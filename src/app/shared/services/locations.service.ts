@@ -54,7 +54,7 @@ export class LocationsService {
    * @param params selected location parameters
    * @returns location observable
    */
-  remove(params) {
+  remove(params): Observable<Location> {
     return this.httpClient.delete<Location>(`${API_HOST}locations/remove`, {params: params});
   }
 }

@@ -24,7 +24,7 @@ export class RedirectToListService {
   do(action, item, parent, data) {
 
     // Stopping all loaders
-    this._auth.removeLoading = false;
+    this._auth.removeProcessing = false;
     this._auth.formProcessing = false;
 
     // Getting generated url for each cases described below

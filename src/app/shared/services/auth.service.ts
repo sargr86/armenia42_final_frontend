@@ -16,7 +16,7 @@ export class AuthService {
   // Gets environment-sensitive api host url
   userData: User;
   formProcessing = false; // regular button spinner state
-  removeLoading = false; // remove button spinner state
+  removeProcessing = false; // remove button spinner state
   slideshow = false;
 
   constructor(

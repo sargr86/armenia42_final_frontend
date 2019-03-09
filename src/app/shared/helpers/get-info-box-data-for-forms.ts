@@ -11,6 +11,8 @@ export default class FormInfoBoxData {
       res = infoBox[action];
       if (item === 'location') {
         res.unshift('location_name_unique');
+      } else if (item === 'image') {
+        res = infoBox['imageEditing'];
       }
 
     } else {

@@ -10,19 +10,25 @@
 
 .info {
   float: left;
-  width: 50%;
+  width: 30%;
   overflow: hidden;
-  .infoList{
-    padding-top: 20px!important;
+  .infoItems {
+    display: flex;
+  }
+  .infoList {
+    padding-top: 20px !important;
   }
   .mat-form-field {
     width: 100%;
   }
-  .coverItems {
-    width: 30%;
+  .coverItemsList {
+    margin-top: 30px;
+    .coverItems {
+      width: 71%;
+    }
   }
-  label{
-    margin:20px;
+  label {
+    margin: 20px;
     cursor: pointer;
   }
 
@@ -30,20 +36,46 @@
     color: $dark_gray;
   }
 
-  .coverSign {
-    display: block;
-    float: left;
-    @include noBgButton;
-    width: 20px !important;;
-    height: 20px !important;
-    background-color: $dark_gray;
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    margin-top: 50px;
+    .saveItem {
+      @include namedBtn;
+      background-color: $green;
+      float: right;
+    }
+    .saveItem:disabled {
+      background-color: $dark_gray;
+    }
+
+    .removeContainer {
+      display: flex;
+      .removeImage {
+        @include namedBtn;
+        background-color: $red;
+      }
+      .checkFolder {
+        padding-top: 4px;
+        label {
+          font-size: 12px;
+          display: block;
+          float: right;
+          color: $darker_gray;
+          margin-top: 3px;
+          margin-left: 4px
+        }
+      }
+
+    }
+
   }
 
-  .favSign {
-    color: $dark_gray;
-  }
 }
 
 .saveImageInfo {
   @include namedBtn;
+
+  float: right;
 }

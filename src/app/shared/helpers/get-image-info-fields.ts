@@ -3,11 +3,12 @@ export default class ImageInfoFields {
     const lang = localStorage.getItem('lang') || 'en';
     const formFields = {
       lang: lang,
-      translate: false,
-      cover: false,
+      translate: 0,
+      cover: 0,
       coverItem: '',
-      favorite: false,
-      id: ''
+      fav: 0,
+      id: '',
+      with_file: 0
     };
     formFields[`description_${lang}`] = '';
 

@@ -34,7 +34,21 @@ export class ImagesService {
     return this.httpClient.post<Image[]>(`${API_HOST}images/add`, params);
   }
 
-  saveInfo(params) {
+  /**
+   * Saves current image info
+   * @param params image info parameters
+   */
+  saveInfo(params): Observable<Image> {
     return this.httpClient.put<Image>(`${API_HOST}images/update-info`, params);
+  }
+
+  /**
+   * Removes an image from db and from the story folder
+   * @param params
+   */
+
+  remove(params): Observable<Image> {
+    console.log(params)
+    return this.httpClient.delete<Image>(`${API_HOST}images/remove`, {params: params});
   }
 }

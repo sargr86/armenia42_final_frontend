@@ -46,7 +46,7 @@
         <div class="actions">
           <div class="removeContainer" *ngIf="editCase">
             <button (click)="remove()" class="removeItem">
-              <mat-spinner *ngIf="_auth.removeLoading" [diameter]="15"></mat-spinner>
+              <mat-spinner *ngIf="_auth.removeProcessing" [diameter]="15"></mat-spinner>
               {{'remove'|translate}}
             </button>
 

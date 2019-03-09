@@ -1,23 +1,23 @@
 <mat-card>
 
-  <form [formGroup]="editImageInfoForm">
+  <form [formGroup]="editImageInfoForm" *ngIf="image;else fileNotFound">
     <div class="info">
-      <mat-list class="infoList">
-        <mat-list-item>
+      <ul class="infoList">
+        <li>
           <mat-form-field>
             <mat-label>{{'description'|translate}}</mat-label>
             <textarea matInput matTextareaAutosize [matAutosizeMinRows]="2" [matAutosizeMaxRows]="25"
                       [formControlName]="'description_'+lang"></textarea>
           </mat-form-field>
 
-        </mat-list-item>
+        </li>
 
-        <mat-list-item *ngIf="makeCover">
+        <li *ngIf="makeCover" class="coverItemsList">
           <ng-select [items]="coverItems" class="coverItems"
-                     dropdownPosition="up" formControlName="coverItem">
+                     [dropdownPosition]="'up'" formControlName="coverItem">
           </ng-select>
-        </mat-list-item>
-        <mat-list-item>
+        </li>
+        <li class="infoItems">
           <label for="translateDesc" [matTooltip]="'translate'|translate">
             <i class="fas fa-globe translateSign" [class.green]="translateState"></i>
           </label>
@@ -29,16 +29,47 @@
           <label for="favorite" [matTooltip]="'make_fav'|translate">
             <i class="fas fa-star favSign" [class.green]="favState" [class.selected]="image.fav"></i>
           </label>
-          <input type="checkbox" formControlName="translate" id="translateDesc" [hidden]="true">
+          <input type="checkbox" formControlName="translate" id="translateDesc" (change)="setAsTranslateable()"
+                 [hidden]="true">
           <input type="checkbox" formControlName="cover" id="cover" [hidden]="true">
-          <input type="checkbox" formControlName="favorite" id="favorite" [hidden]="true">
-        </mat-list-item>
-      </mat-list>
+          <input type="checkbox" formControlName="fav" id="favorite" (change)="setAsFavorite(image.id)" [hidden]="true">
+        </li>
+        <li>
+          <div class="actions">
+            <div class="removeContainer">
 
-      <button (click)="saveImageInfo()" class="saveImageInfo">{{'save'|translate}}</button>
+              <button class="removeImage" (click)="remove(image.id)">
+                <mat-spinner *ngIf="_auth.removeProcessing" [diameter]="15"></mat-spinner>
+                {{'remove'|translate}}
+              </button>
+
+              <!-- Remove-with-folder checkbox-->
+              <div class="checkFolder">
+                <input type="checkbox" id="fileCheck" formControlName="with_file"
+                       [checked]="withFile.value=='1'" (change)="changeWithFileState($event)">
+                <label for="fileCheck">{{'with_file'|translate}}</label>
+              </div>
+            </div>
+            <button (click)="saveImageInfo()" class="saveImageInfo">
+              <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+              {{'save'|translate}}
+            </button>
+          </div>
+        </li>
+      </ul>
+
     </div>
-    <div class="image" [style.background-image]="image.folder|getImgUrl:'others':true">
+
+
+    <!-- Info box recommendations -->
+    <info-box [elements]="infoBoxData"></info-box>
+
+    <div class="image" [style.background-image]="image.file|getImgUrl:'others':true">
 
     </div>
   </form>
+
+  <ng-template #fileNotFound>
+    <small class="no_items_found">{{'file_not_found_error'|translate}}</small>
+  </ng-template>
 </mat-card>

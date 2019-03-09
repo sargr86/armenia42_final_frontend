@@ -32,6 +32,7 @@ import {EditItemComponent} from './components/edit-item/edit-item.component';
 import {LanguagesComponent} from './components/languages/languages.component';
 import {PreviewGalleryComponent} from './components/preview-gallery/preview-gallery.component';
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
+import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.compone
     BuildFormDataPipe,
     PreviewGalleryComponent,
     BreadcrumbsComponent,
+    BuildCoverItemsPipe,
   ],
   imports: [
     CommonModule,
@@ -76,6 +78,7 @@ import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.compone
     GenerateChildItemUrlPipe,
     BuildFolderUrlPipe,
     BuildFormDataPipe,
+    BuildCoverItemsPipe
   ],
   exports: [
     FormsModule,

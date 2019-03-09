@@ -7,7 +7,7 @@ import {Image} from '../../shared/models/Image';
 import {AuthService} from '../../shared/services/auth.service';
 import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 import {DomSanitizer} from '@angular/platform-browser';
-import {NgxGalleryImage, NgxGalleryAction} from 'ngx-gallery';
+import {NgxGalleryImage} from 'ngx-gallery';
 import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
 
 @Component({
@@ -104,10 +104,25 @@ export class ShowImagesComponent implements OnInit {
     }
   }
 
+  /**
+   * Removes the selected image
+   * @param id
+   */
+  remove(id) {
+    const params = {id: id, story_id: this.routeData.story.id, lang: this.lang}
+    this._images.remove(params).subscribe(dt => {
+      this.prepareGalery(dt);
+    });
+  }
+
 
   getImgUrl(url) {
     url = 'url("' + url + '")';
     return this.sanitizer.bypassSecurityTrustStyle(url);
+  }
+
+  makeFav() {
+
   }
 
   /**
