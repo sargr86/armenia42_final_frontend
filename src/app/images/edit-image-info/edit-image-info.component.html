@@ -27,7 +27,7 @@
             </button>
           </label>
           <label for="favorite" [matTooltip]="'make_fav'|translate">
-            <i class="fas fa-star favSign" [class.green]="favState" [class.selected]="image.fav"></i>
+            <i class="fas fa-star favSign" [class.green]="favState"></i>
           </label>
           <input type="checkbox" formControlName="translate" id="translateDesc" (change)="setAsTranslateable()"
                  [hidden]="true">

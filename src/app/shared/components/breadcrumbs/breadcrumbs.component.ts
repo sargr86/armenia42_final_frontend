@@ -37,7 +37,7 @@ export class BreadcrumbsComponent implements OnInit {
 
 
     // Finding the index of current item
-    let index = this.breadCrumbs.findIndex(vendor => (vendor['link'] === el));
+    const index = this.breadCrumbs.findIndex(vendor => (vendor['link'] === el));
 
     if (index != undefined) {
 

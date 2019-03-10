@@ -54,10 +54,13 @@ export class UpdateBreadcrumbsService {
 
       // Saving the value of current recursion!!!
       if (data[`name_${lang}`]) {
+        // passing story id here for correct route url if item is story
+        const link = (data.hasOwnProperty('user_id') ? data['id'] : data['name_en'].toLowerCase());
         this.breadCrumbs.push({
           name: data['name_' + lang],
-          link: data['name_en'].toLowerCase()
+          link: link
         });
+
       }
 
       // Checks to see if counter reached at the keys array end, if not start over
