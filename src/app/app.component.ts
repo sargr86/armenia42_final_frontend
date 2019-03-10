@@ -101,17 +101,18 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   getMainBg(): SafeStyle {
     const dt = this.routeData;
-    if (dt) {
+    if (dt && !this._auth.loggedIn()) {
       const parentData = dt[dt['parent']];
-    // console.log(dt)
       if (parentData) {
         // console.log(dt['parent'])
         const imageData = parentData['images'];
+
         if (imageData && imageData.length > 0) {
           const coverPath = parentData['cover'];
           if (coverPath) {
             let url = 'url("' + API_HOST + coverPath.replace('public', '') + '")';
             url = this.replace.transform(url, false);
+            // console.log(url)
             return this.sanitizer.bypassSecurityTrustStyle(url);
           }
         }

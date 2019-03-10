@@ -9,9 +9,11 @@ const routes: Routes = [
   {
     path: '',
     component: ShowStoriesComponent,
-    data: {},
-    resolve:{
-      location:LocationResolverService
+    data: {
+      parent: 'location'
+    },
+    resolve: {
+      location: LocationResolverService
     }
   },
   {
