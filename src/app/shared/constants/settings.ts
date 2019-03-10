@@ -3,10 +3,10 @@ import {environment} from '../../../environments/environment';
 export const DEFAULT_COUNTRY = 'Armenia';
 export const DEFAULT_ITEMS = ['world', 'countries', 'provinces', 'directions', 'locations', 'stories'];
 export const COVER_ITEMS = [
-  {label: 'country', model: 'countries', value: ''},
-  {label: 'province', model: 'provinces', value: ''},
-  {label: 'direction', model: 'directions', value: ''},
-  {label: 'location', model: 'locations', value: ''}
+  {label_en: 'country', label_ru: 'государство', label_hy: 'պետություն', model: 'countries', value: ''},
+  {label_en: 'province', label_ru: 'провинция', label_hy: 'մարզ/նահանգ', model: 'provinces', value: ''},
+  {label_en: 'direction', label_ru: 'направление', label_hy: 'ուղղություն', model: 'directions', value: ''},
+  {label_en: 'location', label_ru: 'местоположение', label_hy: 'տեղանք', model: 'locations', value: ''}
 ];
 export const DEFAULT_ACTIONS = ['edit', 'update', 'add'];
 export const TEXTAREA_AUTOSIZE_MIN_ROWS = 5;

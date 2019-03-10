@@ -17,9 +17,14 @@
                 class="storyDropzone"></dropzone>
     </div>
 
+
+    <!-- Add-images button -->
     <div class="actions">
-      <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
-      <button class="addImages" (click)="addImages()">{{'add'|translate}}</button>
+
+      <button class="addImages" (click)="addImages()">
+        <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
+        {{'add'|translate}}
+      </button>
     </div>
   </form>
 </mat-card>
