@@ -65,7 +65,7 @@ export class BreadcrumbsComponent implements OnInit {
    * @param b
    */
   goToPath(b) {
-    this.router.navigate([this.getPath(b)]);
+    if(b) this.router.navigate([this.getPath(b)]);
   }
 
   /**
@@ -75,7 +75,7 @@ export class BreadcrumbsComponent implements OnInit {
    */
   checkAvailability(b) {
     return this.unavailableRoutes.some(r => {
-      return b == r;
+      return b == r || !b;
     })
   }
 

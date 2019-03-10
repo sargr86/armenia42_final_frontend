@@ -79,6 +79,14 @@ export class UpdateBreadcrumbsService {
           }
         });
 
+        // Image breadcrumb
+        if (this.url.includes('image')) {
+          this.breadCrumbs.push({
+            name: this.translate.instant('image'),
+            link: ``
+          });
+        }
+
       }
     }
 
