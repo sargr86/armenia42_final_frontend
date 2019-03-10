@@ -25,7 +25,7 @@
     bottom: 5px;
     right: 1px
   }
-  .makeCover {
+  .isCover {
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -66,7 +66,7 @@ button {
   color: $white;
 }
 
-.makeCover {
+.isCover {
   background-color: $white;
   color: $dark_gray;
   width: 20px !important;

@@ -38,6 +38,7 @@ export class ShowImagesComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.route.data.subscribe((dt: Data) => {
       this.routeData = dt;
       this._subject.getLanguage().subscribe(lang => {
@@ -65,6 +66,7 @@ export class ShowImagesComponent implements OnInit {
       this.prepareGalery(data);
     });
   }
+
 
   /**
    * Prepares the gallery options and images
@@ -131,6 +133,10 @@ export class ShowImagesComponent implements OnInit {
    */
   editImageInfo(id) {
     this.router.navigate([this.replace.transform(this.router.url + '/image/' + id, false)]);
+  }
+
+  get imagesFound() {
+    return this.galleryImages && Object.values(this.galleryImages).length > 0;
   }
 
 }

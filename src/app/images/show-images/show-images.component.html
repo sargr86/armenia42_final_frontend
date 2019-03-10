@@ -1,25 +1,37 @@
 <mat-card [class.auth]="!_auth.loggedIn()">
-  <div class="storyContainer">
-    <div class="galleryContainer" *ngIf="galleryImages && viewMode=='gallery'">
+  <div class="storyContainer" *ngIf="imagesFound">
+
+    <!-- Gallery mode -->
+    <div class="galleryContainer" *ngIf="viewMode=='gallery'">
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
     </div>
 
     <!-- Images list for authenticated users -->
-    <ul class="images" *ngIf="galleryImages && viewMode=='list' && _auth.loggedIn()">
+    <ul class="images" *ngIf="viewMode=='list' && _auth.loggedIn()">
+
       <ng-container *ngFor="let i of galleryImages">
         <li class="image">
-          <div class="imageContainer"
-               [style.background-image]="getImgUrl(i['small'])">
-            <ng-container class="buttonsContainer" *ngIf="_auth.loggedIn()">
-              <button (click)="editImageInfo(i.id)" class="editStory">
+          <div class="imageContainer" [style.background-image]="getImgUrl(i['small'])">
+
+            <!-- Image actions buttons -->
+            <ng-container class="buttonsContainer">
+
+              <!-- Edit-image-info-on-page button -->
+              <button (click)="editImageInfo(i.id)">
                 <i class="fas fa-edit"></i>
               </button>
+
+              <!-- Remove image without its file (only from db) button -->
               <button class="removeImage" (click)="remove(i.id)">
                 <i class="fas fa-times-circle"></i>
               </button>
-              <button class="makeCover" [class.selectedBg]="i.cover">
+
+              <!-- Shows if images is a cover for an item (supposed to be clickable, but it's not because *items are multiple-->
+              <button class="isCover" [class.selectedBg]="i.cover">
                 <p>1</p>
               </button>
+
+              <!-- Mark the image as favorite button -->
               <button class="makeFavorite" (click)="makeFav(i.id)" [class.selected]="i.fav">
                 <i class="fas fa-star"></i>
               </button>
@@ -31,7 +43,8 @@
     </ul>
 
 
-    <div *ngIf="galleryImages">
+    <!-- Story appearance for non-authenticated users -->
+    <div *ngIf="!_auth.loggedIn()">
       <h3 class="storyTitle">{{routeData['name_'+lang]}}</h3>
 
       <preview-gallery [galleryImages]="galleryImages"></preview-gallery>
@@ -39,4 +52,9 @@
       <p class="storyDesc">{{routeData['description_'+lang]}}</p>
     </div>
   </div>
+
+
+  <ng-container *ngIf="!imagesFound">
+    <small class="no_items_found">{{'no_images_found_error'|translate}}</small>
+  </ng-container>
 </mat-card>
