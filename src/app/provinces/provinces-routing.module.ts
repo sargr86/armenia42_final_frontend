@@ -11,7 +11,10 @@ const routes: Routes = [
   {
     path: '',
     component: ShowProvincesComponent,
-    data: {},
+    data: {
+      title: 'provinces',
+      parent: 'country'
+    },
     resolve: {
       country: CountriesResolver
     },

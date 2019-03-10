@@ -14,7 +14,9 @@ const routes: Routes = [
     resolve: {
       province: ProvinceResolverService
     },
-    data: {},
+    data: {
+      parent: 'province'
+    },
   },
   {
     path: 'add',
