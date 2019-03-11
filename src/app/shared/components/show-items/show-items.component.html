@@ -7,7 +7,7 @@
         <small class="no_items_found">{{((parent?'no_'+child+'_found':'no_countries_found'))|translate}}</small>
       </ng-container>
       <ng-template #itemsList>
-
+        <preview-gallery [galleryImages]="galleryImages"></preview-gallery>
         <!-- Selected items list container -->
         <div class="listContainer">
 

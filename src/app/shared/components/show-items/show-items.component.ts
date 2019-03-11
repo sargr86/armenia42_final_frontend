@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {GetLangPipe} from '../../pipes/get-lang.pipe';
 import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
@@ -13,6 +13,7 @@ import {ProvincesService} from '../../services/provinces.service';
 import {DirectionsService} from '../../services/directions.service';
 import {LocationsService} from '../../services/locations.service';
 import {StoriesService} from '../../services/stories.service';
+import {NgxGalleryImage} from 'ngx-gallery';
 
 @Component({
   selector: 'show-items',
@@ -28,8 +29,12 @@ export class ShowItemsComponent implements OnInit {
   items = [];
   storiesPage: boolean;
 
+  galleryImages: NgxGalleryImage[];
+
+
   constructor(
     public router: Router,
+    private route: ActivatedRoute,
     private _countries: CountriesService,
     private _provinces: ProvincesService,
     private _directions: DirectionsService,
@@ -52,6 +57,7 @@ export class ShowItemsComponent implements OnInit {
   ngOnInit() {
     this.storiesPage = this.child === 'stories';
     this.getItems();
+    this.getParentImages();
   }
 
 
@@ -70,6 +76,19 @@ export class ShowItemsComponent implements OnInit {
     }
 
   }
+
+  /**
+   * Gets images of parent element
+   */
+  getParentImages() {
+    this.route.data.subscribe(dt => {
+      if (dt && dt[dt.parent]) {
+
+        this.galleryImages = dt[dt.parent]['images'];
+      }
+    });
+  }
+
 
   /**
    * Gets child item url

@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (imageData && imageData.length > 0) {
           const coverPath = parentData['cover'];
           if (coverPath) {
-            let url = 'url("' + API_HOST + coverPath.replace('public', '') + '")';
+            let url = 'url("' + coverPath + '")';
             url = this.replace.transform(url, false);
             // console.log(url)
             return this.sanitizer.bypassSecurityTrustStyle(url);
