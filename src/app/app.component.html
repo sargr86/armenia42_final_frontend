@@ -5,8 +5,7 @@
 <mat-sidenav-container [class.grayBg]="!_auth.loggedIn()">
 
     <!-- Categories side bar-->
-    <mat-sidenav mode="side" #sidenav opened class="mat-elevation-z8" *ngIf=" _auth.loggedIn() && !router.url.includes('profile') && viewMode!='gallery'">
-        <!--<cat-bar></cat-bar>-->
+    <mat-sidenav mode="side" #sidenav opened class="mat-elevation-z8" *ngIf="showLeftSidebar">
       <left-sidebar></left-sidebar>
     </mat-sidenav>
 

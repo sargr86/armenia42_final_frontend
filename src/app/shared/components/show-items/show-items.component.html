@@ -11,7 +11,7 @@
 
         <!-- Selected items list container -->
         <div class="listContainer">
-          <app-cat-list [orientation]="'horizontal'"></app-cat-list>
+          <app-cat-list *ngIf="!_auth.loggedIn()" [orientation]="'horizontal'"></app-cat-list>
             <ul>
                 <ng-container *ngFor="let item of items;let i = index">
                     <li class="item {{child}}">

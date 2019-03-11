@@ -121,6 +121,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * Left sidebar appear conditions
+   */
+  get showLeftSidebar(): boolean {
+    return this._auth.loggedIn() && !this.router.url.includes('profile')
+      && this.viewMode !== 'gallery' && this.routeData && this.routeData.parent !== 'location'
+      && this.routeData.parent !== 'story';
+  }
+
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
   }

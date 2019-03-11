@@ -14,7 +14,8 @@ const routes: Routes = [
       story: StoryResolverService
     },
     data: {
-      title: 'story_images'
+      title: 'story_images',
+      parent: 'story'
     }
   },
   {
