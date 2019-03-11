@@ -10,7 +10,8 @@ export class SubjectService {
   public navForm = new Subject<any>();
   public tableData = new Subject<any>();
   public pageTitle = new Subject<string>();
-  public rightSidebar = new Subject<any>()
+  public rightSidebar = new Subject<any>();
+  public catForm = new Subject<any>();
 
   constructor() {
   }
@@ -81,6 +82,14 @@ export class SubjectService {
 
   getRightSidebar(): Observable<any> {
     return this.rightSidebar.asObservable();
+  }
+
+  setCatForm(value) {
+    this.catForm.next(value);
+  }
+
+  getCatForm(): Observable<any> {
+    return this.catForm.asObservable();
   }
 
 }

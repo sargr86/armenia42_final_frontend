@@ -51,6 +51,12 @@ export class ShowItemsComponent implements OnInit {
       this.getItems();
     });
 
+    // Gets categorized items
+    this._subject.getCatForm().subscribe((cat_id) => {
+      this.getItems(cat_id);
+      this.getParentImages();
+    });
+
 
   }
 
@@ -64,12 +70,18 @@ export class ShowItemsComponent implements OnInit {
   /**
    * Gets items list
    */
-  getItems() {
+  getItems(cat_id = null) {
     if (this.child) {
       // Getting router url filtered parts
       const splitterUrl = this.router.url.split('/');
 
+      // Setting an *item params
       const params = {lang: this.lang, parent_name: splitterUrl[splitterUrl.length - 1]};
+
+      // Appending category if exist
+      if (cat_id) {
+        params['cat_id'] = cat_id;
+      }
       this[`_${this.child}`].get(params).subscribe(dt => {
         this.items = dt;
       });

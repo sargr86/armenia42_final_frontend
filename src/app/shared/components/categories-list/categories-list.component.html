@@ -1,4 +1,4 @@
-<div class="catContainer {{orientation}}">
+<div class="catContainer" [ngClass]="orientation">
 
   <ul class="categories">
     <li *ngFor="let cat of categories|async;let cIndex = index">

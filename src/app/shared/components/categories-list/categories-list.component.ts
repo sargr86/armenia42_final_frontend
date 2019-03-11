@@ -35,12 +35,25 @@ export class CategoriesListComponent implements OnInit {
 
   /**
    * Compares saved and current categories in categories loop
-   * @param cat
-   * @returns {boolean}
+   * @param cat category object
    */
-  getActiveCategory(cat) {
+  getActiveCategory(cat): boolean {
     const savedCat = +localStorage.getItem('cat_id');
     return cat.value === savedCat || (savedCat === 0 && cat.value === 1);
+
+  }
+
+  /**
+   * Saves selected category and get items that match current category
+   * @param cat category object
+   */
+  getCategorizedItems(cat) {
+
+    // Saving selected category id
+    localStorage.setItem('cat_id', cat.icon === 'ban' ? '' : cat.value);
+
+    // Passing it to other components that subscribed via subject
+    this._subject.setCatForm( cat.icon === 'ban' ? null : cat.value);
 
   }
 
