@@ -1,4 +1,4 @@
-<mat-card [class.auth]="!_auth.loggedIn()">
+<mat-card [ngClass]="_auth.loggedIn()?'auth':'not-auth'" >
   <div class="storyContainer" *ngIf="imagesFound">
 
     <!-- Gallery mode -->

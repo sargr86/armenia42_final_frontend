@@ -23,4 +23,14 @@
   background-color: transparent;
 }
 
+.notFound{
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.semiBlack{
+  background-color: $black_transparent_bg;
+}
 

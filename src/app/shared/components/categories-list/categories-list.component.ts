@@ -24,7 +24,18 @@ export class CategoriesListComponent implements OnInit {
 
   ngOnInit() {
     const params = {};
-    this.categories = this._categories.getCategories(params);
+    this._categories.getCategories(params).subscribe(dt => {
+      this.categories = dt;
+      if (this.categories) {
+        const savedCat = +localStorage.getItem('cat_id');
+        const foundCat = this.categories.filter(n => n.value === savedCat)[0];
+        if (foundCat) {
+          this.getActiveCategory(foundCat);
+          this.getCategorizedItems(foundCat);
+        }
+      }
+
+    });
 
     // Getting system current language if changed by language component
     this._subject.getLanguage().subscribe(lang => {
@@ -53,7 +64,7 @@ export class CategoriesListComponent implements OnInit {
     localStorage.setItem('cat_id', cat.icon === 'ban' ? '' : cat.value);
 
     // Passing it to other components that subscribed via subject
-    this._subject.setCatForm( cat.icon === 'ban' ? null : cat.value);
+    this._subject.setCatForm(cat.icon === 'ban' ? null : cat.value);
 
   }
 

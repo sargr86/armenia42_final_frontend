@@ -30,6 +30,7 @@ export class ShowItemsComponent implements OnInit {
   storiesPage: boolean;
 
   galleryImages: NgxGalleryImage[];
+  category: number;
 
 
   constructor(
@@ -72,6 +73,10 @@ export class ShowItemsComponent implements OnInit {
    */
   getItems(cat_id = null) {
     if (this.child) {
+
+      // Saving the selected category id
+      this.category = cat_id;
+
       // Getting router url filtered parts
       const splitterUrl = this.router.url.split('/');
 
