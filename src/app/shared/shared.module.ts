@@ -33,6 +33,7 @@ import {LanguagesComponent} from './components/languages/languages.component';
 import {PreviewGalleryComponent} from './components/preview-gallery/preview-gallery.component';
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
+import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
     PreviewGalleryComponent,
     BreadcrumbsComponent,
     BuildCoverItemsPipe,
+    CategoriesListComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,7 @@ import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
     TranslateModule,
     DropzoneModule,
     NgSelectModule,
-    NgxGalleryModule
+    NgxGalleryModule,
   ],
   providers: [
     GetLangPipe,
@@ -96,7 +98,8 @@ import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
     EditItemComponent,
     PreviewGalleryComponent,
     MaterialReusableTableComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    CategoriesListComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent

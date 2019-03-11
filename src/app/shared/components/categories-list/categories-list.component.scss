@@ -1,0 +1,47 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+button{
+  @include iconBtn;
+}
+
+.vertical{
+
+}
+
+.categories {
+  margin: 0 5px;
+  li {
+    cursor: pointer;
+    margin: 15px 0;
+    text-align: center;
+    padding: 5px;
+    border-radius: 40px;
+    width: 20px;
+    height: 20px;
+    i {
+      font-size: 20px;
+      color: $dark_gray;
+    }
+    i:hover {
+      color: $yellow;
+    }
+  }
+  .active {
+    color: $green !important;
+  }
+}
+
+.horizontal{
+  display: flex;
+  justify-content: center;
+
+  .categories{
+    display: inline-flex;
+    background-color: $black_transparent_bg;
+    li{
+      float: left;
+      margin: 0 15px
+    }
+  }
+}

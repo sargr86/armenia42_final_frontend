@@ -8,9 +8,10 @@
       </ng-container>
       <ng-template #itemsList>
         <preview-gallery [galleryImages]="galleryImages"></preview-gallery>
+
         <!-- Selected items list container -->
         <div class="listContainer">
-
+          <app-cat-list [orientation]="'horizontal'"></app-cat-list>
             <ul>
                 <ng-container *ngFor="let item of items;let i = index">
                     <li class="item {{child}}">
@@ -47,6 +48,7 @@
                     </li>
                 </ng-container>
             </ul>
+
 
 
         </div>
