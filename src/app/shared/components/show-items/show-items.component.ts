@@ -55,7 +55,7 @@ export class ShowItemsComponent implements OnInit {
     // Gets categorized items
     this._subject.getCatForm().subscribe((cat_id) => {
       this.getItems(cat_id);
-      this.getParentImages();
+      this.getParentImages(cat_id);
     });
 
 
@@ -65,6 +65,7 @@ export class ShowItemsComponent implements OnInit {
     this.storiesPage = this.child === 'stories';
     this.getItems();
     this.getParentImages();
+
   }
 
 
@@ -95,15 +96,24 @@ export class ShowItemsComponent implements OnInit {
   }
 
   /**
-   * Gets images of parent element
+   * Gets images of current item
    */
-  getParentImages() {
+  getParentImages(cat_id = null) {
     this.route.data.subscribe(dt => {
       if (dt && dt[dt.parent]) {
+        // Setting an *item params
+        const params = {lang: this.lang, parent_id: dt[dt.parent]['id']};
 
-        this.galleryImages = dt[dt.parent]['images'];
+        // Appending category if exist
+        if (cat_id) {
+          params['cat_id'] = cat_id;
+        }
+        this[`_${this.child}`].getImages(params).subscribe(d => {
+          this.galleryImages = d;
+        });
       }
     });
+
   }
 
 

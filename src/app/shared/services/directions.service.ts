@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Direction} from '../models/Direction';
 import {Observable} from 'rxjs/internal/Observable';
 import {API_HOST} from '../constants/settings';
+import {Image} from '../models/Image';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,15 @@ export class DirectionsService {
    */
   get(params): Observable<Direction[]> {
     return this.httpClient.get<Direction[]>(`${API_HOST}directions/get`, {params: params});
+  }
+
+
+  /**
+   * Gets the images of the selected direction
+   * @param params
+   */
+  getImages(params): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(`${API_HOST}directions/get-images`, {params: params});
   }
 
   /**

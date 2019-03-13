@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Story} from '../models/Story';
 import {Observable} from 'rxjs/internal/Observable';
 import {API_HOST} from '../constants/settings';
+import {Image} from '../models/Image';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,14 @@ export class StoriesService {
    */
   get(params): Observable<Story[]> {
     return this.httpClient.get<Story[]>(`${API_HOST}stories/get`, {params: params});
+  }
+
+  /**
+   * Gets the images of the selected location
+   * @param params
+   */
+  getImages(params): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(`${API_HOST}stories/get-images`, {params: params});
   }
 
   /**

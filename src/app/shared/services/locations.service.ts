@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Location} from '../models/Location';
 import {Observable} from 'rxjs/internal/Observable';
 import {API_HOST} from '../constants/settings';
+import {Image} from '../models/Image';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,14 @@ export class LocationsService {
    */
   get(params): Observable<Location[]> {
     return this.httpClient.get<Location[]>(`${API_HOST}locations/get`, {params: params});
+  }
+
+  /**
+   * Gets the images of the selected location
+   * @param params
+   */
+  getImages(params): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(`${API_HOST}locations/get-images`, {params: params});
   }
 
   /**
