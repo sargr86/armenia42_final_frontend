@@ -158,11 +158,11 @@ export class EditItemComponent implements OnInit {
       childData = data[this.item];
     }
 
-      // Applying province or direction folder for add* or edit-direction cases
-      this.itemForm.patchValue(this.editCase ? childData : {
-        folder: this.parent ? parentData['folder'] : '',
-        parent_name: this.parent ? parentData['name_en'] : ''
-      });
+    // Applying province or direction folder for add* or edit-direction cases
+    this.itemForm.patchValue(this.editCase ? childData : {
+      folder: this.parent ? parentData['folder'] : '',
+      parent_name: this.parent ? parentData['name_en'] : ''
+    });
 
 
   }
@@ -244,11 +244,11 @@ export class EditItemComponent implements OnInit {
   /**
    * Removes current flag image from the drop zone
    */
-  removeImage() {
+  removeImage(e) {
+    this.dropzoneFiles = this.dropzoneFiles.filter(file => file[0].name !== e.name);
     if (this.editCase) {
       this.routeItemSingular.flag_img = '';
     }
-    this.dropzoneFiles = [];
     this.itemForm.controls['flag_img'].patchValue('');
   }
 

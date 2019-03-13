@@ -82,8 +82,12 @@ export class AddImagesComponent implements OnInit {
     this.dropzoneFiles.push(e);
   }
 
-  removeImage() {
-
+  /**
+   * Removes an image file from drop zone
+   * @param e
+   */
+  removeImage(e) {
+    this.dropzoneFiles = this.dropzoneFiles.filter(file => file[0].name !== e.name);
   }
 
   /**

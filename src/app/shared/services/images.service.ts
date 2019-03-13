@@ -48,7 +48,6 @@ export class ImagesService {
    */
 
   remove(params): Observable<Image> {
-    console.log(params)
     return this.httpClient.delete<Image>(`${API_HOST}images/remove`, {params: params});
   }
 }

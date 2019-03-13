@@ -13,7 +13,7 @@
       <dropzone [config]="dropzoneConfig"
                 [message]="dropzoneMsg|translate"
                 id="dropzone"
-                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
+                (thumbnail)="onAddedFile($event)" (removedFile)="removeImage($event)"
                 class="storyDropzone"></dropzone>
     </div>
 

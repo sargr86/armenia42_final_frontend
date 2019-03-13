@@ -127,7 +127,7 @@ export class AppComponent implements OnInit, OnDestroy {
   get showLeftSidebar(): boolean {
     return this._auth.loggedIn() && !this.router.url.includes('profile')
       && this.viewMode !== 'gallery' && this.routeData && this.routeData.parent !== 'location'
-      && this.routeData.parent !== 'story';
+      && this.routeData.parent !== 'story' && this.routeData.title !== 'story_terminal';
   }
 
   ngOnDestroy() {

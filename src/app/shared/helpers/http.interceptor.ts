@@ -44,10 +44,18 @@ export class RequestInterceptor implements HttpInterceptor {
           case 423:
 
             this.translate.get(err.error).subscribe((dt) => {
-              this.toastr.error(dt)
+              this.toastr.error(dt);
             });
             break;
-          //Sequelize & other errors
+          // File exists error
+          case 424:
+            const error = err.error;
+            this.translate.get(error.msg).subscribe((dt) => {
+              console.log(dt)
+              this.toastr.error(error.name,dt);
+            });
+            break;
+          // Sequelize & other errors
           default:
             let name: any;
             let msg = '';

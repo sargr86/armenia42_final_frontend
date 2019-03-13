@@ -74,7 +74,7 @@
         <dropzone [config]="dropzoneConfig"
                   [message]="dropzoneMsg|translate"
                   id="dropzone"
-                  (thumbnail)="onAddedFile($event)" (removedFile)="removeImage()"
+                  (thumbnail)="onAddedFile($event)" (removedFile)="removeImage($event)"
                   class="{{item==='story'?'storyDropzone':'flagDropzone'}}"></dropzone>
       </div>
 

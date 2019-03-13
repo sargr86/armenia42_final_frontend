@@ -56,7 +56,16 @@
   height: 450px;
   overflow: hidden;
   @include dropZone;
+  .dz-details{
+    top:8px;
+  }
   .dz-wrapper,.dz-message {
     overflow: hidden !important;
+  }
+  .dz-remove{
+    position: absolute;
+    top: 50px;
+    left: 48px;
+    z-index: 20000;
   }
 }
