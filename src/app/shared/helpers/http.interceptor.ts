@@ -51,7 +51,6 @@ export class RequestInterceptor implements HttpInterceptor {
           case 424:
             const error = err.error;
             this.translate.get(error.msg).subscribe((dt) => {
-              console.log(dt)
               this.toastr.error(error.name,dt);
             });
             break;
