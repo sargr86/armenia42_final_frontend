@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {ReplaceAllPipe} from "./replace-all.pipe";
-import {DEFAULT_ITEMS} from "../constants/settings";
+import {DEFAULT_COUNTRY, DEFAULT_ITEMS} from "../constants/settings";
 
 @Pipe({
   name: 'getChildUrl'
@@ -16,7 +16,12 @@ export class GenerateChildItemUrlPipe implements PipeTransform {
   transform(item: any, storiesPage: boolean, routerUrl: string): any {
 
     // Getting router url filtered parts
-    const splitterUrl = routerUrl.split('/').filter(n => n);
+    let splitterUrl = routerUrl.split('/').filter(n => n);
+
+    // Home page case (when url is '/')
+    if (splitterUrl.length === 0) {
+      splitterUrl = [this.replace.transform(DEFAULT_COUNTRY, false, true)];
+    }
 
     // Checking if router url contains default items values and cleaning if so
     const cleaned = splitterUrl.filter(r => !DEFAULT_ITEMS.includes(r)).join('/');
