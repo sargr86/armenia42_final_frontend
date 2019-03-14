@@ -5,7 +5,7 @@
   "check_mysql_connection": "Խնդրում ենք ստուգել կապը տվյալների բազայի հետ",
   "folder_not_found": "Այսպիսի անունով պանակ գոյություն չունի",
   "error_renaming": "Վերանվանման սխալ",
-  "permission_denied": "Permission is denied",
+  "permission_denied": "Թույլտվությունը մերժվում է",
   "unknown_error": "Անհայտ սխալ",
   "dir_not_empty": "Այս անունով պանակը դատարկ չէ",
   "check_server": "Խնդրում ենք ստուգել կապը սերվերի հետ",

@@ -92,10 +92,15 @@ b.coverSign{
   padding: 7px 4px 0 4px;
   width: 5px !important;
   height: 6px !important;
-  //float: left;
   font-size: 11px;
 }
 
 .favSign {
   color: $dark_gray;
+}
+
+.circles #galleries{
+  position: absolute!important;
+  bottom:200px!important;
+  left:50%;
 }
