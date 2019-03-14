@@ -18,7 +18,8 @@
           </ng-container>
 
           <ng-template #regularValues>
-            {{el[col]|translate}}
+            <ng-container *ngIf="col=='count'">{{el[col]}}</ng-container>
+            <ng-container *ngIf="col!='count'">{{el[col]|translate:getSymbol()}}</ng-container>
           </ng-template>
         </ng-template>
 

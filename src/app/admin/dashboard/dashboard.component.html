@@ -1,3 +1,10 @@
-<p>
-  dashboard works!
-</p>
+<mat-card *ngIf="itemsStatistics">
+
+  <!-- Terminal title title-->
+  <h2 class="terminalTitle">
+    <mat-icon>person</mat-icon>
+    <span translate>{{'admin_dashboard'}}</span>
+  </h2>
+
+  <app-mat-table [cols]="itemStatCols" [data]="itemsStatistics" [lang]="lang"></app-mat-table>
+</mat-card>
