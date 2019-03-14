@@ -23,8 +23,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    resolve: {
+      country: CountriesResolver
+    },
     data: {
-      title: 'home'
+      title: 'home',
+      parent: 'country'
     }
   },
   {

@@ -65,9 +65,10 @@ export class AppComponent implements OnInit, OnDestroy {
       while (child) {
         if (child.firstChild) {
           child = child.firstChild;
+
           this.routeData = child.data['value'];
         } else if (child.snapshot.data && child.snapshot.data['title']) {
-
+          this.routeData = child.snapshot.data;
           return child.snapshot.data['title'];
         } else {
           return null;
@@ -104,18 +105,12 @@ export class AppComponent implements OnInit, OnDestroy {
     if (dt && !this._auth.loggedIn()) {
       const parentData = dt[dt['parent']];
       if (parentData) {
-        // console.log(dt['parent'])
-        const imageData = parentData['images'];
-
-        if (imageData && imageData.length > 0) {
           const coverPath = parentData['cover'];
           if (coverPath) {
             let url = 'url("' + coverPath + '")';
             url = this.replace.transform(url, false);
-            // console.log(url)
             return this.sanitizer.bypassSecurityTrustStyle(url);
           }
-        }
       }
     }
 

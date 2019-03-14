@@ -14,6 +14,7 @@ import {DirectionsService} from '../../services/directions.service';
 import {LocationsService} from '../../services/locations.service';
 import {StoriesService} from '../../services/stories.service';
 import {NgxGalleryImage} from 'ngx-gallery';
+import {DEFAULT_COUNTRY} from '../../constants/settings';
 
 @Component({
   selector: 'show-items',
@@ -81,8 +82,16 @@ export class ShowItemsComponent implements OnInit {
       // Getting router url filtered parts
       const splitterUrl = this.router.url.split('/');
 
+      // Getting parent from the router url last element
+      let parentName = splitterUrl[splitterUrl.length - 1];
+
+      // Home page case
+      if (!parentName) {
+        parentName = DEFAULT_COUNTRY;
+      }
+
       // Setting an *item params
-      const params = {lang: this.lang, parent_name: splitterUrl[splitterUrl.length - 1]};
+      const params = {lang: this.lang, parent_name: parentName};
 
       // Appending category if exist
       if (cat_id) {
@@ -100,6 +109,7 @@ export class ShowItemsComponent implements OnInit {
    */
   getParentImages(cat_id = null) {
     this.route.data.subscribe(dt => {
+
       if (dt && dt[dt.parent]) {
         // Setting an *item params
         const params = {lang: this.lang, parent_id: dt[dt.parent]['id']};
