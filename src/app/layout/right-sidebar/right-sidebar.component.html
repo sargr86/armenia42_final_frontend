@@ -31,6 +31,14 @@
             </button>
         </li>
 
+      <!-- Manage images link -->
+      <li *ngIf="_auth.checkRoles('admin')">
+        <button [matTooltip]="'images'|translate:symbol" [matTooltipPosition]="'left'"
+                (click)="router.navigate(['admin/manage-images'])">
+            <i class="fa fa-image"></i>
+        </button>
+      </li>
+
         <!-- Languages menu toggler button with its menu -->
         <li *ngIf="!formPage">
             <button [matTooltip]="'settings'|translate" [matTooltipPosition]="'left'">

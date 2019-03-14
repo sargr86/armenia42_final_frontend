@@ -7,11 +7,12 @@
         <!-- Image cell-->
         <ng-container *ngIf="col.includes('img')&& el[col];else textValues">
           <div class="imgContainer">
-            <div [style.background]="el[col]|getImgUrl:'users':true" class="img"></div>
+            <div [style.background]="getImgUrl(el,col)"
+              (click)="navigateToImg(el)"   class="img"></div>
           </div>
         </ng-container>
 
-        <!-- Regular text values -->
+        <!-- Regular text values cells -->
         <ng-template #textValues>
           <ng-container *ngIf="col.includes('status');else regularValues">
             <p class="status {{el[col]['name_en']}}">{{el[col]['name_'+lang]}}</p>
@@ -19,7 +20,10 @@
 
           <ng-template #regularValues>
             <ng-container *ngIf="col=='count'">{{el[col]}}</ng-container>
-            <ng-container *ngIf="col!='count'">{{el[col]|translate:getSymbol()}}</ng-container>
+            <ng-container *ngIf="col!='count'">
+              <span *ngIf="col!='full_name'">{{el[col]|translate:getSymbol()}}</span>
+              <span *ngIf="col=='full_name'">{{el[col]?el[col]:el['user'][col]}}</span>
+            </ng-container>
           </ng-template>
         </ng-template>
 
@@ -27,6 +31,14 @@
         <ng-container *ngIf="col=='actions'">
           <mat-slide-toggle class="statusToggler" [checked]="el.users_status.name_en=='active'"
                             (change)="changeStatus($event,el.id)"></mat-slide-toggle>
+        </ng-container>
+        <ng-container *ngIf="col=='img_actions'">
+          <button class="approve">
+            <i class="fa fa-check"></i>
+          </button>
+          <button class="reject">
+            <i class="fa fa-times"></i>
+          </button>
         </ng-container>
       </td>
     </ng-container>

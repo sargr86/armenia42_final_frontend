@@ -2,6 +2,10 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SubjectService} from "../../services/subject.service";
 import {MatPaginator, MatSlideToggleChange, MatTableDataSource} from "@angular/material";
 import {GetMatTableDataSourcePipe} from "../../pipes/get-mat-table-data-source.pipe";
+import {API_HOST, OTHER_UPLOADS_FOLDER, UPLOADS_FOLDER} from '../../constants/settings';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-mat-table',
@@ -19,7 +23,10 @@ export class MaterialReusableTableComponent implements OnInit {
 
   constructor(
     private subject: SubjectService,
-    private dataSource: GetMatTableDataSourcePipe
+    private dataSource: GetMatTableDataSourcePipe,
+    private  sanitizer: DomSanitizer,
+    private replace: ReplaceAllPipe,
+    private router: Router
   ) {
   }
 
@@ -60,6 +67,28 @@ export class MaterialReusableTableComponent implements OnInit {
 
   getSymbol() {
     return {symbol: ''};
+  }
+
+  /**
+   * Gets image safe-styled url
+   * @param el
+   * @param col
+   */
+  getImgUrl(el, col): SafeStyle {
+    let url = API_HOST + (col === 'img_name' ? '' : 'uploads/users/') + el[col];
+    url = 'url("' + url + '")';
+    return this.sanitizer.bypassSecurityTrustStyle(url);
+  }
+
+  /**
+   * Navigates to image editing page
+   * @param el
+   */
+  navigateToImg(el) {
+    if (el['url']) {
+      const url = el['url'];
+      this.router.navigate([url]);
+    }
   }
 
 }

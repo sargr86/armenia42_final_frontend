@@ -3,6 +3,8 @@
   <form [formGroup]="editImageInfoForm" *ngIf="image;else fileNotFound">
     <div class="info">
       <ul class="infoList">
+
+        <!-- Image description text area -->
         <li>
           <mat-form-field>
             <mat-label>{{'description'|translate}}</mat-label>
@@ -11,33 +13,43 @@
           </mat-form-field>
 
         </li>
-
+        <!-- Cover items list-->
         <li *ngIf="makeCover" class="coverItemsList">
           <ng-select [items]="coverItems" class="coverItems"
                      [dropdownPosition]="'up'" formControlName="coverItem">
           </ng-select>
         </li>
-        <li class="infoItems">
+
+        <!-- Info items list -->
+        <li class="infoItems" *ngIf="_auth.checkRoles('admin')">
+
+          <!-- Translate description sign -->
           <label for="translateDesc" [matTooltip]="'translate'|translate">
             <i class="fas fa-globe translateSign" [class.green]="translateState"></i>
           </label>
+          <input type="checkbox" formControlName="translate" id="translateDesc" (change)="setAsTranslateable()"
+                 [hidden]="true">
+
+          <!-- Make cover sign -->
           <label for="cover" [matTooltip]="'make_cover'|translate">
             <button class="coverSign" (click)="coverItemToggle()" [class.yellowBg]="makeCover"
                     [class.selectedBg]="image.cover">1
             </button>
           </label>
+          <input type="checkbox" formControlName="cover" id="cover" [hidden]="true">
+
+          <!-- Make-favorite sign -->
           <label for="favorite" [matTooltip]="'make_fav'|translate">
             <i class="fas fa-star favSign" [class.green]="favState"></i>
           </label>
-          <input type="checkbox" formControlName="translate" id="translateDesc" (change)="setAsTranslateable()"
-                 [hidden]="true">
-          <input type="checkbox" formControlName="cover" id="cover" [hidden]="true">
           <input type="checkbox" formControlName="fav" id="favorite" (change)="setAsFavorite(image.id)" [hidden]="true">
+
         </li>
         <li>
           <div class="actions">
             <div class="removeContainer">
 
+              <!-- Remove image button -->
               <button class="removeImage" (click)="remove(image.id)">
                 <mat-spinner *ngIf="_auth.removeProcessing" [diameter]="15"></mat-spinner>
                 {{'remove'|translate}}
@@ -50,6 +62,8 @@
                 <label for="fileCheck">{{'with_file'|translate}}</label>
               </div>
             </div>
+
+            <!-- Save image info button -->
             <button (click)="saveImageInfo()" class="saveImageInfo">
               <mat-spinner *ngIf="_auth.formProcessing" [diameter]="15"></mat-spinner>
               {{'save'|translate}}
@@ -64,11 +78,13 @@
     <!-- Info box recommendations -->
     <info-box [elements]="infoBoxData"></info-box>
 
+    <!-- Editing image itself-->
     <div class="image" [style.background-image]="image.folder|getImgUrl:'others':true">
 
     </div>
   </form>
 
+  <!-- File not found message -->
   <ng-template #fileNotFound>
     <small class="no_items_found">{{'file_not_found_error'|translate}}</small>
   </ng-template>

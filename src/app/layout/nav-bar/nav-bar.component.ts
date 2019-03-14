@@ -84,7 +84,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
    * @returns {any}
    */
   get addBtnShow() {
-    return !(/profile|users|edit|add|save/.test(this.router.url)) && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== undefined;
+    return !(/profile|users|edit|add|save|manage/.test(this.router.url))
+      && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== undefined;
   }
 
   /**
@@ -93,6 +94,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
    */
   get showSettings(): boolean {
     return !(/login|profile|register/.test(this.router.url));
+  }
+
+  /**
+   * Checks if we're on of the manage pages
+   */
+  get managePage(): boolean {
+    return this.router.url.includes('manage');
   }
 
   /**

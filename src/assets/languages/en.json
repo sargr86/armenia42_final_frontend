@@ -164,6 +164,7 @@
   "file_not_found_error":"The selected file is not exist",
   "no_images_found_error":"This story has no images yet.",
   "count":"Count",
+  "img_name":"Image",
   "translate_desc_sign": "If you want to translate the image description with Google Translate, click the element marked as <i class='fa fa-globe'></i>, it will become green.",
   "cover_sign":"<b class='coverSign'>1</b> If you want to set this image as a cover for country, province, etc. please click on that sign and select the item you want to apply to."
 }

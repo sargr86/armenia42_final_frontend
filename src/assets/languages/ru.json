@@ -75,6 +75,7 @@
   "review_status": "Статус",
   "story": "История",
   "image": "Изображение",
+  "img_name":"Изображение",
   "pending": "в ожидании",
   "rejected": "отвергнуто",
   "accepted": "принято",

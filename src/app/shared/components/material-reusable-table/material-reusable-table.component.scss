@@ -18,6 +18,7 @@ table {
       height: 80px;
       border-radius: 80px;
       background-size: cover !important;
+      cursor: pointer;
     }
   }
   .status {
@@ -30,5 +31,17 @@ table {
   }
   .inactive {
     background-color: $red;
+  }
+  .mat-column-img_actions {
+    button {
+      @include noBgButton;
+      margin-left:20px;
+    }
+    .approve{
+      background-color: $green;
+    }
+    .reject{
+      background-color: $red;
+    }
   }
 }
