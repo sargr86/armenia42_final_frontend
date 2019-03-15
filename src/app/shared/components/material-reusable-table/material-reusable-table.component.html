@@ -21,8 +21,17 @@
           <ng-template #regularValues>
             <ng-container *ngIf="col=='count'">{{el[col]}}</ng-container>
             <ng-container *ngIf="col!='count'">
-              <span *ngIf="col!='full_name'">{{el[col]|translate:getSymbol()}}</span>
+              <!-- User full name cell-->
               <span *ngIf="col=='full_name'">{{el[col]?el[col]:el['user'][col]}}</span>
+
+              <!-- Story name cell-->
+              <span *ngIf="col=='location'">{{el[col]?el[col]['name_'+lang]:''}}</span>
+
+              <!-- Story name cell-->
+              <span *ngIf="col=='story'">{{el[col]?el[col]['name_'+lang]:''}}</span>
+
+              <!-- The rest cells -->
+              <span *ngIf="col!='full_name' && col!='story' && col!='location'">{{el[col]|translate:getSymbol()}}</span>
             </ng-container>
           </ng-template>
         </ng-template>

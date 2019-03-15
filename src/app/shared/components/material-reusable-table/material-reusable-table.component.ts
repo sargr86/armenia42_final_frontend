@@ -75,7 +75,7 @@ export class MaterialReusableTableComponent implements OnInit {
    * @param col
    */
   getImgUrl(el, col): SafeStyle {
-    let url = API_HOST + (col === 'img_name' ? '' : 'uploads/users/') + el[col];
+    let url = API_HOST + (col === 'img_path' ? '' : 'uploads/users/') + el[col];
     url = 'url("' + url + '")';
     return this.sanitizer.bypassSecurityTrustStyle(url);
   }

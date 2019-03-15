@@ -3,6 +3,7 @@ import {ImagesService} from '../../shared/services/images.service';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
 import {DashboardService} from '../../shared/services/dashboard.service';
 import {SubjectService} from '../../shared/services/subject.service';
+import {AuthService} from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-show-user-images',
@@ -12,14 +13,15 @@ import {SubjectService} from '../../shared/services/subject.service';
 export class ShowUserImagesComponent implements OnInit {
   lang = this.getLang.transform();
   images;
-  columns = ['img_name', 'full_name'];
+  columns = ['img_path', 'name', 'location', 'story'];
 
 
   constructor(
     private _images: ImagesService,
     private _dashboard: DashboardService,
     private getLang: GetLangPipe,
-    private _subject: SubjectService
+    private _subject: SubjectService,
+    public _auth: AuthService
   ) {
 
     this._subject.getLanguage().subscribe(lang => {
@@ -42,11 +44,11 @@ export class ShowUserImagesComponent implements OnInit {
    * @param cat_id category id
    */
   getImages(lang, cat_id = null) {
-    const params = {lang: lang};
+    const params = {lang: lang, user_id: this._auth.userData.id};
     if (cat_id) {
       params['cat_id'] = cat_id;
     }
-    this._dashboard.getManageImages(params).subscribe(dt => {
+    this._dashboard.getUserImages(params).subscribe(dt => {
       this.images = dt;
       this._subject.setTableData(dt);
     });

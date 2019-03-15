@@ -28,4 +28,12 @@ export class DashboardService {
   getManageImages(params): Observable<Image[]> {
     return this.httpClient.get<Image[]>(`${API_HOST}dashboard/get-manage-images`, {params: params});
   }
+
+  /**
+   * Gets one user images
+   * @param params
+   */
+  getUserImages(params): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(`${API_HOST}dashboard/get-user-images`, {params: params});
+  }
 }
