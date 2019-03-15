@@ -32,9 +32,9 @@
         </li>
 
       <!-- Manage images link -->
-      <li *ngIf="_auth.checkRoles('admin')">
+      <li>
         <button [matTooltip]="'images'|translate:symbol" [matTooltipPosition]="'left'"
-                (click)="router.navigate(['admin/manage-images'])">
+                (click)="getManageRoute('images')">
             <i class="fa fa-image"></i>
         </button>
       </li>

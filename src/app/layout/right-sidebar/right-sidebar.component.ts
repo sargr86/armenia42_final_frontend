@@ -48,4 +48,13 @@ export class RightSidebarComponent implements OnInit {
     return {symbol: ''};
   }
 
+  /**
+   * Gets manage item (story/image) route and navigates to it
+   * @param item current item (story/image)
+   */
+  getManageRoute(item) {
+    const url = (this._auth.checkRoles('admin') ? 'admin/manage-' + item : 'dashboard/' + item);
+    this.router.navigate([url]);
+  }
+
 }

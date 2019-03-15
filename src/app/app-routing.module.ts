@@ -48,6 +48,10 @@ const routes: Routes = [
     canActivate: [NonAuthGuard]
   },
   {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule',
+  },
+  {
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
     data: {
