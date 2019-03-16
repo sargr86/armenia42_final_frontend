@@ -115,6 +115,8 @@
   "direction_terminal": "Ուղղության տերմինալ",
   "location_terminal": "Տեղանքի տերմինալ",
   "story_terminal": "Պատմության տերմինալ",
+  "user_images_terminal": "Նկարների տերմինալ",
+  "images_terminal": "Նկարների տերմինալ",
   "country_name_required_error": "Պետության անվանումը պարտադիր է",
   "country_exists_error": "Այս պետությունն արդեն ավելացված է",
   "province_exists_error": "Այս պետությունն արդեն ունի տվյալ անունով մարզ/ նահանգ",

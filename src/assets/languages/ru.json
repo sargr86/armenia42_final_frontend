@@ -115,6 +115,8 @@
   "direction_terminal": "Терминал направления",
   "location_terminal": "Терминал местоположения",
   "story_terminal": "Терминал истории",
+  "user_images_terminal": "Терминал изображений",
+  "images_terminal": "Терминал изображений",
   "country_name_required_error": "Название страны обязательно",
   "country_exists_error": "Эта страна уже добавлена",
   "province_exists_error": "У этой страны уже есть провинция с таким именем",

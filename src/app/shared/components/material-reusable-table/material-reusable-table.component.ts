@@ -35,6 +35,11 @@ export class MaterialReusableTableComponent implements OnInit {
 
   ngOnInit() {
 
+    // Gets system changed language
+    this.subject.getLanguage().subscribe(lang => {
+      this.lang = lang;
+    });
+
     // Gets table data changes
     this.subject.getTableData().subscribe(dt => {
       this.data = dt;

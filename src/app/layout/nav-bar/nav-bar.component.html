@@ -56,7 +56,7 @@
 
 
     <!--Breadcrumbs or placeholder of them-->
-    <div class="breadcrumbs" *ngIf="!managePage && pageTitle !== 'home'">
+    <div class="breadcrumbs" *ngIf="showAuthBreadCrumbs()">
       <breadcrumbs [breadCrumbs]="breadCrumbs" class="breadCrumbs"></breadcrumbs>
       <!--<div class="breadcrumbsPlaceholder" *ngIf="router.url.includes('countries')"></div>-->
     </div>

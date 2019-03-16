@@ -121,6 +121,8 @@
   "direction_terminal": "Direction terminal",
   "location_terminal": "Location terminal",
   "story_terminal": "Story terminal",
+  "user_images_terminal": "Images terminal",
+  "images_terminal": "Images terminal",
   "country_name_required_error": "Country name is required",
   "country_exists_error": "This country already exists",
   "province_exists_error": "The country already has a province with such name",

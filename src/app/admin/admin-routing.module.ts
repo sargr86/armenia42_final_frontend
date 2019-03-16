@@ -21,7 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'manage-images',
-    component: ManageImagesComponent
+    component: ManageImagesComponent,
+    data: {
+      title: 'images_terminal'
+    }
   }
 ];
 

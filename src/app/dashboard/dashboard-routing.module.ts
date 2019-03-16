@@ -10,7 +10,10 @@ const routes: Routes = [
   },
   {
     path: 'images',
-    component: ShowUserImagesComponent
+    component: ShowUserImagesComponent,
+    data:{
+      title: 'user_images_terminal'
+    }
   }
 ];
 

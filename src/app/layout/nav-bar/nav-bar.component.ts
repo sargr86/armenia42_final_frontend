@@ -83,7 +83,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
    * Checks to see if we're on a form editing/saving/users page to toggle add-button
    */
   get addBtnShow(): boolean {
-    return !(/profile|users|edit|add|save|manage/.test(this.router.url))
+    return !(/profile|users|edit|add|save|manage/.test(this.router.url)) && this.pageTitle !== 'user_images_terminal'
       && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== 'home' && this.pageTitle !== undefined;
   }
 
@@ -109,6 +109,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.viewMode = mode;
     this.navForm.controls.viewMode.setValue(mode);
     this.subject.setNavForm(this.navForm.value);
+  }
+
+  /**
+   * Shows or hides breadcrumbs in auth-mode
+   * @returns {boolean}
+   */
+  showAuthBreadCrumbs() {
+    return !this.managePage && this.pageTitle !== 'home' && this.pageTitle !== 'user_images_terminal';
   }
 
 
