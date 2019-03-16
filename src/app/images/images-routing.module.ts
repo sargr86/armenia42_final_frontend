@@ -30,6 +30,9 @@ const routes: Routes = [
     component: EditImageInfoComponent,
     resolve: {
       image: ImageResolver
+    },
+    data: {
+      title: 'images_terminal'
     }
   }
 ];

@@ -130,7 +130,7 @@ export class EditImageInfoComponent implements OnInit {
           const params = {
             id: id, story_id: this.image.story.id,
             lang: this.lang, withFile: this.withFile.value,
-            file: this.image.file
+            file: this.image.folder
           };
           this._images.remove(params).subscribe(dt => {
             const redirectUrl = this.router.url.split('image')[0];

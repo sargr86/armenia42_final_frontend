@@ -137,6 +137,7 @@
   "item_name_affects_folder_name": "Please note that changing the <b>name</b> field here will also affect <b>the folder name</b>. This is possible only in English variant of the system.",
   "location_category_required_error": "Please select at least one category of the location",
   "location_name_required_error": "Location name is required",
+  "direction_name_required_error":"Direction name is required",
   "story_name_required_error": "Story name is required",
   "country_not_found_error": "The country is not found",
   "province_not_found_error": "The province is not found",
@@ -171,6 +172,7 @@
   "no_images_found_error":"This story has no images yet.",
   "count":"Count",
   "img_path":"Image",
+  "file_not_exist_error":"The file is not exist",
   "translate_desc_sign": "If you want to translate the image description with Google Translate, click the element marked as <i class='fa fa-globe'></i>, it will become green.",
   "cover_sign":"<b class='coverSign'>1</b> If you want to set this image as a cover for country, province, etc. please click on that sign and select the item you want to apply to."
 }

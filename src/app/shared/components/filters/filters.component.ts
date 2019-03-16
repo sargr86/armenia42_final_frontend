@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DashboardService} from '../../services/dashboard.service';
 import {GetLangPipe} from '../../pipes/get-lang.pipe';
 import {SubjectService} from '../../services/subject.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-filters',
@@ -16,7 +17,8 @@ export class FiltersComponent implements OnInit {
   constructor(
     private _dashboard: DashboardService,
     private getLang: GetLangPipe,
-    private _subject: SubjectService
+    private _subject: SubjectService,
+    private router: Router
   ) {
     this._subject.getLanguage().subscribe(lang => {
       this.lang = lang;

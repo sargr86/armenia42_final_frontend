@@ -16,7 +16,7 @@ export class PreviewGalleryComponent implements OnInit {
     this.prevGalleryOptions = [
       {
         'image': false, 'thumbnails': false, 'width': '0px', 'height': '0px', 'previewKeyboardNavigation': true,
-        'imageDescription': true, 'previewCloseOnEsc': true
+        'imageDescription': true, 'previewCloseOnEsc': true, 'previewFullscreen': true,
       },
       {'breakpoint': 500, 'width': '300px', 'height': '300px', 'thumbnailsColumns': 3},
       {'breakpoint': 300, 'width': '100%', 'height': '200px', 'thumbnailsColumns': 2}

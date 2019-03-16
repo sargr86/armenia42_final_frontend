@@ -1,4 +1,4 @@
-<div class="filters">
+<div class="filters" *ngIf="router.url.includes('manage')">
   <div class="reviewStatusFilters" #review_statuses>
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="selectedStatus">
       <ng-container *ngFor="let status of statusFilters|async">
