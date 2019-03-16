@@ -1,0 +1,24 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+.filters {
+  .reviewStatusFilters {
+    float: right;
+    margin: 10px;
+  }
+  .status {
+    color: $white;
+  }
+  .status:not(.mat-button-toggle-checked) {
+    background-color: $gray;
+  }
+  .mat-button-toggle-checked.pending {
+    background-color: $yellow;
+  }
+  .mat-button-toggle-checked.accepted {
+    background-color: $green;
+  }
+  .mat-button-toggle-checked.rejected {
+    background-color: $red;
+  }
+}

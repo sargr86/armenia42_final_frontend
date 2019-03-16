@@ -1,0 +1,11 @@
+<div class="filters">
+  <div class="reviewStatusFilters" #review_statuses>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="selectedStatus">
+      <ng-container *ngFor="let status of statusFilters|async">
+        <mat-button-toggle class="status {{status['name_en']}}"
+                           [value]="status['name_en']"
+                           (change)="changeReviewStatus(status['name_en'])">{{status['name_'+lang]}}</mat-button-toggle>
+      </ng-container>
+    </mat-button-toggle-group>
+  </div>
+</div>

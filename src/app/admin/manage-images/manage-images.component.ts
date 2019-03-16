@@ -14,6 +14,7 @@ export class ManageImagesComponent implements OnInit {
   images;
   columns = ['img_path', 'full_name', 'review_status', 'img_actions'];
   selectedStatus;
+  selectedCat = null;
 
   constructor(
     private _images: ImagesService,
@@ -23,22 +24,23 @@ export class ManageImagesComponent implements OnInit {
   ) {
 
     this._subject.getLanguage().subscribe(lang => {
-      this.getImages(lang);
+      this.getImages(lang, this.selectedCat);
     });
 
     this._subject.getCatForm().subscribe(cat => {
+      this.selectedCat = cat;
       this.getImages(this.lang, cat);
     });
 
     this._subject.getFilterForm().subscribe(dt => {
       this.selectedStatus = dt.status;
-      this.getImages(this.lang);
+      this.getImages(this.lang, this.selectedCat);
     });
   }
 
   ngOnInit() {
 
-    this.getImages(this.lang);
+    this.getImages(this.lang, this.selectedCat);
   }
 
   /**
