@@ -8,6 +8,7 @@ export const COVER_ITEMS = [
   {label_en: 'direction', label_ru: 'направление', label_hy: 'ուղղություն', model: 'directions', value: ''},
   {label_en: 'location', label_ru: 'местоположение', label_hy: 'տեղանք', model: 'locations', value: ''}
 ];
+export const REVIEW_STATUSES = ['pending', 'accepted', 'rejected'];
 export const DEFAULT_ACTIONS = ['edit', 'update', 'add'];
 export const TEXTAREA_AUTOSIZE_MIN_ROWS = 5;
 export const TEXTAREA_AUTOSIZE_MAX_ROWS = 10;

@@ -12,8 +12,8 @@ import {SubjectService} from '../../shared/services/subject.service';
 export class ManageImagesComponent implements OnInit {
   lang = this.getLang.transform();
   images;
-  columns = ['img_path', 'full_name', 'review_status','img_actions'];
-
+  columns = ['img_path', 'full_name', 'review_status', 'img_actions'];
+  selectedStatus;
 
   constructor(
     private _images: ImagesService,
@@ -29,6 +29,11 @@ export class ManageImagesComponent implements OnInit {
     this._subject.getCatForm().subscribe(cat => {
       this.getImages(this.lang, cat);
     });
+
+    this._subject.getFilterForm().subscribe(dt => {
+      this.selectedStatus = dt.status;
+      this.getImages(this.lang);
+    });
   }
 
   ngOnInit() {
@@ -42,7 +47,7 @@ export class ManageImagesComponent implements OnInit {
    * @param cat_id category id
    */
   getImages(lang, cat_id = null) {
-    const params = {lang: lang};
+    const params = {lang: lang, status: this.selectedStatus};
     if (cat_id) {
       params['cat_id'] = cat_id;
     }

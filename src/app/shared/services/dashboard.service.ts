@@ -42,6 +42,15 @@ export class DashboardService {
    * @param params
    */
   changeReviewStatus(params): Observable<Object> {
-    return this.httpClient.put(`${API_HOST}dashboard/change-review-status`,  params);
+    return this.httpClient.put(`${API_HOST}dashboard/change-review-status`, params);
+  }
+
+  /**
+   * Gets review status filters list
+   * @param params
+   * @returns {Observable<ArrayBuffer>}
+   */
+  getReviewStatusFilters(params) {
+    return this.httpClient.get(`${API_HOST}dashboard/get-review-status-filters`, params);
   }
 }

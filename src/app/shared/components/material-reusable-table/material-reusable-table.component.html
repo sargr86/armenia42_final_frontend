@@ -1,4 +1,5 @@
-<table mat-table [dataSource]="dataSrc" class="mat-elevation-z8">
+<app-filters></app-filters>
+<table mat-table [dataSource]="dataSrc" class="mat-elevation-z8" *ngIf="data && data.length > 0;else no_images">
   <ng-container *ngFor="let col of cols">
     <ng-container matColumnDef="{{col}}">
       <th mat-header-cell *matHeaderCellDef [textContent]="col|translate:{symbol:''}"></th>
@@ -8,7 +9,7 @@
         <ng-container *ngIf="col.includes('img')&& el[col];else textValues">
           <div class="imgContainer">
             <div [style.background]="getImgUrl(el,col)"
-              (click)="navigateToImg(el)"   class="img"></div>
+                 (click)="navigateToImg(el)" class="img"></div>
           </div>
         </ng-container>
 
@@ -45,10 +46,10 @@
                             (change)="changeStatus($event,el.id)"></mat-slide-toggle>
         </ng-container>
         <ng-container *ngIf="col=='img_actions'">
-          <button class="approve" (click)="changeReviewStatus(el,'accepted')">
+          <button class="approve" *ngIf="el.review_status.name_en=='rejected'" (click)="changeReviewStatus(el,'accepted')">
             <i class="fa fa-check"></i>
           </button>
-          <button class="reject" (click)="changeReviewStatus(el,'rejected')">
+          <button class="reject" *ngIf="el.review_status.name_en=='accepted'" (click)="changeReviewStatus(el,'rejected')">
             <i class="fa fa-times"></i>
           </button>
         </ng-container>
@@ -59,4 +60,10 @@
   <tr mat-header-row *matHeaderRowDef="cols"></tr>
   <tr mat-row *matRowDef="let row; columns: cols;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[3, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[3, 10, 20]" *ngIf="data && data.length > 0" showFirstLastButtons></mat-paginator>
+
+<ng-template #no_images>
+  <div class="notFoundContainer">
+    <small class="no_items_found">{{'not_found'|translate}}</small>
+  </div>
+</ng-template>

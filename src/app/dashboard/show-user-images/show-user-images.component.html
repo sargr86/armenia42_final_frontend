@@ -1,8 +1,5 @@
 <mat-card>
 
-  <app-mat-table *ngIf="images && images.length > 0;else no_images" [data]="images" [lang]="lang"
+  <app-mat-table [data]="images" [lang]="lang"
                  [cols]="columns"></app-mat-table>
-  <ng-template #no_images>
-    <small class="no_items_found">{{'no_manage_images_found'|translate}}</small>
-  </ng-template>
 </mat-card>

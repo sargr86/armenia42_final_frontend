@@ -34,6 +34,7 @@ import {PreviewGalleryComponent} from './components/preview-gallery/preview-gall
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 import {BuildCoverItemsPipe} from './pipes/build-cover-items.pipe';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CategoriesListComponent } from './components/categories-list/categories
     BreadcrumbsComponent,
     BuildCoverItemsPipe,
     CategoriesListComponent,
+    FiltersComponent,
   ],
   imports: [
     CommonModule,

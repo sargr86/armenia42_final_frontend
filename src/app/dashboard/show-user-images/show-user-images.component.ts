@@ -14,7 +14,7 @@ export class ShowUserImagesComponent implements OnInit {
   lang = this.getLang.transform();
   images;
   columns = ['img_path', 'name', 'location', 'story', 'review_status'];
-
+  selectedStatus = 'pending';
 
   constructor(
     private _images: ImagesService,
@@ -31,6 +31,11 @@ export class ShowUserImagesComponent implements OnInit {
     this._subject.getCatForm().subscribe(cat => {
       this.getImages(this.lang, cat);
     });
+
+    this._subject.getFilterForm().subscribe(dt => {
+      this.selectedStatus = dt.status;
+      this.getImages(this.lang);
+    });
   }
 
   ngOnInit() {
@@ -44,7 +49,7 @@ export class ShowUserImagesComponent implements OnInit {
    * @param cat_id category id
    */
   getImages(lang, cat_id = null) {
-    const params = {lang: lang, user_id: this._auth.userData.id};
+    const params = {lang: lang, user_id: this._auth.userData.id, status: this.selectedStatus};
     if (cat_id) {
       params['cat_id'] = cat_id;
     }

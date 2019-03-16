@@ -1,12 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {SubjectService} from "../../services/subject.service";
-import {MatPaginator, MatSlideToggleChange, MatTableDataSource} from "@angular/material";
-import {GetMatTableDataSourcePipe} from "../../pipes/get-mat-table-data-source.pipe";
-import {API_HOST, OTHER_UPLOADS_FOLDER, UPLOADS_FOLDER} from '../../constants/settings';
+import {SubjectService} from '../../services/subject.service';
+import {MatPaginator, MatSlideToggleChange, MatTableDataSource} from '@angular/material';
+import {GetMatTableDataSourcePipe} from '../../pipes/get-mat-table-data-source.pipe';
+import {API_HOST} from '../../constants/settings';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
 import {Router} from '@angular/router';
-import {ImagesService} from '../../services/images.service';
 import {DashboardService} from '../../services/dashboard.service';
 
 @Component({
@@ -45,6 +44,8 @@ export class MaterialReusableTableComponent implements OnInit {
       this.data = dt;
       this.setTableData();
     });
+
+
 
 
     this.setTableData();

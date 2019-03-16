@@ -13,6 +13,7 @@ export class SubjectService {
   public pageTitle = new Subject<string>();
   public rightSidebar = new Subject<any>();
   public catForm = new Subject<any>();
+  public filterForm = new Subject<any>();
 
   constructor() {
   }
@@ -101,6 +102,14 @@ export class SubjectService {
 
   getCatForm(): Observable<any> {
     return this.catForm.asObservable();
+  }
+
+  setFilterForm(value) {
+    this.rightSidebar.next(value);
+  }
+
+  getFilterForm(): Observable<any> {
+    return this.rightSidebar.asObservable();
   }
 
 }
