@@ -12,7 +12,7 @@ import {SubjectService} from '../../shared/services/subject.service';
 export class ManageImagesComponent implements OnInit {
   lang = this.getLang.transform();
   images;
-  columns = ['img_path', 'full_name', 'img_actions'];
+  columns = ['img_path', 'full_name', 'review_status','img_actions'];
 
 
   constructor(

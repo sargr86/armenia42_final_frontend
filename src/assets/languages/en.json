@@ -127,6 +127,7 @@
   "direction_exists_error": "The province already has a direction with such name",
   "location_exists_error": "A location with such name already exists",
   "story_exists_error": "The location already has a story with such name",
+  "no_roles_for_user":"The user does not have roles",
   "confirm": "Confirm",
   "cancel": "Cancel",
   "please_confirm": "Please confirm this action.",

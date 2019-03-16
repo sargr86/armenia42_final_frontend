@@ -26,10 +26,13 @@ table {
     border-radius: 10px;
     color: $white;
   }
-  .active {
+  .active,.accepted {
     background-color: $green;
   }
-  .inactive {
+  .pending{
+    background-color: $yellow;
+  }
+  .inactive,.rejected {
     background-color: $red;
   }
   .mat-column-img_actions {

@@ -13,7 +13,7 @@ import {AuthService} from '../../shared/services/auth.service';
 export class ShowUserImagesComponent implements OnInit {
   lang = this.getLang.transform();
   images;
-  columns = ['img_path', 'name', 'location', 'story'];
+  columns = ['img_path', 'name', 'location', 'story', 'review_status'];
 
 
   constructor(

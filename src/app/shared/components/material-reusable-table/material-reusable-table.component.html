@@ -14,8 +14,11 @@
 
         <!-- Regular text values cells -->
         <ng-template #textValues>
+
+          <!-- User & story/image statuses -->
           <ng-container *ngIf="col.includes('status');else regularValues">
-            <p class="status {{el[col]['name_en']}}">{{el[col]['name_'+lang]}}</p>
+            <p *ngIf="col==='users_status'" class="status {{el[col]['name_en']}}">{{el[col]['name_'+lang]}}</p>
+            <p *ngIf="col==='review_status'" class="status {{el[col]['name_en']}}">{{el[col]['name_'+lang]}}</p>
           </ng-container>
 
           <ng-template #regularValues>
