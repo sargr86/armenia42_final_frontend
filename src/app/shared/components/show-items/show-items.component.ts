@@ -131,7 +131,7 @@ export class ShowItemsComponent implements OnInit {
    * Gets child item url
    * @param item current item
    */
-  getUrl(item) {
+  getUrl(item): string {
     return this.getChildUrl.transform(item, this.storiesPage, this.router.url);
   }
 
@@ -141,6 +141,15 @@ export class ShowItemsComponent implements OnInit {
    */
   getEditUrl(item): string {
     return `${this.getUrl(item)}/edit`;
+  }
+
+  /**
+   * Shows or hides *item edit button
+   */
+  showEditButton(item): any | boolean {
+    return this._auth.loggedIn()  &&
+      ((/directions|locations|stories/.test(this.child)) && item.user && item.user.email === this._auth.userData.email)
+      || this._auth.checkRoles('admin');
   }
 
 }

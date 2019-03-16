@@ -32,7 +32,7 @@
         </li>
 
       <!-- Manage images link -->
-      <li>
+      <li *ngIf="!router.url.includes('manage-images')">
         <button [matTooltip]="'images'|translate:symbol" [matTooltipPosition]="'left'"
                 (click)="getManageRoute('images')">
             <i class="fa fa-image"></i>

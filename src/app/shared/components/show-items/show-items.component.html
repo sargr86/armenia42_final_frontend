@@ -55,7 +55,7 @@
 
               <!-- Edit-item button -->
               <button (click)="router.navigate([getEditUrl(item)])" class="edit"
-                      *ngIf="_auth.loggedIn() && _auth.checkRoles('admin')">
+                      *ngIf="showEditButton(item)">
                 <i class="fas fa-edit"></i>
               </button>
 
