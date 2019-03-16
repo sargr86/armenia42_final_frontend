@@ -30,6 +30,7 @@ export class ShowUsersComponent implements OnInit {
 
     // Subscribes table status change event
     this.subject.getTableForm().subscribe(data => {
+      console.log(data)
       data.lang = this.lang;
       this.changeUserStatus(data);
 

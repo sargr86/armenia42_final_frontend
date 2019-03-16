@@ -6,6 +6,8 @@ import {API_HOST, OTHER_UPLOADS_FOLDER, UPLOADS_FOLDER} from '../../constants/se
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {ReplaceAllPipe} from '../../pipes/replace-all.pipe';
 import {Router} from '@angular/router';
+import {ImagesService} from '../../services/images.service';
+import {DashboardService} from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-mat-table',
@@ -26,7 +28,8 @@ export class MaterialReusableTableComponent implements OnInit {
     private dataSource: GetMatTableDataSourcePipe,
     private  sanitizer: DomSanitizer,
     private replace: ReplaceAllPipe,
-    private router: Router
+    private router: Router,
+    private _dashboard: DashboardService
   ) {
   }
 
@@ -63,6 +66,20 @@ export class MaterialReusableTableComponent implements OnInit {
     sendObj['status'] = status ? 'active' : 'inactive';
 
     this.subject.setTableForm(sendObj);
+  }
+
+  /**
+   * Changes image review status
+   * @param el image element
+   * @param status status of review
+   */
+  changeReviewStatus(el, status) {
+    const sendObj = {id: el.id, status: status, lang: this.lang};
+    this._dashboard.changeReviewStatus(sendObj).subscribe(dt => {
+      this.data = dt;
+      this.setTableData();
+    });
+    // this.subject.setTableItemForm(sendObj);
   }
 
   getSymbol() {

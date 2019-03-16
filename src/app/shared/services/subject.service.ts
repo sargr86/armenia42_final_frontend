@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/internal/Observable';
 export class SubjectService {
 
   public language = new Subject<string>();
-  public table = new Subject<any>();
+  public tableForm = new Subject<any>();
+  public tableItemForm = new Subject<any>();
   public navForm = new Subject<any>();
   public tableData = new Subject<any>();
   public pageTitle = new Subject<string>();
@@ -38,7 +39,7 @@ export class SubjectService {
    * @param value
    */
   setTableForm(value) {
-    this.table.next(value)
+    this.tableForm.next(value);
   }
 
   /**
@@ -46,12 +47,22 @@ export class SubjectService {
    * @returns {Observable<any>}
    */
   getTableForm(): Observable<any> {
-    return this.table.asObservable();
+    return this.tableForm.asObservable();
+  }
+
+  setTableItemForm(value) {
+
+    this.tableItemForm.next(value);
+  }
+
+  getTableItemForm(): Observable<any> {
+    console.log('aaa')
+    return this.tableItemForm.asObservable();
   }
 
 
   setTableData(value) {
-    this.tableData.next(value)
+    this.tableData.next(value);
   }
 
   getTableData(): Observable<any> {

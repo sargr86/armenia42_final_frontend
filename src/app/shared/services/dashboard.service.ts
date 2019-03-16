@@ -36,4 +36,12 @@ export class DashboardService {
   getUserImages(params): Observable<Image[]> {
     return this.httpClient.get<Image[]>(`${API_HOST}dashboard/get-user-images`, {params: params});
   }
+
+  /**
+   * Changes an image review status
+   * @param params
+   */
+  changeReviewStatus(params): Observable<Object> {
+    return this.httpClient.put(`${API_HOST}dashboard/change-review-status`,  params);
+  }
 }

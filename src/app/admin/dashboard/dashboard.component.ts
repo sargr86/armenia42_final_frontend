@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from '../../shared/services/dashboard.service';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
+import {SubjectService} from '../../shared/services/subject.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _dashboard: DashboardService,
-    private getLang: GetLangPipe
+    private getLang: GetLangPipe,
+    private _subject: SubjectService
   ) {
   }
 

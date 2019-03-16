@@ -45,10 +45,10 @@
                             (change)="changeStatus($event,el.id)"></mat-slide-toggle>
         </ng-container>
         <ng-container *ngIf="col=='img_actions'">
-          <button class="approve">
+          <button class="approve" (click)="changeReviewStatus(el,'accepted')">
             <i class="fa fa-check"></i>
           </button>
-          <button class="reject">
+          <button class="reject" (click)="changeReviewStatus(el,'rejected')">
             <i class="fa fa-times"></i>
           </button>
         </ng-container>

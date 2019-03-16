@@ -4,7 +4,7 @@
   <div class="{{_auth.loggedIn()?'squares':'circles'}}">
 
 
-    <preview-gallery [galleryImages]="galleryImages"></preview-gallery>
+    <preview-gallery [galleryImages]="galleryImages" *ngIf="!_auth.loggedIn()"></preview-gallery>
 
     <!-- Selected items list container -->
     <div class="listContainer">
