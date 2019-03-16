@@ -81,11 +81,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   /**
    * Checks to see if we're on a form editing/saving/users page to toggle add-button
-   * @returns {any}
    */
-  get addBtnShow() {
+  get addBtnShow(): boolean {
     return !(/profile|users|edit|add|save|manage/.test(this.router.url))
-      && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== undefined;
+      && this.pageTitle !== 'admin_dashboard' && this.pageTitle !== 'home' && this.pageTitle !== undefined;
   }
 
   /**

@@ -49,7 +49,7 @@ export class BuildFormDataPipe implements PipeTransform {
       }
     }
 
-    if (item === 'story') {
+    if (item === 'story' || item === 'location') {
       formData.append('user_id', this._auth.userData.id.toString());
       formData.append('email', this._auth.userData.email);
     }

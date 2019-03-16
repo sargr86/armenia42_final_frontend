@@ -24,9 +24,8 @@ const routes: Routes = [
     resolve: {
       province: ProvinceResolverService
     },
-    canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard],
     data: {
-      expectedRole: 'admin',
       title: 'direction_terminal',
       item: 'directions',
       icon: 'directions'

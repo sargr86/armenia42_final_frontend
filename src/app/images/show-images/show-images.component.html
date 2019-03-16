@@ -14,7 +14,7 @@
           <div class="imageContainer" [style.background-image]="getImgUrl(i['small'])">
 
             <!-- Image actions buttons -->
-            <ng-container class="buttonsContainer">
+            <ng-container class="buttonsContainer" *ngIf="showEditButtons(i)">
 
               <!-- Edit-image-info-on-page button -->
               <button (click)="editImageInfo(i.id)">

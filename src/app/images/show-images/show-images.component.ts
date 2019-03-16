@@ -129,14 +129,26 @@ export class ShowImagesComponent implements OnInit {
 
   /**
    * Navigates to the selected images info editing page
-   * @param id
+   * @param id image id
    */
   editImageInfo(id) {
     this.router.navigate([this.replace.transform(this.router.url + '/image/' + id, false)]);
   }
 
-  get imagesFound() {
+  /**
+   * Checks if the selected story contains images
+   */
+  get imagesFound(): boolean {
     return this.galleryImages && Object.values(this.galleryImages).length > 0;
+  }
+
+  /**
+   * Shows or hides the edit buttons of an image
+   * @param i image
+   */
+  showEditButtons(i): boolean {
+    return (this._auth.userData.email === i['user']['email'] && i['review_status']['name_en'] === 'pending')
+      || this._auth.checkRoles('admin');
   }
 
 }

@@ -9,15 +9,7 @@ import {NonAuthGuard} from './shared/guards/non-auth.guard';
 import {AuthGuard} from './shared/guards/auth.guard';
 import {RoleGuard} from './shared/guards/role.guard';
 import {CountriesResolver} from './shared/resolvers/countries-resolver.service';
-import {ShowProvincesComponent} from './provinces/show-provinces/show-provinces.component';
-import {DirectionResolverService} from './shared/resolvers/direction-resolver.service';
-import {ProvinceResolverService} from './shared/resolvers/province-resolver.service';
-import {EditDirectionComponent} from './directions/edit-direction/edit-direction.component';
-import {EditProvinceComponent} from './provinces/edit-province/edit-province.component';
-import {ShowDirectionsComponent} from './directions/show-directions/show-directions.component';
 import {EditCountryComponent} from './countries/edit-country/edit-country.component';
-import {EditLocationComponent} from './locations/edit-location/edit-location.component';
-import {LocationResolverService} from './shared/resolvers/location-resolver.service';
 
 const routes: Routes = [
   {

@@ -1,1 +1,1 @@
-<show-items [parent]="'countries'" [child]="'provinces'"></show-items>
+<show-items [parent]="'countries'" [child]="'provinces'" *ngIf="!_auth.loggedIn()"></show-items>
