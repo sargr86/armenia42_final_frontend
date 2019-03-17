@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -15,13 +15,14 @@ import {LocationsService} from '../../services/locations.service';
 import {StoriesService} from '../../services/stories.service';
 import {NgxGalleryImage} from 'ngx-gallery';
 import {DEFAULT_COUNTRY} from '../../constants/settings';
+import {Subscription} from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'show-items',
   templateUrl: './show-items.component.html',
   styleUrls: ['./show-items.component.scss']
 })
-export class ShowItemsComponent implements OnInit {
+export class ShowItemsComponent implements OnInit, OnDestroy {
 
   @Input() parent: string;
   @Input() child: string;
@@ -33,6 +34,9 @@ export class ShowItemsComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
   category: number;
 
+  languageSubscription: Subscription;
+  categorySubscription: Subscription;
+  routeSubscription: Subscription;
 
   constructor(
     public router: Router,
@@ -48,7 +52,7 @@ export class ShowItemsComponent implements OnInit {
     private replace: ReplaceAllPipe,
     private getChildUrl: GenerateChildItemUrlPipe
   ) {
-    this._subject.getLanguage().subscribe(lang => {
+    this.languageSubscription = this._subject.getLanguage().subscribe(lang => {
       this.lang = lang;
       this.getItems();
     });
@@ -108,7 +112,7 @@ export class ShowItemsComponent implements OnInit {
    * Gets images of current item
    */
   getParentImages(cat_id = null) {
-    this.route.data.subscribe(dt => {
+    this.routeSubscription = this.route.data.subscribe(dt => {
 
       if (dt && dt[dt.parent]) {
         // Setting an *item params
@@ -147,9 +151,21 @@ export class ShowItemsComponent implements OnInit {
    * Shows or hides *item edit button
    */
   showEditButton(item): any | boolean {
-    return this._auth.loggedIn()  &&
+    return this._auth.loggedIn() &&
       ((/directions|locations|stories/.test(this.child)) && item.user && item.user.email === this._auth.userData.email)
       || this._auth.checkRoles('admin');
+  }
+
+  ngOnDestroy() {
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+    if (this.categorySubscription) {
+      this.categorySubscription.unsubscribe();
+    }
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
   }
 
 }

@@ -9,6 +9,7 @@ import {OTHER_UPLOADS_FOLDER} from '../../shared/constants/settings';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NgxGalleryImage} from 'ngx-gallery';
 import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
+import {Subscription} from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-show-images',
@@ -23,6 +24,8 @@ export class ShowImagesComponent implements OnInit {
 
   galleryOptions;
   galleryImages: NgxGalleryImage[];
+  imageGetting: Subscription;
+  routeSubscription: Subscription;
 
   constructor(
     private _images: ImagesService,
@@ -39,7 +42,7 @@ export class ShowImagesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.data.subscribe((dt: Data) => {
+    this.routeSubscription = this.route.data.subscribe((dt: Data) => {
       this.routeData = dt;
       this._subject.getLanguage().subscribe(lang => {
         this.lang = lang;
@@ -62,7 +65,7 @@ export class ShowImagesComponent implements OnInit {
    */
   getImages(dt, lang) {
     const params = {story_id: dt.story.id, lang: lang};
-    this._images.get(params).subscribe(data => {
+    this.imageGetting = this._images.get(params).subscribe(data => {
       this.prepareGalery(data);
     });
   }
@@ -149,6 +152,15 @@ export class ShowImagesComponent implements OnInit {
   showEditButtons(i): boolean {
     return (this._auth.userData.email === i['user']['email'] && i['review_status']['name_en'] === 'pending')
       || this._auth.checkRoles('admin');
+  }
+
+  ngOnDestroy() {
+    if (this.imageGetting) {
+      this.imageGetting.unsubscribe();
+    }
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
   }
 
 }

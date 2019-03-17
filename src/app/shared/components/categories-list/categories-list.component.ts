@@ -23,7 +23,19 @@ export class CategoriesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    const params = {};
+
+    this.getCategories();
+
+    // Getting system current language if changed by language component
+    this._subject.getLanguage().subscribe(lang => {
+      this.lang = lang;
+      this.getCategories();
+    });
+  }
+
+
+  getCategories() {
+    const params = {lang: this.lang};
     this._categories.getCategories(params).subscribe(dt => {
       this.categories = dt;
       if (this.categories) {
@@ -36,13 +48,7 @@ export class CategoriesListComponent implements OnInit {
       }
 
     });
-
-    // Getting system current language if changed by language component
-    this._subject.getLanguage().subscribe(lang => {
-      this.lang = lang;
-    });
   }
-
 
   /**
    * Compares saved and current categories in categories loop
