@@ -104,13 +104,19 @@ export class AppComponent implements OnInit, OnDestroy {
     const dt = this.routeData;
     if (dt && !this._auth.loggedIn()) {
       const parentData = dt[dt['parent']];
+
       if (parentData) {
-          const coverPath = parentData['cover'];
-          if (coverPath) {
-            let url = 'url("' + coverPath + '")';
-            url = this.replace.transform(url, false);
-            return this.sanitizer.bypassSecurityTrustStyle(url);
-          }
+        const coverPath = parentData['cover'];
+        if (coverPath) {
+          let url = 'url("' + coverPath + '")';
+          url = this.replace.transform(url, false);
+          return this.sanitizer.bypassSecurityTrustStyle(url);
+        }
+      }
+      else {
+        let url = 'url("' + API_HOST + 'uploads/others/BlackMarble_2016_5k.jpg")';
+        url = this.replace.transform(url, false);
+        return this.sanitizer.bypassSecurityTrustStyle(url);
       }
     }
 

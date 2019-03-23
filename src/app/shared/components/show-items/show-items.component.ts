@@ -37,6 +37,7 @@ export class ShowItemsComponent implements OnInit, OnDestroy {
   languageSubscription: Subscription;
   categorySubscription: Subscription;
   routeSubscription: Subscription;
+  itemsSubscription: Subscription;
 
   constructor(
     public router: Router,
@@ -58,7 +59,7 @@ export class ShowItemsComponent implements OnInit, OnDestroy {
     });
 
     // Gets categorized items
-    this._subject.getCatForm().subscribe((cat_id) => {
+    this.categorySubscription = this._subject.getCatForm().subscribe((cat_id) => {
       this.getItems(cat_id);
       this.getParentImages(cat_id);
     });
@@ -101,7 +102,7 @@ export class ShowItemsComponent implements OnInit, OnDestroy {
       if (cat_id) {
         params['cat_id'] = cat_id;
       }
-      this[`_${this.child}`].get(params).subscribe(dt => {
+      this.itemsSubscription = this[`_${this.child}`].get(params).subscribe(dt => {
         this.items = dt;
       });
     }
@@ -112,21 +113,24 @@ export class ShowItemsComponent implements OnInit, OnDestroy {
    * Gets images of current item
    */
   getParentImages(cat_id = null) {
-    this.routeSubscription = this.route.data.subscribe(dt => {
+    if (!this._auth.loggedIn()) {
+      this.routeSubscription = this.route.data.subscribe(dt => {
 
-      if (dt && dt[dt.parent]) {
-        // Setting an *item params
-        const params = {lang: this.lang, parent_id: dt[dt.parent]['id']};
+        if (dt && dt[dt.parent]) {
+          // Setting an *item params
+          const params = {lang: this.lang, parent_id: dt[dt.parent]['id']};
 
-        // Appending category if exist
-        if (cat_id) {
-          params['cat_id'] = cat_id;
+          // Appending category if exist
+          if (cat_id) {
+            params['cat_id'] = cat_id;
+          }
+          this[`_${this.child}`].getImages(params).subscribe(d => {
+            this.galleryImages = d;
+          });
         }
-        this[`_${this.child}`].getImages(params).subscribe(d => {
-          this.galleryImages = d;
-        });
-      }
-    });
+      });
+    }
+
 
   }
 
@@ -165,6 +169,9 @@ export class ShowItemsComponent implements OnInit, OnDestroy {
     }
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
+    }
+    if (this.itemsSubscription) {
+      this.itemsSubscription.unsubscribe();
     }
   }
 
