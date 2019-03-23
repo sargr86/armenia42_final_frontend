@@ -84,11 +84,16 @@ button {
   }
 }
 
-.mat-card.not-auth{
-  background-color: $dark_gray!important;
+.mat-card.not-auth {
+  background-color: $dark_gray !important;
 }
-.applyYearRange{
-  background-color: $green;
-  display: block;
-  margin:20px auto;
+
+.controls {
+  margin: 20px auto;
+  width: 7%;
+  .applyYearRange {
+    background-color: $green;
+    display: block;
+    float: right;
+  }
 }

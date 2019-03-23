@@ -85,7 +85,7 @@
     <info-box [elements]="infoBoxData"></info-box>
 
     <!-- Editing image itself-->
-    <div class="image" [style.background-image]="image.folder|getImgUrl:'others':true">
+    <div class="image" [style.background-image]="getFile(image)|getImgUrl:'others':true">
 
     </div>
   </form>

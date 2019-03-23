@@ -4,9 +4,14 @@
   <div class="rangeSliderContainer">
     <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options" (valueChange)="startYearChanged($event)"
                 (highValueChange)="endYearChanged($event)"></ng5-slider>
-    <button class="applyYearRange" (click)="applyYearRange()">
-      <i class="fa fa-check"></i>
-    </button>
+    <div class="controls">
+
+      <mat-slide-toggle [matTooltip]="'include_null_year'|translate" [checked]="includeNullYear"
+                        (change)="changeNullYear($event)"></mat-slide-toggle>
+      <button class="applyYearRange" (click)="applyYearRange()">
+        <i class="fa fa-check"></i>
+      </button>
+    </div>
   </div>
 
 

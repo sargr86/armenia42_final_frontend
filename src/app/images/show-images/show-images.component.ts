@@ -41,6 +41,8 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
     ceil: this.endYear
   };
 
+  includeNullYear = true;
+
   constructor(
     private _images: ImagesService,
     private route: ActivatedRoute,
@@ -78,7 +80,11 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
    * @param lang current languge of the system
    */
   getImages(dt, lang) {
-    const params = {story_id: dt.story.id, lang: lang, start: this.startYear, end: this.endYear};
+    const params = {
+      story_id: dt.story.id, lang: lang,
+      start: this.startYear, end: this.endYear,
+      includeNullYearValues: this.includeNullYear ? 1 : 0
+    };
     this.imageGetting = this._images.get(params).subscribe(data => {
       this.prepareGalery(data);
     });
@@ -178,7 +184,12 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
   }
 
   applyYearRange() {
-    this.getImages(this.routeData,this.lang);
+    this.getImages(this.routeData, this.lang);
+  }
+
+  changeNullYear(e) {
+    this.includeNullYear = e.checked;
+    this.getImages(this.routeData, this.lang);
   }
 
   ngOnDestroy() {

@@ -172,9 +172,7 @@ export class EditImageInfoComponent implements OnInit {
    * Get with file checkbox control
    * @returns with file checkbox control
    */
-  get withFile()
-    :
-    AbstractControl | null {
+  get withFile(): AbstractControl | null {
     return this.editImageInfoForm.get('with_file');
   }
 
@@ -182,11 +180,13 @@ export class EditImageInfoComponent implements OnInit {
    * Changing remove-with-file checkbox state
    * @param e checkbox change event
    */
-  changeWithFileState(e
-                        :
-                        any
-  ) {
+  changeWithFileState(e: any) {
     this.withFile.patchValue(e.target.checked ? '1' : '0');
+  }
+
+
+  getFile(image){
+    return image.folder.replace(/_/g, ' ');
   }
 
 }
