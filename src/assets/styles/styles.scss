@@ -87,7 +87,7 @@ ul {
   background-color: $dark_gray;
 }
 
-b.coverSign{
+b.coverSign {
   margin: 3px 4px;
   padding: 7px 4px 0 4px;
   width: 5px !important;
@@ -99,8 +99,34 @@ b.coverSign{
   color: $dark_gray;
 }
 
-.circles #galleries{
-  position: absolute!important;
-  bottom:200px!important;
-  left:50%;
+.circles #galleries {
+  position: absolute !important;
+  bottom: 200px !important;
+  left: 50%;
 }
+
+.ng5-slider {
+  .ng5-slider-pointer {
+    background-color: $yellow !important;
+    width: 25px !important;
+    height: 25px !important;
+    top: -12px !important;
+    outline: none !important;
+  }
+  .ng5-slider-bar{
+    background-color: $gray!important;
+    height:1px!important;
+  }
+  .ng5-slider-bubble {
+    color: $darker_gray !important;
+  }
+
+  .ng5-slider-selection {
+    background-color: $dark_gray !important;
+  }
+}
+
+.ng5-slider .ng5-slider-pointer:after {
+  display: none !important;
+}
+

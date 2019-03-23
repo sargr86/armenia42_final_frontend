@@ -10,6 +10,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NgxGalleryImage} from 'ngx-gallery';
 import {ReplaceAllPipe} from '../../shared/pipes/replace-all.pipe';
 import {Subscription} from 'rxjs/internal/Subscription';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-show-images',
@@ -29,6 +30,16 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
   navSubscription: Subscription;
   langSubscription: Subscription;
+
+  startYear = 1970;
+  endYear = +moment().format('YYYY');
+
+  value = this.startYear;
+  highValue = this.endYear;
+  options = {
+    floor: this.startYear,
+    ceil: this.endYear
+  };
 
   constructor(
     private _images: ImagesService,
@@ -67,7 +78,7 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
    * @param lang current languge of the system
    */
   getImages(dt, lang) {
-    const params = {story_id: dt.story.id, lang: lang};
+    const params = {story_id: dt.story.id, lang: lang, start: this.startYear, end: this.endYear};
     this.imageGetting = this._images.get(params).subscribe(data => {
       this.prepareGalery(data);
     });
@@ -155,6 +166,19 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
   showEditButtons(i): boolean {
     return (this._auth.userData.email === i['user']['email'] && i['review_status']['name_en'] === 'pending')
       || this._auth.checkRoles('admin');
+  }
+
+  startYearChanged(e) {
+    this.startYear = e;
+
+  }
+
+  endYearChanged(e) {
+    this.endYear = e;
+  }
+
+  applyYearRange() {
+    this.getImages(this.routeData,this.lang);
   }
 
   ngOnDestroy() {

@@ -9,6 +9,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {DropzoneModule} from 'ngx-dropzone-wrapper';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgxGalleryModule} from 'ngx-gallery';
+import { Ng5SliderModule } from 'ng5-slider';
 
 // Pipes
 import {GetLangPipe} from './pipes/get-lang.pipe';
@@ -70,6 +71,7 @@ import { FiltersComponent } from './components/filters/filters.component';
     DropzoneModule,
     NgSelectModule,
     NgxGalleryModule,
+    Ng5SliderModule
   ],
   providers: [
     GetLangPipe,
@@ -92,6 +94,7 @@ import { FiltersComponent } from './components/filters/filters.component';
     DropzoneModule,
     NgSelectModule,
     NgxGalleryModule,
+    Ng5SliderModule,
     GetLangPipe,
     GetImageUrlPipe,
     InfoBoxComponent,

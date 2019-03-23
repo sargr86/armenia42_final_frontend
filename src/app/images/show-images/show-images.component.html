@@ -1,5 +1,17 @@
-<mat-card [ngClass]="_auth.loggedIn()?'auth':'not-auth'" >
+<mat-card [ngClass]="_auth.loggedIn()?'auth':'not-auth'">
+
+  <!-- Year range slider container -->
+  <div class="rangeSliderContainer">
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options" (valueChange)="startYearChanged($event)"
+                (highValueChange)="endYearChanged($event)"></ng5-slider>
+    <button class="applyYearRange" (click)="applyYearRange()">
+      <i class="fa fa-check"></i>
+    </button>
+  </div>
+
+
   <div class="storyContainer" *ngIf="imagesFound">
+
 
     <!-- Gallery mode -->
     <div class="galleryContainer" *ngIf="viewMode=='gallery'">

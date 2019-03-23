@@ -32,6 +32,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "ng5-slider": "^1.1.13",
     "ngx-dropzone-wrapper": "^7.2.1",
     "ngx-gallery": "^5.9.1",
     "ngx-toastr": "^9.1.2",
@@ -41,7 +42,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.2",
     "@angular/cli": "~7.0.1",
-    "@angular/compiler-cli": "^7.2.5",
+    "@angular/compiler-cli": "^7.2.10",
     "@angular/language-service": "~7.0.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
