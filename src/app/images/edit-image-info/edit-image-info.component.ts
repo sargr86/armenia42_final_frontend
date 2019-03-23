@@ -9,6 +9,7 @@ import {BuildCoverItemsPipe} from '../../shared/pipes/build-cover-items.pipe';
 import FormInfoBoxData from '../../shared/helpers/get-info-box-data-for-forms';
 import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {MatDialog} from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-image-info',
@@ -22,6 +23,8 @@ export class EditImageInfoComponent implements OnInit {
   makeCover = false;
   coverItems: any;
   infoBoxData: any;
+  startYear = 1960;
+  currentYear = moment().format('YYYY');
 
   constructor(
     private _fb: FormBuilder,

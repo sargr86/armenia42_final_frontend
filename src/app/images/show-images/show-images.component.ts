@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ImagesService} from '../../shared/services/images.service';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {GetLangPipe} from '../../shared/pipes/get-lang.pipe';
@@ -16,7 +16,7 @@ import {Subscription} from 'rxjs/internal/Subscription';
   templateUrl: './show-images.component.html',
   styleUrls: ['./show-images.component.scss']
 })
-export class ShowImagesComponent implements OnInit {
+export class ShowImagesComponent implements OnInit, OnDestroy {
   lang = this.getLang.transform();
   images: Image[];
   viewMode = 'list';
@@ -24,8 +24,11 @@ export class ShowImagesComponent implements OnInit {
 
   galleryOptions;
   galleryImages: NgxGalleryImage[];
+
   imageGetting: Subscription;
   routeSubscription: Subscription;
+  navSubscription: Subscription;
+  langSubscription: Subscription;
 
   constructor(
     private _images: ImagesService,
@@ -44,11 +47,11 @@ export class ShowImagesComponent implements OnInit {
 
     this.routeSubscription = this.route.data.subscribe((dt: Data) => {
       this.routeData = dt;
-      this._subject.getLanguage().subscribe(lang => {
+      this.langSubscription = this._subject.getLanguage().subscribe(lang => {
         this.lang = lang;
         this.getImages(dt, lang);
       });
-      this._subject.getNavForm().subscribe(d => {
+      this.navSubscription = this._subject.getNavForm().subscribe(d => {
         this.viewMode = d.viewMode;
         this.getImages(dt, this.lang);
       });
@@ -160,6 +163,13 @@ export class ShowImagesComponent implements OnInit {
     }
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
+    }
+    if (this.navSubscription) {
+      this.navSubscription.unsubscribe();
+    }
+
+    if (this.langSubscription) {
+      this.langSubscription.unsubscribe();
     }
   }
 

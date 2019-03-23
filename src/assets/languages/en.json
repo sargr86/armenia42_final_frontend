@@ -173,6 +173,7 @@
   "count":"Count",
   "img_path":"Image",
   "file_not_exist_error":"The file is not exist",
+  "year":"Year",
   "translate_desc_sign": "If you want to translate the image description with Google Translate, click the element marked as <i class='fa fa-globe'></i>, it will become green.",
   "cover_sign":"<b class='coverSign'>1</b> If you want to set this image as a cover for country, province, etc. please click on that sign and select the item you want to apply to."
 }

@@ -3,6 +3,7 @@ export default class ImageInfoFields {
     const lang = localStorage.getItem('lang') || 'en';
     const formFields = {
       lang: lang,
+      year: '',
       translate: 0,
       cover: 0,
       coverItem: '',
