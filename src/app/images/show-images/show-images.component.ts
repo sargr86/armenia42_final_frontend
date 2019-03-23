@@ -134,7 +134,11 @@ export class ShowImagesComponent implements OnInit, OnDestroy {
    * @param id
    */
   remove(id) {
-    const params = {id: id, story_id: this.routeData.story.id, lang: this.lang}
+    const params = {
+      id: id, story_id: this.routeData.story.id, lang: this.lang,
+      start: this.startYear, end: this.endYear,
+      includeNullYearValues: this.includeNullYear ? 1 : 0
+    };
     this._images.remove(params).subscribe(dt => {
       this.prepareGalery(dt);
     });
