@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ShowLocationsComponent,
     data: {
       item: 'locations',
-      title: 'location_terminal',
+      title: 'locations',
       parent: 'direction'
     },
     resolve: {

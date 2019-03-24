@@ -26,7 +26,7 @@ const routes: Routes = [
     },
     canActivate: [AuthGuard],
     data: {
-      title: 'direction_terminal',
+      title: 'directions',
       item: 'directions',
       icon: 'directions'
     },
